@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
-</head>
-<body>
-  <header>
-    <h1>Virtual Chemistry Lab</h1>
-    <nav><head>
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Virtual Chemistry Lab</title>
 
   <!-- Google Fonts & Font Awesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+ <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500&display=swap"rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
@@ -32,25 +27,32 @@
       padding: 25px 20px;
       text-align: center;
       color: white;
-      
       top: 0;
       z-index: 1000;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     }
+    .header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
 
-    header img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-      margin-bottom: 10px;
-    }
+.labman-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
 
     header h1 {
       font-size: 2.4em;
       margin-bottom: 10px;
     }
 
+    
     nav {
       margin-top: 10px;
       display: flex;
@@ -78,6 +80,64 @@
       text-align: center;
     }
 
+    .about-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 50px 30px;
+  margin: 40px auto;
+  max-width: 1100px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.about-text {
+  flex: 1;
+  min-width: 300px;
+  text-align: left;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.about-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #0d47a1, #42a5f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.about-text p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+  color: #0d1a2b;
+}
+
+.about-animation {
+  flex: 1;
+  min-width: 280px;
+  max-width: 400px;
+  height: 300px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
     .equipment-section {
       background: #ffffff;
       margin: 30px auto;
@@ -88,7 +148,6 @@
     }
 
     .equipment-section h2 {
-      color: #0d47a1;
       font-size: 2rem;
       margin-bottom: 30px;
     }
@@ -121,7 +180,6 @@
     .equipment-grid p {
       font-weight: 600;
       font-size: 1rem;
-      color: #0d47a1;
     }
 
     .periodic-table {
@@ -131,7 +189,6 @@
     .periodic-table h2 {
       font-size: 1.8rem;
       margin-bottom: 20px;
-      color: #0d47a1;
     }
 
     .periodic-table img {
@@ -141,6 +198,42 @@
       box-shadow: 0 0 20px rgba(13, 71, 161, 0.1);
       display: block;
       margin: 0 auto;
+    }
+
+    .ph-simulation {
+      margin-top: 50px;
+      padding: 30px;
+      background-color: #f9f9f9;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    .ph-simulation h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    #phSlider {
+      width: 80%;
+      margin-top: 20px;
+    }
+
+    #phValue {
+      margin-top: 15px;
+      font-size: 1.2em;
+      font-weight: 600;
+    }
+
+    #phBox {
+      margin-top: 20px;
+      height: 80px;
+      border-radius: 10px;
+      background-color: #00bcd4;
+      transition: background-color 0.3s ease;
     }
 
     footer {
@@ -158,13 +251,12 @@
         gap: 8px;
       }
 
-      header img {
-        width: 80px;
-        height: 80px;
+      .about-section {
+        flex-direction: column;
       }
 
-      header h1 {
-        font-size: 1.8em;
+      .about-animation {
+        height: 250px;
       }
 
       .equipment-grid {
@@ -172,58 +264,113 @@
       }
     }
   </style>
+</head>
 
+<body>
+  <header>
+  
+  <div class="header-container">
+    <img src="images/labman.png" alt="Labman" class="labman-logo">
+    <h1>Virtual Chemistry Lab</h1>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="experiments.html">Experiments</a>
+    <a href="safety.html">Lab Safety</a>
+    <a href="theory.html">Theory</a>
+    <a href="register_teacher.html">Register as Teacher</a>
+    <a href="register_student.html">Register as Student</a>
+  </nav>
+</header>
 
-      <a href="index.html">Home</a>
-      <a href="experiments.html">Experiments</a>
-      <a href="safety.html">Lab Safety</a>
-      <a href="theory.html">Theory</a>
-      <a href="register_teacher.html">Register as Teacher</a>
-      <a href="register_student.html">Register as Student</a>
-    </nav>
-  </header>
 
   <main>
-     <img src="images/labman.png" alt="Chemistry Lab Man">
+    <!-- 👇 About + Animation Section -->
+    <section class="about-section">
+  <div class="about-text">
+    <h2><span>🔬 About This Lab</span></h2>
+    <p>
+      Welcome to your own <strong>immersive chemistry playground</strong>! This virtual lab empowers students and educators to perform <em>realistic experiments</em>, interact with simulations, and discover the power of atoms and molecules—all from any device.
+    </p>
+    <p>
+      🌐 Explore chemical equipment, 🧪 simulate reactions, and 💡 build your understanding of science in a safe, smart, and stunning way.
+    </p>
+    <p>
+      Designed with ❤️ for curious minds.
+    </p>
+  </div>
+  <div class="about-animation" id="lottieChemAnim"></div>
+</section>
+
+
+  
+
     <section class="equipment-section">
       <h2>🧪 Lab Equipment</h2>
       <div class="equipment-grid">
-        <div class="item" title="Used for mixing liquids.">
-          <img src="images/beaker.png" alt="Beaker">
-          <p>Beaker</p>
-        </div>
-        <div class="item" title="Used to swirl and mix chemicals.">
-          <img src="images/flask.png" alt="Conical Flask">
-          <p>Conical Flask</p>
-        </div>
-        <div class="item" title="Used to hold small amounts of liquid.">
-          <img src="images/testtube.png" alt="Test Tube">
-          <p>Test Tube</p>
-        </div>
-        <div class="item" title="Used for titration in experiments.">
-          <img src="images/burette.png" alt="Burette">
-          <p>Burette</p>
-        </div>
-        <div class="item" title="Used to transfer small volumes of liquids.">
-          <img src="images/pipette.png" alt="Pipette">
-          <p>Pipette</p>
-        </div>
-        <div class="item" title="Used to heat substances.">
-          <img src="images/bunsenburner.png" alt="Bunsen Burner">
-          <p>Bunsen Burner</p>
-        </div>
+        <div class="item"><img src="images/beaker.png" alt="Beaker"><p>Beaker</p></div>
+        <div class="item"><img src="images/flask.png" alt="Flask"><p>Conical Flask</p></div>
+        <div class="item"><img src="images/testtube.png" alt="Test Tube"><p>Test Tube</p></div>
+        <div class="item"><img src="images/burette.png" alt="Burette"><p>Burette</p></div>
+        <div class="item"><img src="images/pipette.png" alt="Pipette"><p>Pipette</p></div>
+        <div class="item"><img src="images/bunsenburner.png" alt="Bunsen Burner"><p>Bunsen Burner</p></div>
       </div>
     </section>
-
+    <section class="ph-simulation">
+      <h2>🧫 pH Scale Simulation</h2>
+      <p>Adjust the pH level and observe the nature of the solution.</p>
+      <input type="range" id="phSlider" min="0" max="14" value="7" />
+      <div id="phValue">pH: 7 (Neutral)</div>
+      <div id="phBox"></div>
+    </section>
     <section class="periodic-table">
       <h2>Periodic Table</h2>
       <img src="images/Periodic_Table.png" alt="Periodic Table of Elements">
     </section>
+
+    
   </main>
 
   <footer>
     <p>&copy; 2025 Virtual Chemistry Lab</p>
   </footer>
-  <script src="../virtuallabbackend/virtuallab.js"></script>
+
+  <!-- Load Lottie.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+
+  <!-- Animation Loader Script -->
+  <script>
+    lottie.loadAnimation({
+      container: document.getElementById('lottieChemAnim'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'images/Animation - 1751621659082.json' // Change to your animation file path if different
+    });
+
+    // pH Simulation Logic
+    const phSlider = document.getElementById("phSlider");
+    const phValue = document.getElementById("phValue");
+    const phBox = document.getElementById("phBox");
+
+    phSlider.addEventListener("input", () => {
+      const val = parseInt(phSlider.value);
+      let nature = "", color = "";
+
+      if (val < 7) {
+        nature = "Acidic";
+        color = `rgb(${255 - val * 20}, 100, 100)`;
+      } else if (val === 7) {
+        nature = "Neutral";
+        color = "#00bcd4";
+      } else {
+        nature = "Basic";
+        color = `rgb(100, ${255 - (14 - val) * 20}, 100)`;
+      }
+
+      phValue.textContent = `pH: ${val} (${nature})`;
+      phBox.style.backgroundColor = color;
+    });
+  </script>
 </body>
 </html>
