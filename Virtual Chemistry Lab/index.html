@@ -245,6 +245,57 @@
       font-size: 0.95em;
       margin-top: 60px;
     }
+    /* Dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown button */
+.dropbtn {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 8px 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.dropbtn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 4px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: #0d47a1;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-weight: 500;
+}
+
+/* Hover effect for dropdown links */
+.dropdown-content a:hover {
+  background-color: #e3f2fd;
+}
+
+/* Show the dropdown on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
 
     @media (max-width: 768px) {
       nav {
@@ -276,11 +327,14 @@
   </div>
   <nav>
     <a href="index.html">Home</a>
-    <a href="experiments.html">Experiments</a>
-    <a href="safety.html">Lab Safety</a>
-    <a href="theory.html">Theory</a>
     <a href="register_teacher.html">Register as Teacher</a>
     <a href="register_student.html">Register as Student</a>
+    <div class="dropdown">
+    <button class="dropbtn">Login <i class="fa fa-caret-down"></i></button>
+    <div class="dropdown-content">
+      <a href="login/login_teacher.html">Login as Teacher</a>
+      <a href="login/login_student.html">Login as Student</a>
+    </div>
   </nav>
 </header>
 
@@ -335,7 +389,7 @@
 </html>
 
 
- <style>, <div class="ptable-container">
+ <div class="ptable-container">
  <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -765,6 +819,14 @@ const elements = [
       }
       ptable.appendChild(div);
     }
+    
+    function loginStudent(e) {
+      e.preventDefault();
+      const email = document.getElementById("studentEmail").value;
+      localStorage.setItem("student_email", email);
+      window.location.href = "student_dashboard.html";
+    }
+  
 </script>
 </body>
 </html>
