@@ -220,3 +220,40 @@ footer {
     transform: scale(1);
   }
 }
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background: #f0f0f0;
+}
+
+.periodic-table {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.element {
+  width: 60px;
+  height: 60px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #90caf9;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px #aaa;
+  transition: 0.3s;
+}
+
+.element:hover {
+  background-color: #64b5f6;
+}
+
+.element-info {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  width: 300px;
+}
