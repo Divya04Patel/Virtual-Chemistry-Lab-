@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Virtual Chemistry Lab</title>
-
+ <script src="https://unpkg.com/lottie-web@5.7.13/build/player/lottie.min.js"></script>
+</head>
   <!-- Google Fonts & Font Awesome -->
  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500&display=swap"rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -296,14 +297,11 @@
       🌐 Explore chemical equipment, 🧪 simulate reactions, and 💡 build your understanding of science in a safe, smart, and stunning way.
     </p>
     <p>
-      Designed with ❤ for curious minds.
+      Designed with ❤️ for curious minds.
     </p>
   </div>
   <div class="about-animation" id="lottieChemAnim"></div>
 </section>
-
-
-  
 
     <section class="equipment-section">
       <h2>🧪 Lab Equipment</h2>
@@ -478,6 +476,7 @@
     </div>
   </div>
 </section>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
 <script>
 // All 118 elements, with grid positions (col, row) for main table
 // Data source: IUPAC, Wikipedia, PubChem
@@ -629,6 +628,43 @@ const elements = [
         ptable.appendChild(div);
       }
     }
+    
+     
+
+  <!-- Animation Loader Script -->
+
+    lottie.loadAnimation({
+      container: document.getElementById('lottieChemAnim'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'images/Animation - 1751621659082.json' // Change to your animation file path if different
+    });
+
+    // pH Simulation Logic
+    const phSlider = document.getElementById("phSlider");
+    const phValue = document.getElementById("phValue");
+    const phBox = document.getElementById("phBox");
+
+    phSlider.addEventListener("input", () => {
+      const val = parseInt(phSlider.value);
+      let nature = "", color = "";
+
+      if (val < 7) {
+        nature = "Acidic";
+        color = `rgb(${255 - val * 20}, 100, 100)`;
+      } else if (val === 7) {
+        nature = "Neutral";
+        color = "#00bcd4";
+      } else {
+        nature = "Basic";
+        color = `rgb(100, ${255 - (14 - val) * 20}, 100)`;
+      }
+
+      phValue.textContent = `pH: ${val} (${nature})`;
+      phBox.style.backgroundColor = color;
+    });
+ 
     // Lanthanides (row 9)
     for(let col=3; col<=17; col++) {
       const el = elements.find(e => e.row===9 && e.col===col);
@@ -682,13 +718,8 @@ const elements = [
     document.addEventListener('keydown', function(e) {
       if(e.key === "Escape") closeModal();
     });
-  </script>
-</body>
-</html>
-</div>
-</script>
-</body>
-</html>        const div = document.createElement('div');
+  
+        const div = document.createElement('div');
         div.className = 'element';
         if(el) {
           div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
@@ -700,8 +731,8 @@ const elements = [
           div.style.cursor = 'default';
         }
         ptable.appendChild(div);
-      }
-    }
+      
+    
     // Lanthanides (row 9)
     for(let col=3; col<=17; col++) {
       const el = elements.find(e => e.row===9 && e.col===col);
@@ -734,5 +765,6 @@ const elements = [
       }
       ptable.appendChild(div);
     }
+</script>
 </body>
 </html>
