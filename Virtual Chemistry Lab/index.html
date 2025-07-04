@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+</head>
+<body>
+  <header>
+    <h1>Virtual Chemistry Lab</h1>
+    <nav><head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Chemistry Lab</title>
+
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #ffffff);
+      color: #0d47a1;
+    }
+
+    header {
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      padding: 25px 20px;
+      text-align: center;
+      color: white;
+      
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    header img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+      margin-bottom: 10px;
+    }
+
+    header h1 {
+      font-size: 2.4em;
+      margin-bottom: 10px;
+    }
+
+    nav {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #ffffff;
+      padding: 8px 16px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      transition: all 0.3s ease-in-out;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    main {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .equipment-section {
+      background: #ffffff;
+      margin: 30px auto;
+      padding: 30px 20px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(13, 71, 161, 0.15);
+      max-width: 1100px;
+    }
+
+    .equipment-section h2 {
+      color: #0d47a1;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .equipment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 25px;
+    }
+
+    .equipment-grid .item {
+      background: #f0f8ff;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.07);
+      transition: transform 0.3s ease;
+    }
+
+    .equipment-grid .item:hover {
+      transform: translateY(-5px);
+    }
+
+    .equipment-grid img {
+      width: 100%;
+      max-height: 110px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .equipment-grid p {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #0d47a1;
+    }
+
+    .periodic-table {
+      margin-top: 60px;
+    }
+
+    .periodic-table h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #0d47a1;
+    }
+
+    .periodic-table img {
+      width: 95%;
+      max-width: 1000px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(13, 71, 161, 0.1);
+      display: block;
+      margin: 0 auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #0d47a1;
+      color: white;
+      font-size: 0.95em;
+      margin-top: 60px;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      header img {
+        width: 80px;
+        height: 80px;
+      }
+
+      header h1 {
+        font-size: 1.8em;
+      }
+
+      .equipment-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+    }
+  </style>
+
+
+      <a href="index.html">Home</a>
+      <a href="experiments.html">Experiments</a>
+      <a href="safety.html">Lab Safety</a>
+      <a href="theory.html">Theory</a>
+      <a href="register_teacher.html">Register as Teacher</a>
+      <a href="register_student.html">Register as Student</a>
+    </nav>
+  </header>
+
+  <main>
+     <img src="images/labman.png" alt="Chemistry Lab Man">
+    <section class="equipment-section">
+      <h2>🧪 Lab Equipment</h2>
+      <div class="equipment-grid">
+        <div class="item" title="Used for mixing liquids.">
+          <img src="images/beaker.png" alt="Beaker">
+          <p>Beaker</p>
+        </div>
+        <div class="item" title="Used to swirl and mix chemicals.">
+          <img src="images/flask.png" alt="Conical Flask">
+          <p>Conical Flask</p>
+        </div>
+        <div class="item" title="Used to hold small amounts of liquid.">
+          <img src="images/testtube.png" alt="Test Tube">
+          <p>Test Tube</p>
+        </div>
+        <div class="item" title="Used for titration in experiments.">
+          <img src="images/burette.png" alt="Burette">
+          <p>Burette</p>
+        </div>
+        <div class="item" title="Used to transfer small volumes of liquids.">
+          <img src="images/pipette.png" alt="Pipette">
+          <p>Pipette</p>
+        </div>
+        <div class="item" title="Used to heat substances.">
+          <img src="images/bunsenburner.png" alt="Bunsen Burner">
+          <p>Bunsen Burner</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="periodic-table">
+      <h2>Periodic Table</h2>
+      <img src="images/Periodic_Table.png" alt="Periodic Table of Elements">
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Virtual Chemistry Lab</p>
+  </footer>
+  <script src="../virtuallabbackend/virtuallab.js"></script>
+</body>
+</html>

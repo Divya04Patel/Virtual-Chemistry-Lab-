@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Chemistry Lab - Interactive</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .lab-container { display: flex; gap: 40px; margin: 40px; }
+    .chemicals, .equipment { width: 200px; }
+    .chemicals h3, .equipment h3 { text-align: center; }
+    .item-list { display: flex; flex-direction: column; gap: 12px; }
+    .item { padding: 10px; background: #e3f2fd; border-radius: 8px; text-align: center; cursor: grab; }
+    .workspace { flex: 1; min-height: 400px; background: #f5f5f5; border: 2px dashed #90caf9; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .workspace.over { background: #bbdefb; }
+    #result { margin-top: 30px; font-size: 1.2em; color: #1565c0; }
+    #simulate-btn { margin-top: 20px; padding: 10px 24px; font-size: 1em; background: #1976d2; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+    #simulate-btn:disabled { background: #90caf9; }
+    .chem-img { width: 32px; height: 32px; vertical-align: middle; margin-right: 8px; }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center;">Virtual Chemistry Lab</h1>
+  <div class="lab-container">
+    <div class="chemicals">
+      <h3>Chemicals</h3>
+      <div class="item-list" id="chemicals-list">
+        <div class="item" draggable="true" data-name="Sodium"><img src="images/sodium.png" alt="Sodium" class="chem-img">Sodium</div>
+        <div class="item" draggable="true" data-name="Water"><img src="images/water.png" alt="Water" class="chem-img">Water</div>
+        <div class="item" draggable="true" data-name="Copper Sulphate"><img src="images/flask.png" alt="Copper Sulphate" class="chem-img">Copper Sulphate</div>
+        <div class="item" draggable="true" data-name="Zinc"><img src="images/flask.png" alt="Zinc" class="chem-img">Zinc</div>
+        <div class="item" draggable="true" data-name="Hydrochloric Acid"><img src="images/hcl.png" alt="Hydrochloric Acid" class="chem-img">Hydrochloric Acid</div>
+        <div class="item" draggable="true" data-name="Litmus Paper"><img src="images/flask.png" alt="Litmus Paper" class="chem-img">Litmus Paper</div>
+        <div class="item" draggable="true" data-name="Phenolphthalein"><img src="images/flask.png" alt="Phenolphthalein" class="chem-img">Phenolphthalein</div>
+      </div>
+    </div>
+    <div class="equipment">
+      <h3>Equipment</h3>
+      <div class="item-list" id="equipment-list">
+        <div class="item" draggable="true" data-name="Beaker"><img src="images/beaker.png" alt="Beaker" class="chem-img">Beaker</div>
+        <div class="item" draggable="true" data-name="Test Tube"><img src="images/testtube.png" alt="Test Tube" class="chem-img">Test Tube</div>
+        <div class="item" draggable="true" data-name="Burette"><img src="images/burette.png" alt="Burette" class="chem-img">Burette</div>
+        <div class="item" draggable="true" data-name="Pipette"><img src="images/pipette.png" alt="Pipette" class="chem-img">Pipette</div>
+        <div class="item" draggable="true" data-name="Burner"><img src="images/bunsenburner.png" alt="Burner" class="chem-img">Burner</div>
+      </div>
+    </div>
+    <div class="workspace" id="workspace">
+      <h3>Workspace</h3>
+      <div id="experiment-instructions" style="color:#1976d2; margin-bottom:10px;"></div>
+      <div id="workspace-items" style="min-height:60px;"></div>
+      <button id="simulate-btn" disabled>Simulate</button>
+      <div id="result"></div>
+      <div id="submit-result-section" style="display:none; margin-top:20px;">
+        <textarea id="student-observation" placeholder="Enter your observation/result here..." style="width:90%;height:60px;"></textarea><br/>
+        <button id="submit-observation-btn">Submit Result</button>
+        <div id="submit-status"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const API_BASE = "http://127.0.0.1:5000";
+    // Drag and drop logic
+    const workspace = document.getElementById('workspace-items');
+    const wsContainer = document.getElementById('workspace');
+    let draggedItem = null;
+    document.querySelectorAll('.item').forEach(item => {
+      item.addEventListener('dragstart', e => {
+        draggedItem = item.cloneNode(true);
+        e.dataTransfer.effectAllowed = 'move';
+      });
+    });
+    wsContainer.addEventListener('dragover', e => {
+      e.preventDefault();
+      wsContainer.classList.add('over');
+    });
+    wsContainer.addEventListener('dragleave', e => {
+      wsContainer.classList.remove('over');
+    });
+    wsContainer.addEventListener('drop', e => {
+      e.preventDefault();
+      wsContainer.classList.remove('over');
+      // In drop logic, ensure both image and name are shown in workspace, but only once
+      if (draggedItem) {
+        // Prevent duplicate items
+        if (![...workspace.children].some(child => child.dataset.name === draggedItem.dataset.name)) {
+          const wsItem = document.createElement('div');
+          wsItem.className = 'item';
+          wsItem.dataset.name = draggedItem.dataset.name;
+          wsItem.style.display = 'inline-block';
+          wsItem.style.margin = '8px';
+          // Use the same image as in the sidebar
+          const img = draggedItem.querySelector('img').cloneNode();
+          img.style.width = '40px';
+          img.style.marginRight = '8px';
+          wsItem.appendChild(img);
+          wsItem.appendChild(document.createTextNode(draggedItem.dataset.name));
+          wsItem.style.transition = 'box-shadow 0.3s';
+          wsItem.style.boxShadow = '0 0 16px 4px #90caf9';
+          setTimeout(() => { wsItem.style.boxShadow = 'none'; }, 600);
+          workspace.appendChild(wsItem);
+          updateSimulateBtn();
+        }
+        draggedItem = null;
+      }
+    });
+    function updateSimulateBtn() {
+      document.getElementById('simulate-btn').disabled = workspace.children.length < 2;
+    }
+    // Remove item from workspace on click
+    workspace.addEventListener('click', e => {
+      if (e.target.classList.contains('item')) {
+        workspace.removeChild(e.target);
+        updateSimulateBtn();
+      }
+    });
+    // Simulate button logic
+    document.getElementById('simulate-btn').addEventListener('click', async () => {
+      const reactants = [...workspace.children].map(child => child.dataset.name);
+      document.getElementById('result').textContent = 'Simulating...';
+      try {
+        const res = await fetch(`${API_BASE}/simulate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ reactants })
+        });
+        const data = await res.json();
+        if (data.error) {
+          document.getElementById('result').textContent = 'No reaction or invalid combination.';
+        } else {
+          // Show reactants and products as an equation with images
+          const reactantStr = reactants.join(' + ');
+          const productStr = Array.isArray(data.products) ? data.products.join(' + ') : data.products;
+
+          // Helper to get image src for a chemical
+          function getImgSrc(name) {
+            const map = {
+              'Sodium': 'sodium.png',
+              'Water': 'water.png',
+              'Copper Sulphate': 'flask.png',
+              'Zinc': 'flask.png',
+              'Hydrochloric Acid': 'hcl.png',
+              'Litmus Paper': 'litmus.png',
+              'Phenolphthalein': 'flask.png',
+              'Beaker': 'beaker.png',
+              'Test Tube': 'testtube.png',
+              'Burette': 'burette.png',
+              'Pipette': 'pipette.png',
+              'Burner': 'bunsenburner.png',
+              'Sodium Hydroxide': 'flask.png',
+              'Hydrogen Gas': 'flask.png',
+              'Zinc Chloride': 'flask.png',
+              'Copper Sulphate Solution': 'flask.png',
+              'Red Litmus': 'litmus.png',
+              'Blue Litmus': 'litmus.png',
+              'Pink Solution': 'flask.png',
+              'Colorless Solution': 'flask.png',
+              'Heating Occurs': 'beaker.png'
+            };
+            return `images/${map[name] || 'flask.png'}`;
+          }
+
+          // Render images for reactants and products
+          const reactantImgs = reactants.map(r => `<img src='${getImgSrc(r)}' alt='${r}' style='width:48px;height:48px;margin:0 8px;vertical-align:middle;'>`).join('');
+          const productNames = Array.isArray(data.products) ? data.products : [data.products];
+          const productImgs = productNames.map(p => `<img src='${getImgSrc(p)}' alt='${p}' style='width:48px;height:48px;margin:0 8px;vertical-align:middle;'>`).join('');
+
+          document.getElementById('result').innerHTML = `
+            <div style='margin-bottom:10px;'>
+              ${reactantImgs}
+              <span style='font-size:2em;vertical-align:middle;'>→</span>
+              ${productImgs}
+            </div>
+            <b style='color:#1565c0;font-size:1.5em;'>${reactantStr} → ${productStr}</b><br>
+            Type: ${data.reactionType}<br>
+            Visual: ${data.visual}
+          `;
+          wsContainer.style.boxShadow = '0 0 32px 8px #81c784';
+          setTimeout(() => { wsContainer.style.boxShadow = 'none'; }, 1000);
+        }
+      } catch (err) {
+        document.getElementById('result').textContent = 'Error connecting to backend.';
+      }
+    });
+    // Show experiment instructions if present in localStorage
+    const expStr = localStorage.getItem('current_experiment');
+    if (expStr) {
+      try {
+        const exp = JSON.parse(decodeURIComponent(expStr));
+        document.getElementById('experiment-instructions').textContent = `Experiment: ${exp.name} | Instructions: ${exp.instructions}`;
+        document.getElementById('submit-result-section').style.display = '';
+      } catch {}
+    }
+    // Submit observation/result
+    document.getElementById('submit-observation-btn').onclick = async function() {
+      const obs = document.getElementById('student-observation').value.trim();
+      const assignmentId = localStorage.getItem('current_assignment_id');
+      if (!obs || !assignmentId) return;
+      const res = await fetch(`${API_BASE}/evaluate_assignment`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ assignment_id: assignmentId, result: obs })
+      });
+      const result = await res.json();
+      document.getElementById('submit-status').textContent = result.success ? 'Result submitted!' : (result.error || 'Error');
+      if (result.success) {
+        localStorage.removeItem('current_assignment_id');
+        localStorage.removeItem('current_experiment');
+      }
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Dashboard - Virtual Chemistry Lab</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .dashboard-container { max-width: 900px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px #b3c6e0; padding: 32px; }
+    h2 { color: #0d47a1; }
+    .section { margin-bottom: 32px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    th, td { border: 1px solid #b3c6e0; padding: 8px; text-align: left; }
+    th { background: #e3f2fd; }
+    .perform-btn { background: #43a047; color: #fff; border: none; border-radius: 4px; padding: 6px 16px; cursor: pointer; }
+    .perform-btn:hover { background: #2e7031; }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <h2>🧑‍🎓 Student Dashboard</h2>
+    <div style="color:#1976d2;font-weight:bold;margin-bottom:10px;">Logged in as: <span id="student-email-display"></span></div>
+    <div class="section">
+      <h3>Assigned Experiments</h3>
+      <table id="assigned-table">
+        <thead><tr><th>Experiment</th><th>Instructions</th><th>Submit Result</th><th>Teacher Feedback</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  <script src="../virtuallabbackend/virtuallab.js"></script>
+  <script>
+    // Replace with actual student email (from login/session)
+    const studentEmail = localStorage.getItem('student_email') || prompt('Enter your student email:');
+    localStorage.setItem('student_email', studentEmail);
+
+    // Display the logged-in student email
+    document.getElementById('student-email-display').textContent = studentEmail;
+
+    // --- DEMO MODE: Show assignments from localStorage ---
+    function getDemoAssignments() {
+      return JSON.parse(localStorage.getItem('demo_assignments') || '[]');
+    }
+
+    async function loadAssignments() {
+      const data = getDemoAssignments().filter(a => a.student_email === studentEmail);
+      const tbody = document.querySelector('#assigned-table tbody');
+      tbody.innerHTML = '';
+      if (data.length === 0) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td colspan="4" style="text-align:center;color:#888;">No experiments assigned yet. Please wait for your teacher to assign a task.</td>`;
+        tbody.appendChild(tr);
+      } else {
+        data.forEach(a => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${a.experiment.name}</td><td>${a.experiment.instructions}</td><td>${a.result ? 'Submitted' : `<button class='perform-btn' onclick=\"performExperiment('${a.id}', '${encodeURIComponent(JSON.stringify(a.experiment))}')\">Perform & Submit</button>`}</td><td>${a.result || ''}</td>`;
+          tbody.appendChild(tr);
+        });
+      }
+    }
+    loadAssignments();
+
+    window.performExperiment = function(id, experimentStr) {
+      // Store assignment id and experiment details in localStorage
+      localStorage.setItem('current_assignment_id', id);
+      localStorage.setItem('current_experiment', experimentStr);
+      window.location.href = 'lab.html';
+    };
+  </script>
+</body>
+</html>

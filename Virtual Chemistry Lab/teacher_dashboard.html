@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teacher Dashboard - Virtual Chemistry Lab</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .dashboard-container { max-width: 900px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px #b3c6e0; padding: 32px; }
+    h2 { color: #0d47a1; }
+    .section { margin-bottom: 32px; }
+    label, select, input, button { margin: 8px 0; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    th, td { border: 1px solid #b3c6e0; padding: 8px; text-align: left; }
+    th { background: #e3f2fd; }
+    .assign-btn { background: #1976d2; color: #fff; border: none; border-radius: 4px; padding: 6px 16px; cursor: pointer; }
+    .assign-btn:hover { background: #0d47a1; }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <h2>👨‍🏫 Teacher Dashboard</h2>
+    <div class="section">
+      <h3>Assign Experiment to Student</h3>
+      <form id="assign-form">
+        <label>Student Email: <input type="email" id="student-email" required /></label><br/>
+        <label>Experiment Name: <input type="text" id="experiment-name" required /></label><br/>
+        <label>Instructions: <input type="text" id="experiment-instructions" required /></label><br/>
+        <button type="submit" class="assign-btn">Assign Experiment</button>
+      </form>
+      <div id="assign-status"></div>
+    </div>
+    <div class="section">
+      <h3>Assigned Experiments</h3>
+      <table id="assigned-table">
+        <thead><tr><th>Student</th><th>Experiment</th><th>Instructions</th><th>Result</th><th>Evaluate</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  <script src="../virtuallabbackend/virtuallab.js"></script>
+  <script>
+    // Replace with actual teacher email (from login/session)
+    const teacherEmail = localStorage.getItem('teacher_email') || prompt('Enter your teacher email:');
+    localStorage.setItem('teacher_email', teacherEmail);
+
+    // --- DEMO MODE: Store assignments in localStorage ---
+    function getDemoAssignments() {
+      return JSON.parse(localStorage.getItem('demo_assignments') || '[]');
+    }
+    function setDemoAssignments(assignments) {
+      localStorage.setItem('demo_assignments', JSON.stringify(assignments));
+    }
+
+    async function loadAssignments() {
+      // DEMO: Use localStorage instead of backend
+      const data = getDemoAssignments().filter(a => a.teacher_email === teacherEmail);
+      const tbody = document.querySelector('#assigned-table tbody');
+      tbody.innerHTML = '';
+      data.forEach(a => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${a.student_email}</td><td>${a.experiment.name}</td><td>${a.experiment.instructions}</td><td>${a.result || ''}</td><td>${a.result ? '' : `<button onclick="evaluate('${a.id}')">Evaluate</button>`}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+    loadAssignments();
+
+    document.getElementById('assign-form').onsubmit = function(e) {
+      e.preventDefault();
+      const student_email = document.getElementById('student-email').value;
+      const experiment = {
+        name: document.getElementById('experiment-name').value,
+        instructions: document.getElementById('experiment-instructions').value
+      };
+      // DEMO: Store assignment in localStorage
+      const assignments = getDemoAssignments();
+      assignments.push({
+        id: Date.now().toString(),
+        teacher_email: teacherEmail,
+        student_email,
+        experiment,
+        result: null
+      });
+      setDemoAssignments(assignments);
+      document.getElementById('assign-status').textContent = 'Assigned!';
+      loadAssignments();
+    };
+
+    window.evaluate = function(id) {
+      const result = prompt('Enter evaluation/grade/feedback:');
+      if (!result) return;
+      const assignments = getDemoAssignments();
+      const idx = assignments.findIndex(a => a.id === id);
+      if (idx !== -1) {
+        assignments[idx].result = result;
+        setDemoAssignments(assignments);
+        loadAssignments();
+      }
+    };
+  </script>
+</body>
+</html>
