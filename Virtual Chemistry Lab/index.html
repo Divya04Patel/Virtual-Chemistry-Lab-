@@ -296,7 +296,7 @@
       🌐 Explore chemical equipment, 🧪 simulate reactions, and 💡 build your understanding of science in a safe, smart, and stunning way.
     </p>
     <p>
-      Designed with ❤️ for curious minds.
+      Designed with ❤ for curious minds.
     </p>
   </div>
   <div class="about-animation" id="lottieChemAnim"></div>
@@ -316,151 +316,16 @@
         <div class="item"><img src="images/bunsenburner.png" alt="Bunsen Burner"><p>Bunsen Burner</p></div>
       </div>
     </section>
-    <section class="ph-simulation">
-      <h2>🧫 pH Scale Simulation</h2>
-      <p>Adjust the pH level and observe the nature of the solution.</p>
-      <input type="range" id="phSlider" min="0" max="14" value="7" />
-      <div id="phValue">pH: 7 (Neutral)</div>
-      <div id="phBox"></div>
-    </section>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Virtual Chemistry Lab - Periodic Table</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  
-  <script src="script.js"></script>
-</body>
-</html>
+<section class="ph-simulation">
+  <h2>🧫 pH Scale Simulation</h2>
+  <p>Adjust the pH level and observe the nature of the solution.</p>
+  <input type="range" id="phSlider" min="0" max="14" value="7" />
+  <div id="phValue">pH: 7 (Neutral)</div>
+  <div id="phBox"></div>
+</section>
 
-
- <style>, <div class="ptable-container">
- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Dynamic Periodic Table</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #f4f8fb;
-      margin: 0;
-      padding: 0;
-    }
-    .ptable-container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 6px 24px rgba(13,71,161,0.10);
-    }
-    .ptable-title {
-      text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 30px;
-      color: #0d47a1;
-      letter-spacing: 2px;
-    }
-    .ptable {
-      display: grid;
-      grid-template-columns: repeat(18, 44px);
-      grid-gap: 6px;
-      justify-content: center;
-    }
-    .element {
-      background: #e3f2fd;
-      border: 2px solid #90caf9;
-      border-radius: 8px;
-      text-align: center;
-      padding: 6px 0 2px 0;
-      cursor: pointer;
-      transition: transform 0.15s, box-shadow 0.15s;
-      position: relative;
-      font-size: 1rem;
-      min-height: 44px;
-      user-select: none;
-    }
-    .element:hover {
-      transform: scale(1.08);
-      box-shadow: 0 2px 8px rgba(33,150,243,0.18);
-      z-index: 2;
-    }
-    .atomic-number {
-      font-size: 0.7em;
-      color: #1976d2;
-      position: absolute;
-      top: 3px;
-      left: 6px;
-    }
-    .symbol {
-      font-size: 1.2em;
-      font-weight: bold;
-      color: #0d47a1;
-      margin-top: 10px;
-    }
-    .modal-bg {
-      display: none;
-      position: fixed;
-      top:0; left:0; right:0; bottom:0;
-      background: rgba(0,0,0,0.35);
-      z-index: 100;
-      justify-content: center;
-      align-items: center;
-    }
-    .modal {
-      background: #fff;
-      border-radius: 16px;
-      padding: 32px 36px;
-      box-shadow: 0 8px 32px rgba(13,71,161,0.18);
-      min-width: 320px;
-      max-width: 90vw;
-      text-align: center;
-      position: relative;
-      animation: pop 0.2s;
-    }
-    @keyframes pop {
-      from { transform: scale(0.8);}
-      to { transform: scale(1);}
-    }
-    .modal h2 {
-      margin: 0 0 10px 0;
-      font-size: 2.2em;
-      color: #0d47a1;
-    }
-    .modal .close {
-      position: absolute;
-      top: 12px;
-      right: 18px;
-      font-size: 1.5em;
-      color: #1976d2;
-      cursor: pointer;
-      background: none;
-      border: none;
-    }
-    .modal-details {
-      margin-top: 18px;
-      font-size: 1.1em;
-      color: #222;
-      text-align: left;
-    }
-    @media (max-width: 900px) {
-      .ptable { grid-template-columns: repeat(18, 28px);}
-      .element { font-size: 0.8em; min-height: 28px;}
-    }
-    @media (max-width: 600px) {
-      .ptable-container { padding: 5px;}
-      .ptable { grid-template-columns: repeat(18, 18px);}
-      .element { font-size: 0.7em; min-height: 18px;}
-      .modal { padding: 18px 8px;}
-    }
-  </style>
-</head>
-<body>
+<!-- Periodic Table Section -->
+<section class="periodic-table">
   <div class="ptable-container">
     <div class="ptable-title">PERIODIC TABLE OF ELEMENTS</div>
     <div class="ptable" id="ptable"></div>
@@ -477,10 +342,11 @@
       </div>
     </div>
   </div>
-  <script>
-    // All 118 elements, with grid positions (col, row) for main table
-    // Data source: IUPAC, Wikipedia, PubChem
-    const elements = [
+</section>
+<script>
+// All 118 elements, with grid positions (col, row) for main table
+// Data source: IUPAC, Wikipedia, PubChem
+const elements = [
       // period 1
       {num:1, sym:"H", name:"Hydrogen", mass:"1.008", config:"1s1", col:1, row:1},
       {num:2, sym:"He", name:"Helium", mass:"4.0026", config:"1s2", col:18, row:1},
@@ -686,5 +552,52 @@
 </html>
 </div>
 </script>
+</body>
+</html>        const div = document.createElement('div');
+        div.className = 'element';
+        if(el) {
+          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
+          div.title = el.name;
+          div.onclick = () => showModal(el);
+        } else {
+          div.style.background = 'transparent';
+          div.style.border = 'none';
+          div.style.cursor = 'default';
+        }
+        ptable.appendChild(div);
+      }
+    }
+    // Lanthanides (row 9)
+    for(let col=3; col<=17; col++) {
+      const el = elements.find(e => e.row===9 && e.col===col);
+      const div = document.createElement('div');
+      div.className = 'element';
+      if(el) {
+        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
+        div.title = el.name;
+        div.onclick = () => showModal(el);
+      } else {
+        div.style.background = 'transparent';
+        div.style.border = 'none';
+        div.style.cursor = 'default';
+      }
+      ptable.appendChild(div);
+    }
+    // Actinides (row 10)
+    for(let col=3; col<=17; col++) {
+      const el = elements.find(e => e.row===10 && e.col===col);
+      const div = document.createElement('div');
+      div.className = 'element';
+      if(el) {
+        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
+        div.title = el.name;
+        div.onclick = () => showModal(el);
+      } else {
+        div.style.background = 'transparent';
+        div.style.border = 'none';
+        div.style.cursor = 'default';
+      }
+      ptable.appendChild(div);
+    }
 </body>
 </html>
