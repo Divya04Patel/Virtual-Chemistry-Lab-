@@ -296,7 +296,7 @@
       🌐 Explore chemical equipment, 🧪 simulate reactions, and 💡 build your understanding of science in a safe, smart, and stunning way.
     </p>
     <p>
-      Designed with ❤️ for curious minds.
+      Designed with ❤ for curious minds.
     </p>
   </div>
   <div class="about-animation" id="lottieChemAnim"></div>
@@ -337,6 +337,7 @@
 </html>
 
 
+ <style>, <div class="ptable-container">
  <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -476,10 +477,11 @@
       </div>
     </div>
   </div>
-  <script>
-    // All 118 elements, with grid positions (col, row) for main table
-    // Data source: IUPAC, Wikipedia, PubChem
-    const elements = [
+</section>
+<script>
+// All 118 elements, with grid positions (col, row) for main table
+// Data source: IUPAC, Wikipedia, PubChem
+const elements = [
       // period 1
       {num:1, sym:"H", name:"Hydrogen", mass:"1.008", config:"1s1", col:1, row:1},
       {num:2, sym:"He", name:"Helium", mass:"4.0026", config:"1s2", col:18, row:1},
@@ -685,5 +687,52 @@
 </html>
 </div>
 </script>
+</body>
+</html>        const div = document.createElement('div');
+        div.className = 'element';
+        if(el) {
+          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
+          div.title = el.name;
+          div.onclick = () => showModal(el);
+        } else {
+          div.style.background = 'transparent';
+          div.style.border = 'none';
+          div.style.cursor = 'default';
+        }
+        ptable.appendChild(div);
+      }
+    }
+    // Lanthanides (row 9)
+    for(let col=3; col<=17; col++) {
+      const el = elements.find(e => e.row===9 && e.col===col);
+      const div = document.createElement('div');
+      div.className = 'element';
+      if(el) {
+        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
+        div.title = el.name;
+        div.onclick = () => showModal(el);
+      } else {
+        div.style.background = 'transparent';
+        div.style.border = 'none';
+        div.style.cursor = 'default';
+      }
+      ptable.appendChild(div);
+    }
+    // Actinides (row 10)
+    for(let col=3; col<=17; col++) {
+      const el = elements.find(e => e.row===10 && e.col===col);
+      const div = document.createElement('div');
+      div.className = 'element';
+      if(el) {
+        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
+        div.title = el.name;
+        div.onclick = () => showModal(el);
+      } else {
+        div.style.background = 'transparent';
+        div.style.border = 'none';
+        div.style.cursor = 'default';
+      }
+      ptable.appendChild(div);
+    }
 </body>
 </html>
