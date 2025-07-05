@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<ml lang="en">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Virtual Chemistry Lab</title>
-
   <!-- Google Fonts & Font Awesome -->
- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500&display=swap"rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
   <style>
     * {
       box-sizing: border-box;
@@ -388,56 +386,83 @@
         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       }
     }
+
+    .ptable-legend {
+  font-size: 1.05em;
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  justify-content: center;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 5px 14px;
+  box-shadow: 0 2px 8px rgba(13,71,161,0.04);
+}
+.legend-box {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid #bbb;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.legend-box.alkali-metals { background: #ffb347; border-color: #ff9800; }
+.legend-box.alkaline-earth-metals { background: #ffe082; border-color: #ffd600; }
+.legend-box.transition-metals { background: #b3e5fc; border-color: #0288d1; }
+.legend-box.boron-group { background: #f8bbd0; border-color: #ad1457; }
+.legend-box.carbon-group { background: #c8e6c9; border-color: #388e3c; }
+.legend-box.nitrogen-group { background: #e1bee7; border-color: #8e24aa; }
+.legend-box.chalcogens { background: #ffccbc; border-color: #d84315; }
+.legend-box.halogens { background: #b2dfdb; border-color: #00897b; }
+.legend-box.noble-gases { background: #d1c4e9; border-color: #512da8; }
+.legend-box.lanthanides { background: #f0e68c; border-color: #bdb76b; }
+.legend-box.actinides { background: #bcaaa4; border-color: #4e342e; }
+.legend-box.reactive-nonmetals { background: #ffd6d6; border-color: #e57373; }
   </style>
 </head>
-
 <body>
   <header>
-  
-  <div class="header-container">
-    <img src="images/labman.png" alt="Labman" class="labman-logo">
-    <h1>Virtual Chemistry Lab</h1>
-  </div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="experiments.html">Experiments</a>
-    <a href="safety.html">Lab Safety</a>
-    <a href="theory.html">Theory</a>
-    <a href="register_teacher.html">Register as Teacher</a>
-    <a href="register_student.html">Register as Student</a>
-  </nav>
-</header>
-
+    <div class="header-container">
+      <img src="images/labman.png" alt="Labman" class="labman-logo">
+      <h1>Virtual Chemistry Lab</h1>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="experiments.html">Experiments</a>
+      <a href="safety.html">Lab Safety</a>
+      <a href="theory.html">Theory</a>
+      <a href="register_teacher.html">Register as Teacher</a>
+      <a href="register_student.html">Register as Student</a>
+    </nav>
+  </header>
 
   <main>
-    <!-- 👇 About + Animation Section -->
+    <!-- About Section -->
     <section class="about-section">
-  <div class="about-text">
-    <h2><span>🔬 About This Lab</span></h2>
-    <p>
-      Welcome to your own <strong>immersive chemistry playground</strong>! This virtual lab empowers students and educators to perform <em>realistic experiments</em>, interact with simulations, and discover the power of atoms and molecules—all from any device.
-    </p>
-    <p>
-      🌐 Explore chemical equipment, 🧪 simulate reactions, and 💡 build your understanding of science in a safe, smart, and stunning way.
-    </p>
-    <p>
-      Designed with ❤ for curious minds.
-    </p>
-  </div>
-  <div class="about-animation" id="lottieChemAnim"></div>
-</section>
+      <div class="about-text">
+        <h2><span>🔬 About This Lab</span></h2>
+        <p>
+          Welcome to your own <strong>immersive chemistry playground</strong>! This virtual lab empowers students and educators to perform <em>realistic experiments</em>, interact with simulations, and discover the power of atoms and molecules—all from any device.
+        </p>
+        <p>
+          🌐 Explore chemical equipment, 🧪 simulate reactions, and 💡 build your understanding of science in a safe, smart, and stunning way.
+        </p>
+        <p>
+          Designed with ❤ for curious minds.
+        </p>
+      </div>
+      <div class="about-animation" id="lottieChemAnim"></div>
+    </section>
 
-
-    <section class="grade-selection" style="margin: 40px 0;">
-  <h2>Choose Your Grade</h2>
-  <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-    <a href="grade9.html" class="btn" style="padding: 14px 28px; background: #1976d2; color: #fff; border-radius: 8px; text-decoration: none; font-size: 1.1em;">Grade 9</a>
-    <a href="grade10.html" class="btn" style="padding: 14px 28px; background: #388e3c; color: #fff; border-radius: 8px; text-decoration: none; font-size: 1.1em;">Grade 10</a>
-    <a href="grade11.html" class="btn" style="padding: 14px 28px; background: #fbc02d; color: #222; border-radius: 8px; text-decoration: none; font-size: 1.1em;">Grade 11</a>
-    <a href="grade12.html" class="btn" style="padding: 14px 28px; background: #d32f2f; color: #fff; border-radius: 8px; text-decoration: none; font-size: 1.1em;">Grade 12</a>
-  </div>
-</section>
-
+    <!-- Equipment Section -->
     <section class="equipment-section">
       <h2>🧪 Lab Equipment</h2>
       <div class="equipment-grid">
@@ -449,6 +474,8 @@
         <div class="item"><img src="images/bunsenburner.png" alt="Bunsen Burner"><p>Bunsen Burner</p></div>
       </div>
     </section>
+
+    <!-- pH Simulation Section -->
     <section class="ph-simulation">
       <h2>🧫 pH Scale Simulation</h2>
       <p>Adjust the pH level and observe the nature of the solution.</p>
@@ -456,183 +483,52 @@
       <div id="phValue">pH: 7 (Neutral)</div>
       <div id="phBox"></div>
     </section>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Virtual Chemistry Lab - Periodic Table</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  
-  <script src="script.js"></script>
-</body>
-</html>
 
-
- <style>, <div class="ptable-container">
- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Dynamic Periodic Table</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #f4f8fb;
-      margin: 0;
-      padding: 0;
-    }
-    .ptable-container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 6px 24px rgba(13,71,161,0.10);
-    }
-    .ptable-title {
-      text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 30px;
-      color: #0d47a1;
-      letter-spacing: 2px;
-    }
-    .ptable {
-      display: grid;
-      grid-template-columns: repeat(18, 44px);
-      grid-gap: 6px;
-      justify-content: center;
-    }
-    .element {
-      border: 2px solid #90caf9;
-      border-radius: 8px;
-      text-align: center;
-      padding: 6px 0 2px 0;
-      cursor: pointer;
-      transition: transform 0.15s, box-shadow 0.15s;
-      position: relative;
-      font-size: 1rem;
-      min-height: 44px;
-      user-select: none;
-    }
-    .element:hover {
-      transform: scale(1.08);
-      box-shadow: 0 2px 8px rgba(33,150,243,0.18);
-      z-index: 2;
-    }
-    .atomic-number {
-      font-size: 0.7em;
-      color: #1976d2;
-      position: absolute;
-      top: 3px;
-      left: 6px;
-    }
-    .symbol {
-      font-size: 1.2em;
-      font-weight: bold;
-      color: #0d47a1;
-      margin-top: 10px;
-    }
-    .modal-bg {
-      display: none;
-      position: fixed;
-      top:0; left:0; right:0; bottom:0;
-      background: rgba(0,0,0,0.35);
-      z-index: 100;
-      justify-content: center;
-      align-items: center;
-    }
-    .modal {
-      background: #fff;
-      border-radius: 16px;
-      padding: 32px 36px;
-      box-shadow: 0 8px 32px rgba(13,71,161,0.18);
-      min-width: 320px;
-      max-width: 90vw;
-      text-align: center;
-      position: relative;
-      animation: pop 0.2s;
-    }
-    @keyframes pop {
-      from { transform: scale(0.8);}
-      to { transform: scale(1);}
-    }
-    .modal h2 {
-      margin: 0 0 10px 0;
-      font-size: 2.2em;
-      color: #0d47a1;
-    }
-    .modal .close {
-      position: absolute;
-      top: 12px;
-      right: 18px;
-      font-size: 1.5em;
-      color: #1976d2;
-      cursor: pointer;
-      background: none;
-      border: none;
-    }
-    .modal-details {
-      margin-top: 18px;
-      font-size: 1.1em;
-      color: #222;
-      text-align: left;
-    }
-    .bubble-effect {
-      position: absolute;
-      pointer-events: none;
-      border-radius: 50%;
-      background: rgba(33, 150, 243, 0.25);
-      transform: scale(0);
-      animation: bubble-pop 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-      z-index: 9999;
-    }
-@keyframes bubble-pop {
-  to {
-    transform: scale(3.5);
-    opacity: 0;
-  }
-}
-    /* Group colors */
-.element.alkali-metals { background: #ffb347; border-color: #ff9800; }
-.element.alkaline-earth-metals { background: #ffe082; border-color: #ffd600; }
-.element.transition-metals { background: #b3e5fc; border-color: #0288d1; }
-.element.boron-group { background: #f8bbd0; border-color: #ad1457; }
-.element.carbon-group { background: #c8e6c9; border-color: #388e3c; }
-.element.nitrogen-group { background: #e1bee7; border-color: #8e24aa; }
-.element.chalcogens { background: #ffccbc; border-color: #d84315; }
-.element.halogens { background: #b2dfdb; border-color: #00897b; }
-.element.noble-gases { background: #d1c4e9; border-color: #512da8; }
-.element.lanthanides { background: #f0e68c; border-color: #bdb76b; }
-.element.actinides { background: #bcaaa4; border-color: #4e342e; }
-.element.reactive-nonmetals { background: #ffd6d6; border-color: #e57373; }
-  </style>
-</head>
-<body>
-  <div class="ptable-container">
-    <div class="ptable-title">PERIODIC TABLE OF ELEMENTS</div>
-    <div class="ptable" id="ptable"></div>
-  </div>
-  <div class="modal-bg" id="modalBg">
-    <div class="modal" id="modal">
-      <button class="close" onclick="closeModal()">&times;</button>
-      <h2 id="modalSymbol"></h2>
-      <div class="modal-details">
-        <div><b>Name:</b> <span id="modalName"></span></div>
-        <div><b>Atomic Number:</b> <span id="modalNumber"></span></div>
-        <div><b>Atomic Mass:</b> <span id="modalMass"></span></div>
-        <div><b>Electronic Configuration:</b> <span id="modalConfig"></span></div>
-        <div><b>Group:</b> <span id="modalGroup"></span></div>
+    <!-- Periodic Table Section -->
+    <section class="periodic-table">
+      <div class="ptable-container">
+        <div class="ptable-title">PERIODIC TABLE OF ELEMENTS</div>
+        <div class="ptable" id="ptable"></div>
       </div>
-    </div>
-  </div>
-</section>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
-<script>
-// All 118 elements, with grid positions (col, row) for main table
-// Data source: IUPAC, Wikipedia, PubChem
+      <div class="modal-bg" id="modalBg">
+        <div class="modal" id="modal">
+          <button class="close" onclick="closeModal()">&times;</button>
+          <h2 id="modalSymbol"></h2>
+          <div class="modal-details">
+            <div><b>Name:</b> <span id="modalName"></span></div>
+            <div><b>Atomic Number:</b> <span id="modalNumber"></span></div>
+            <div><b>Atomic Mass:</b> <span id="modalMass"></span></div>
+            <div><b>Electronic Configuration:</b> <span id="modalConfig"></span></div>
+            <div><b>Group:</b> <span id="modalGroup"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Periodic Table Legend -->
+      <div class="ptable-legend" style="margin: 40px auto 0; max-width: 900px; display: flex; flex-wrap: wrap; gap: 18px; justify-content: center;">
+  <div class="legend-item"><span class="legend-box alkali-metals"></span> Alkali Metals (Group 1): <b>Li–Fr</b></div>
+  <div class="legend-item"><span class="legend-box alkaline-earth-metals"></span> Alkaline Earth Metals (Group 2): <b>Be–Ra</b></div>
+  <div class="legend-item"><span class="legend-box transition-metals"></span> Transition Metals (Groups 3–12): <b>Sc–Cn</b></div>
+  <div class="legend-item"><span class="legend-box boron-group"></span> Boron Group (Group 13): <b>B–Nh</b></div>
+  <div class="legend-item"><span class="legend-box carbon-group"></span> Carbon Group (Group 14): <b>C–Fl</b></div>
+  <div class="legend-item"><span class="legend-box nitrogen-group"></span> Nitrogen Group (Group 15): <b>N–Mc</b></div>
+  <div class="legend-item"><span class="legend-box chalcogens"></span> Chalcogens (Group 16): <b>O–Lv</b></div>
+  <div class="legend-item"><span class="legend-box halogens"></span> Halogens (Group 17): <b>F–Ts</b></div>
+  <div class="legend-item"><span class="legend-box noble-gases"></span> Noble Gases (Group 18): <b>He–Og</b></div>
+  <div class="legend-item"><span class="legend-box lanthanides"></span> Lanthanides (f-block): <b>La–Lu</b></div>
+  <div class="legend-item"><span class="legend-box actinides"></span> Actinides (f-block): <b>Ac–Lr</b></div>
+  <div class="legend-item"><span class="legend-box reactive-nonmetals"></span> Reactive Nonmetals: <b>H, C, N, O, P, S, Se</b></div>
+</div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Virtual Chemistry Lab
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+  <script>
+    // --- Periodic Table Data (all 118 elements, grouped) ---
 const elements = [
   // Period 1
   {num:1, sym:"H", name:"Hydrogen", mass:"1.008", config:"1s1", col:1, row:1, group:"reactive-nonmetals", groupName:"Reactive Nonmetals"},
@@ -761,7 +657,7 @@ const elements = [
   {num:118, sym:"Og", name:"Oganesson", mass:"294", config:"[Rn] 5f14 6d10 7s2 7p6", col:18, row:7, group:"noble-gases", groupName:"Noble Gases"}
 ];
 
-    // Render periodic table (main block: rows 1-7, cols 1-18)
+    // --- Render Periodic Table ---
     const ptable = document.getElementById('ptable');
     for(let row=1; row<=7; row++) {
       for(let col=1; col<=18; col++) {
@@ -813,7 +709,24 @@ const elements = [
       ptable.appendChild(div);
     }
 
-    // Modal logic
+    // --- Bubble/Splash Effect ---
+function addSplashEffect(e) {
+  const target = e.currentTarget;
+  const rect = target.getBoundingClientRect();
+  const splash = document.createElement('span');
+  splash.className = 'bubble-effect';
+  splash.style.left = (e.clientX - rect.left) + 'px';
+  splash.style.top = (e.clientY - rect.top) + 'px';
+  splash.style.width = splash.style.height = Math.max(rect.width, rect.height) + 'px';
+  target.style.position = 'relative';
+  target.appendChild(splash);
+  splash.addEventListener('animationend', () => splash.remove());
+}
+document.querySelectorAll('.element, nav a, .equipment-grid .item').forEach(el => {
+  el.addEventListener('click', addSplashEffect);
+});
+
+    // --- Modal Logic ---
     function showModal(el) {
       document.getElementById('modalSymbol').textContent = el.sym;
       document.getElementById('modalName').textContent = el.name;
@@ -826,65 +739,12 @@ const elements = [
     function closeModal() {
       document.getElementById('modalBg').style.display = 'none';
     }
-    // Close modal on background click
     document.getElementById('modalBg').onclick = function(e) {
       if(e.target === this) closeModal();
     }
-    // Optional: ESC key closes modal
     document.addEventListener('keydown', function(e) {
       if(e.key === "Escape") closeModal();
     });
   </script>
-</body>
-</html>
-</div>
-</script>
-</body>
-</html>        const div = document.createElement('div');
-        div.className = 'element';
-        if(el) {
-          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-          div.title = el.name;
-          div.onclick = () => showModal(el);
-        } else {
-          div.style.background = 'transparent';
-          div.style.border = 'none';
-          div.style.cursor = 'default';
-        }
-        ptable.appendChild(div);
-      }
-    }
-    // Lanthanides (row 9)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===9 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-    // Actinides (row 10)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===10 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
 </body>
 </html>
