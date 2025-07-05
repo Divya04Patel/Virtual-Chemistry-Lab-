@@ -77,12 +77,23 @@
 <script>
 document.querySelector('form').addEventListener('submit', function(e) {
   e.preventDefault();
+  const name = document.querySelector('input[name="name"]').value;
+  const email = document.querySelector('input[name="email"]').value;
+  const school = document.querySelector('input[name="school"]').value;
+  const grade = document.querySelector('select[name="grade"]').value;
   const pwd = document.querySelector('input[name="password"]').value;
   const cpwd = document.querySelector('input[name="confirm_password"]').value;
+
   if (pwd !== cpwd) {
     alert('Passwords do not match!');
     return;
   }
+
+  // Save student info to localStorage
+  const students = JSON.parse(localStorage.getItem('students') || '[]');
+  students.push({ name, email, school, grade });
+  localStorage.setItem('students', JSON.stringify(students));
+
   alert('Registration successful! Please login.');
   window.location.href = 'login_student.html';
 });

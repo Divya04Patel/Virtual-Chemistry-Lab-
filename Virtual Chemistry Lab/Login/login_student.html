@@ -107,10 +107,10 @@
         // Logic to redirect based on login page
         if (window.location.href.includes("teacher")) {
           localStorage.setItem("teacher_email", email);
-          window.location.href = "teacher_dashboard.html";
+          window.location.href =window.location.href = "../teacher_dashboard.html";
         } else {
           localStorage.setItem("student_email", email);
-          window.location.href = "student_dashboard.html";
+          window.location.href = window.location.href = "../student_dashboard.html";
         }
       } else {
         alert("Please enter both email and password.");
