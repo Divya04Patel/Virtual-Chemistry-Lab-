@@ -60,24 +60,27 @@
       <input type="text" name="name" placeholder="Full Name" required />
       <input type="email" name="email" placeholder="Email Address" required />
       <input type="text" name="institution" placeholder="Institution Name" required />
-<<<<<<<< HEAD:Virtual Chemistry Lab/Login/register_teacher.html
-========
       <input type="text" name="subject" placeholder="Subject Specialization" required />
->>>>>>>> 6bdd56bb4374accd12fc9825fdf63239cb753aa5:Virtual Chemistry Lab/templates/register_teacher.html
       <input type="password" name="password" placeholder="Create Password" required />
       <input type="password" name="confirm_password" placeholder="Confirm Password" required />
       <button type="submit">Register</button>
     </form>
   </div>
-  <script src="../virtuallabbackend/virtuallab.js"></script>
-  <script>
-    document.querySelector('form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      // Directly redirect to dashboard (simulate registration)
-      const form = e.target;
-      localStorage.setItem('teacher_email', form.email.value);
-      window.location.href = 'teacher_dashboard.html';
-    });
-  </script>
+  <!-- ...existing code... -->
+<script>
+document.querySelector('form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const pwd = document.querySelector('input[name="password"]').value;
+  const cpwd = document.querySelector('input[name="confirm_password"]').value;
+  if (pwd !== cpwd) {
+    alert('Passwords do not match!');
+    return;
+  }
+  alert('Registration successful! Please login.');
+  window.location.href = 'login_teacher.html';
+});
+</script>
+
+<!-- ...existing code... -->
 </body>
 </html>

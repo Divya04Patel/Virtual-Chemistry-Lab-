@@ -434,14 +434,52 @@
       <img src="images/labman.png" alt="Labman" class="labman-logo">
       <h1>Virtual Chemistry Lab</h1>
     </div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="experiments.html">Experiments</a>
-      <a href="safety.html">Lab Safety</a>
-      <a href="theory.html">Theory</a>
-      <a href="register_teacher.html">Register as Teacher</a>
-      <a href="register_student.html">Register as Student</a>
-    </nav>
+   <nav>
+  <a href="index.html">Home</a>
+  <a href="Login/register_teacher.html">Register as Teacher</a>
+  <a href="Login/register_student.html">Register as Student</a>
+   <div class="dropdown">
+    <a href="#" class="dropbtn">Login ▼</a>
+    <div class="dropdown-content">
+      <a href="Login/login_teacher.html">Login as Teacher</a>
+      <a href="Login/login_student.html">Login as Student</a>
+    </div>
+  </div>
+</nav>
+<style>
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .dropbtn {
+    cursor: pointer;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background: #fff;
+    min-width: 180px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+    z-index: 1;
+    border-radius: 8px;
+    margin-top: 6px;
+  }
+  .dropdown-content a {
+    color: #0d47a1;
+    padding: 10px 18px;
+    text-decoration: none;
+    display: block;
+    background: none;
+    border-radius: 0;
+    font-weight: 500;
+  }
+  .dropdown-content a:hover {
+    background: #e3f2fd;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+</style>
   </header>
 
   <main>
