@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<ml lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -108,6 +108,7 @@
   margin-bottom: 20px;
   background: linear-gradient(90deg, #0d47a1, #42a5f5);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -663,734 +664,223 @@ const elements = [
     document.addEventListener('keydown', function(e) {
       if(e.key === "Escape") closeModal();
     });
-  </script>
-</body>
+  
+
+       const div = document.createElement('div');
+        div.className = 'element';
+        if(el) {
+          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
+          div.title = el.name;
+          div.onclick = () => showModal(el);
+        } else {
+          div.style.background = 'transparent';
+          div.style.border = 'none';
+          div.style.cursor = 'default';
+        }
+        ptable.appendChild(div);
+      
+    
+    // Lanthanides (row 9)
+    for(let col=3; col<=17; col++) {
+      const el = elements.find(e => e.row===9 && e.col===col);
+      const div = document.createElement('div');
+      div.className = 'element';
+      if(el) {
+        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
+        div.title = el.name;
+        div.onclick = () => showModal(el);
+      } else {
+        div.style.background = 'transparent';
+        div.style.border = 'none';
+        div.style.cursor = 'default';
+      }
+      ptable.appendChild(div);
+    }
+    // Actinides (row 10)
+    for(let col=3; col<=17; col++) {
+      const el = elements.find(e => e.row===10 && e.col===col);
+      const div = document.createElement('div');
+      div.className = 'element';
+      if(el) {
+        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
+        div.title = el.name;
+        div.onclick = () => showModal(el);
+      } else {
+        div.style.background = 'transparent';
+        div.style.border = 'none';
+        div.style.cursor = 'default';
+      }
+      ptable.appendChild(div);
+    }
+
+    // Modal logic
+    function showModal(el) {
+      document.getElementById('modalSymbol').textContent = el.sym;
+      document.getElementById('modalName').textContent = el.name;
+      document.getElementById('modalNumber').textContent = el.num;
+      document.getElementById('modalMass').textContent = el.mass;
+      document.getElementById('modalConfig').textContent = el.config;
+      document.getElementById('modalBg').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('modalBg').style.display = 'none';
+    }
+    // Close modal on background click
+    document.getElementById('modalBg').onclick = function(e) {
+      if(e.target === this) closeModal();
+    }
+    // Optional: ESC key closes modal
+    document.addEventListener('keydown', function(e) {
+      if(e.key === "Escape") closeModal();
+    });
+        const div = document.createElement('div');
+        div.className = 'element';
+        if(el) {
+          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
+          div.title = el.name;
+          div.onclick = () => showModal(el);
+        } else {
+          div.style.background = 'transparent';
+          div.style.border = 'none';
+          div.style.cursor = 'default';
+        }
+        ptable.appendChild(div);
+      
+    
+    // Lanthanides (row 9)
+    for(let col=3; col<=17; col++) {
+      const el = elements.find(e => e.row===9 && e.col===col);
+      const div = document.createElement('div');
+      div.className = 'element';
+      if(el) {
+        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
+        div.title = el.name;
+        div.onclick = () => showModal(el);
+      } else {
+        div.style.background = 'transparent';
+        div.style.border = 'none';
+        div.style.cursor = 'default';
+      }
+      ptable.appendChild(div);
+    }
+    // Actinides (row 10)
+    for(let col=3; col<=17; col++) {
+      const el = elements.find(e => e.row===10 && e.col===col);
+      const div = document.createElement('div');
+      div.className = 'element';
+      if(el) {
+        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
+        div.title = el.name;
+        div.onclick = () => showModal(el);
+      } else {
+        div.style.background = 'transparent';
+        div.style.border = 'none';
+        div.style.cursor = 'default';
+      }
+      ptable.appendChild(div);
+    }
+
+    // Modal logic
+    function showModal(el) {
+      document.getElementById('modalSymbol').textContent = el.sym;
+      document.getElementById('modalName').textContent = el.name;
+      document.getElementById('modalNumber').textContent = el.num;
+      document.getElementById('modalMass').textContent = el.mass;
+      document.getElementById('modalConfig').textContent = el.config;
+      document.getElementById('modalBg').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('modalBg').style.display = 'none';
+    }
+    // Close modal on background click
+    document.getElementById('modalBg').onclick = function(e) {
+      if(e.target === this) closeModal();
+    }
+    // Optional: ESC key closes modal
+    document.addEventListener('keydown', function(e) {
+      if(e.key === "Escape") closeModal();
+    });
+      const div = document.createElement('div');
+        div.className = 'element';
+        if(el) {
+          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
+          div.title = el.name;
+          div.onclick = () => showModal(el);
+        } else {
+          div.style.background = 'transparent';
+          div.style.border = 'none';
+          div.style.cursor = 'default';
+        }
+        ptable.appendChild(div);
+      
+    
+    // Lanthanides (row 9)
+    for(let col=3; col<=17; col++) {
+      const el = elements.find(e => e.row===9 && e.col===col);
+      const div = document.createElement('div');
+      div.className = 'element';
+      if(el) {
+        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
+        div.title = el.name;
+        div.onclick = () => showModal(el);
+      } else {
+        div.style.background = 'transparent';
+        div.style.border = 'none';
+        div.style.cursor = 'default';
+      }
+      ptable.appendChild(div);
+    }
+    // Actinides (row 10)
+    for(let col=3; col<=17; col++) {
+      const el = elements.find(e => e.row===10 && e.col===col);
+      const div = document.createElement('div');
+      div.className = 'element';
+      if(el) {
+        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
+        div.title = el.name;
+        div.onclick = () => showModal(el);
+      } else {
+        div.style.background = 'transparent';
+        div.style.border = 'none';
+        div.style.cursor = 'default';
+      }
+      ptable.appendChild(div);
+    }
+
+    // Modal logic
+    function showModal(el) {
+      document.getElementById('modalSymbol').textContent = el.sym;
+      document.getElementById('modalName').textContent = el.name;
+      document.getElementById('modalNumber').textContent = el.num;
+      document.getElementById('modalMass').textContent = el.mass;
+      document.getElementById('modalConfig').textContent = el.config;
+      document.getElementById('modalBg').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('modalBg').style.display = 'none';
+    }
+    // Close modal on background click
+    document.getElementById('modalBg').onclick = function(e) {
+      if(e.target === this) closeModal();
+    }
+    // Optional: ESC key closes modal
+    document.addEventListener('keydown', function(e) {
+      if(e.key === "Escape") closeModal();
+    });
+        const div = document.createElement('div');
+        div.className = 'element';
+        if(el) {
+          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
+          div.title = el.name;
+          div.onclick = () => showModal(el);
+        } else {
+          div.style.background = 'transparent';
+          div.style.border = 'none';
+          div.style.cursor = 'default';
+        }
+        ptable.appendChild(div);
+      
+    
+   </script>
+   </body>
 </html>
-</div>
-</script>
-</body>
-</html>        const div = document.createElement('div');
-        div.className = 'element';
-        if(el) {
-          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-          div.title = el.name;
-          div.onclick = () => showModal(el);
-        } else {
-          div.style.background = 'transparent';
-          div.style.border = 'none';
-          div.style.cursor = 'default';
-        }
-        ptable.appendChild(div);
-      }
-    }
-    // Lanthanides (row 9)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===9 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-    // Actinides (row 10)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===10 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-
-    // Modal logic
-    function showModal(el) {
-      document.getElementById('modalSymbol').textContent = el.sym;
-      document.getElementById('modalName').textContent = el.name;
-      document.getElementById('modalNumber').textContent = el.num;
-      document.getElementById('modalMass').textContent = el.mass;
-      document.getElementById('modalConfig').textContent = el.config;
-      document.getElementById('modalBg').style.display = 'flex';
-    }
-    function closeModal() {
-      document.getElementById('modalBg').style.display = 'none';
-    }
-    // Close modal on background click
-    document.getElementById('modalBg').onclick = function(e) {
-      if(e.target === this) closeModal();
-    }
-    // Optional: ESC key closes modal
-    document.addEventListener('keydown', function(e) {
-      if(e.key === "Escape") closeModal();
-    });
-  </script>
-</body>
-</html>        const div = document.createElement('div');
-        div.className = 'element';
-        if(el) {
-          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-          div.title = el.name;
-          div.onclick = () => showModal(el);
-        } else {
-          div.style.background = 'transparent';
-          div.style.border = 'none';
-          div.style.cursor = 'default';
-        }
-        ptable.appendChild(div);
-      }
-    }
-    // Lanthanides (row 9)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===9 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-    // Actinides (row 10)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===10 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-
-    // Modal logic
-    function showModal(el) {
-      document.getElementById('modalSymbol').textContent = el.sym;
-      document.getElementById('modalName').textContent = el.name;
-      document.getElementById('modalNumber').textContent = el.num;
-      document.getElementById('modalMass').textContent = el.mass;
-      document.getElementById('modalConfig').textContent = el.config;
-      document.getElementById('modalBg').style.display = 'flex';
-    }
-    function closeModal() {
-      document.getElementById('modalBg').style.display = 'none';
-    }
-    // Close modal on background click
-    document.getElementById('modalBg').onclick = function(e) {
-      if(e.target === this) closeModal();
-    }
-    // Optional: ESC key closes modal
-    document.addEventListener('keydown', function(e) {
-      if(e.key === "Escape") closeModal();
-    });
-  </script>
-</body>
-</html>        const div = document.createElement('div');
-        div.className = 'element';
-        if(el) {
-          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-          div.title = el.name;
-          div.onclick = () => showModal(el);
-        } else {
-          div.style.background = 'transparent';
-          div.style.border = 'none';
-          div.style.cursor = 'default';
-        }
-        ptable.appendChild(div);
-      }
-    }
-    // Lanthanides (row 9)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===9 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-    // Actinides (row 10)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===10 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-
-    // Modal logic
-    function showModal(el) {
-      document.getElementById('modalSymbol').textContent = el.sym;
-      document.getElementById('modalName').textContent = el.name;
-      document.getElementById('modalNumber').textContent = el.num;
-      document.getElementById('modalMass').textContent = el.mass;
-      document.getElementById('modalConfig').textContent = el.config;
-      document.getElementById('modalBg').style.display = 'flex';
-    }
-    function closeModal() {
-      document.getElementById('modalBg').style.display = 'none';
-    }
-    // Close modal on background click
-    document.getElementById('modalBg').onclick = function(e) {
-      if(e.target === this) closeModal();
-    }
-    // Optional: ESC key closes modal
-    document.addEventListener('keydown', function(e) {
-      if(e.key === "Escape") closeModal();
-    });
-  </script>
-</body>
-</html>        const div = document.createElement('div');
-        div.className = 'element';
-        if(el) {
-          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-          div.title = el.name;
-          div.onclick = () => showModal(el);
-        } else {
-          div.style.background = 'transparent';
-          div.style.border = 'none';
-          div.style.cursor = 'default';
-        }
-        ptable.appendChild(div);
-      }
-    }
-    // Lanthanides (row 9)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===9 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-    // Actinides (row 10)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===10 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-
-    // Modal logic
-    function showModal(el) {
-      document.getElementById('modalSymbol').textContent = el.sym;
-      document.getElementById('modalName').textContent = el.name;
-      document.getElementById('modalNumber').textContent = el.num;
-      document.getElementById('modalMass').textContent = el.mass;
-      document.getElementById('modalConfig').textContent = el.config;
-      document.getElementById('modalBg').style.display = 'flex';
-    }
-    function closeModal() {
-      document.getElementById('modalBg').style.display = 'none';
-    }
-    // Close modal on background click
-    document.getElementById('modalBg').onclick = function(e) {
-      if(e.target === this) closeModal();
-    }
-    // Optional: ESC key closes modal
-    document.addEventListener('keydown', function(e) {
-      if(e.key === "Escape") closeModal();
-    });
-  </script>
-</body>
-</html>        const div = document.createElement('div');
-        div.className = 'element';
-        if(el) {
-          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-          div.title = el.name;
-          div.onclick = () => showModal(el);
-        } else {
-          div.style.background = 'transparent';
-          div.style.border = 'none';
-          div.style.cursor = 'default';
-        }
-        ptable.appendChild(div);
-      }
-    }
-    // Lanthanides (row 9)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===9 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-    // Actinides (row 10)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===10 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-
-    // Modal logic
-    function showModal(el) {
-      document.getElementById('modalSymbol').textContent = el.sym;
-      document.getElementById('modalName').textContent = el.name;
-      document.getElementById('modalNumber').textContent = el.num;
-      document.getElementById('modalMass').textContent = el.mass;
-      document.getElementById('modalConfig').textContent = el.config;
-      document.getElementById('modalBg').style.display = 'flex';
-    }
-    function closeModal() {
-      document.getElementById('modalBg').style.display = 'none';
-    }
-    // Close modal on background click
-    document.getElementById('modalBg').onclick = function(e) {
-      if(e.target === this) closeModal();
-    }
-    // Optional: ESC key closes modal
-    document.addEventListener('keydown', function(e) {
-      if(e.key === "Escape") closeModal();
-    });
-  </script>
-</body>
-</html>        const div = document.createElement('div');
-        div.className = 'element';
-        if(el) {
-          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-          div.title = el.name;
-          div.onclick = () => showModal(el);
-        } else {
-          div.style.background = 'transparent';
-          div.style.border = 'none';
-          div.style.cursor = 'default';
-        }
-        ptable.appendChild(div);
-      }
-    }
-    // Lanthanides (row 9)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===9 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-    // Actinides (row 10)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===10 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-
-    // Modal logic
-    function showModal(el) {
-      document.getElementById('modalSymbol').textContent = el.sym;
-      document.getElementById('modalName').textContent = el.name;
-      document.getElementById('modalNumber').textContent = el.num;
-      document.getElementById('modalMass').textContent = el.mass;
-      document.getElementById('modalConfig').textContent = el.config;
-      document.getElementById('modalBg').style.display = 'flex';
-    }
-    function closeModal() {
-      document.getElementById('modalBg').style.display = 'none';
-    }
-    // Close modal on background click
-    document.getElementById('modalBg').onclick = function(e) {
-      if(e.target === this) closeModal();
-    }
-    // Optional: ESC key closes modal
-    document.addEventListener('keydown', function(e) {
-      if(e.key === "Escape") closeModal();
-    });
-  </script>
-</body>
-</html>        const div = document.createElement('div');
-        div.className = 'element';
-        if(el) {
-          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-          div.title = el.name;
-          div.onclick = () => showModal(el);
-        } else {
-          div.style.background = 'transparent';
-          div.style.border = 'none';
-          div.style.cursor = 'default';
-        }
-        ptable.appendChild(div);
-      }
-    }
-    // Lanthanides (row 9)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===9 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-    // Actinides (row 10)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===10 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-
-    // Modal logic
-    function showModal(el) {
-      document.getElementById('modalSymbol').textContent = el.sym;
-      document.getElementById('modalName').textContent = el.name;
-      document.getElementById('modalNumber').textContent = el.num;
-      document.getElementById('modalMass').textContent = el.mass;
-      document.getElementById('modalConfig').textContent = el.config;
-      document.getElementById('modalBg').style.display = 'flex';
-    }
-    function closeModal() {
-      document.getElementById('modalBg').style.display = 'none';
-    }
-    // Close modal on background click
-    document.getElementById('modalBg').onclick = function(e) {
-      if(e.target === this) closeModal();
-    }
-    // Optional: ESC key closes modal
-    document.addEventListener('keydown', function(e) {
-      if(e.key === "Escape") closeModal();
-    });
-  </script>
-</body>
-</html>        const div = document.createElement('div');
-        div.className = 'element';
-        if(el) {
-          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-          div.title = el.name;
-          div.onclick = () => showModal(el);
-        } else {
-          div.style.background = 'transparent';
-          div.style.border = 'none';
-          div.style.cursor = 'default';
-        }
-        ptable.appendChild(div);
-      }
-    }
-    // Lanthanides (row 9)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===9 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-    // Actinides (row 10)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===10 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-
-    // Modal logic
-    function showModal(el) {
-      document.getElementById('modalSymbol').textContent = el.sym;
-      document.getElementById('modalName').textContent = el.name;
-      document.getElementById('modalNumber').textContent = el.num;
-      document.getElementById('modalMass').textContent = el.mass;
-      document.getElementById('modalConfig').textContent = el.config;
-      document.getElementById('modalBg').style.display = 'flex';
-    }
-    function closeModal() {
-      document.getElementById('modalBg').style.display = 'none';
-    }
-    // Close modal on background click
-    document.getElementById('modalBg').onclick = function(e) {
-      if(e.target === this) closeModal();
-    }
-    // Optional: ESC key closes modal
-    document.addEventListener('keydown', function(e) {
-      if(e.key === "Escape") closeModal();
-    });
-  </script>
-</body>
-</html>        const div = document.createElement('div');
-        div.className = 'element';
-        if(el) {
-          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-          div.title = el.name;
-          div.onclick = () => showModal(el);
-        } else {
-          div.style.background = 'transparent';
-          div.style.border = 'none';
-          div.style.cursor = 'default';
-        }
-        ptable.appendChild(div);
-      }
-    }
-    // Lanthanides (row 9)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===9 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-    // Actinides (row 10)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===10 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-
-    // Modal logic
-    function showModal(el) {
-      document.getElementById('modalSymbol').textContent = el.sym;
-      document.getElementById('modalName').textContent = el.name;
-      document.getElementById('modalNumber').textContent = el.num;
-      document.getElementById('modalMass').textContent = el.mass;
-      document.getElementById('modalConfig').textContent = el.config;
-      document.getElementById('modalBg').style.display = 'flex';
-    }
-    function closeModal() {
-      document.getElementById('modalBg').style.display = 'none';
-    }
-    // Close modal on background click
-    document.getElementById('modalBg').onclick = function(e) {
-      if(e.target === this) closeModal();
-    }
-    // Optional: ESC key closes modal
-    document.addEventListener('keydown', function(e) {
-      if(e.key === "Escape") closeModal();
-    });
-  </script>
-</body>
-</html>        const div = document.createElement('div');
-        div.className = 'element';
-        if(el) {
-          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-          div.title = el.name;
-          div.onclick = () => showModal(el);
-        } else {
-          div.style.background = 'transparent';
-          div.style.border = 'none';
-          div.style.cursor = 'default';
-        }
-        ptable.appendChild(div);
-      }
-    }
-    // Lanthanides (row 9)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===9 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-    // Actinides (row 10)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===10 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-
-    // Modal logic
-    function showModal(el) {
-      document.getElementById('modalSymbol').textContent = el.sym;
-      document.getElementById('modalName').textContent = el.name;
-      document.getElementById('modalNumber').textContent = el.num;
-      document.getElementById('modalMass').textContent = el.mass;
-      document.getElementById('modalConfig').textContent = el.config;
-      document.getElementById('modalBg').style.display = 'flex';
-    }
-    function closeModal() {
-      document.getElementById('modalBg').style.display = 'none';
-    }
-    // Close modal on background click
-    document.getElementById('modalBg').onclick = function(e) {
-      if(e.target === this) closeModal();
-    }
-    // Optional: ESC key closes modal
-    document.addEventListener('keydown', function(e) {
-      if(e.key === "Escape") closeModal();
-    });
-  </script>
-</body>
-</html>        const div = document.createElement('div');
-        div.className = 'element';
-        if(el) {
-          div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-          div.title = el.name;
-          div.onclick = () => showModal(el);
-        } else {
-          div.style.background = 'transparent';
-          div.style.border = 'none';
-          div.style.cursor = 'default';
-        }
-        ptable.appendChild(div);
-      }
-    }
-    // Lanthanides (row 9)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===9 && e.col===col);
-      const div = document.createElement('div');
-      div.className = 'element';
-      if(el) {
-        div.innerHTML = `<span class="atomic-number">${el.num}</span><div class="symbol">${el.sym}</div>`;
-        div.title = el.name;
-        div.onclick = () => showModal(el);
-      } else {
-        div.style.background = 'transparent';
-        div.style.border = 'none';
-        div.style.cursor = 'default';
-      }
-      ptable.appendChild(div);
-    }
-    // Actinides (row 10)
-    for(let col=3; col<=17; col++) {
-      const el = elements.find(e => e.row===10 && e.col===col);
-      const div = document.createElement('div');
-      div.class
