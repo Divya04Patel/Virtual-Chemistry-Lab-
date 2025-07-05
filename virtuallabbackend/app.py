@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, render_template
 from flask_cors import CORS
 from simulation import simulate_reaction
 from user_management import add_user, get_user, add_assignment, get_assignments_for_student, get_assignments_for_teacher, update_assignment_result
@@ -89,6 +89,44 @@ def evaluate_assignment():
         return jsonify({'error': 'Missing fields'}), 400
     update_assignment_result(data['assignment_id'], data['result'])
     return jsonify({'success': True})
+
+@app.route('/experiments', methods=['GET'])
+def get_experiments():
+    # This should return the list of experiments
+    return jsonify([
+        {"id": 1, "name": "Experiment 1", "description": "Description of Experiment 1"},
+        {"id": 2, "name": "Experiment 2", "description": "Description of Experiment 2"},
+        # Add more experiments as needed
+    ])
+
+experiments_by_class = {
+    9: [
+        {"id": 1, "title": "Separation of Mixtures", "description": "Learn to separate mixtures."},
+        {"id": 2, "title": "Physical and Chemical Changes", "description": "Observe different changes."}
+    ],
+    10: [
+        {"id": 3, "title": "Acids, Bases and Salts", "description": "Explore acid-base reactions."},
+        {"id": 4, "title": "Metals and Non-metals", "description": "Study properties of metals."}
+    ],
+    11: [
+        {"id": 5, "title": "Titration", "description": "Perform titration experiments."},
+        {"id": 6, "title": "Preparation of Solutions", "description": "Prepare chemical solutions."}
+    ],
+    12: [
+        {"id": 7, "title": "Qualitative Analysis", "description": "Analyze unknown samples."},
+        {"id": 8, "title": "Electrochemistry", "description": "Study electrochemical cells."}
+    ]
+}
+
+@app.route('/experiments_for_class', methods=['POST'])
+def experiments_for_class():
+    data = request.get_json()
+    class_num = int(data.get('class'))
+    return jsonify(experiments_by_class.get(class_num, []))
+
+@app.route('/lab')
+def lab():
+    return render_template('lab.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
