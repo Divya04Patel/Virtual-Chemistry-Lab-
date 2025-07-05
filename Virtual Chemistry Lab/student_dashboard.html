@@ -4,40 +4,177 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Student Dashboard - Virtual Chemistry Lab</title>
+
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Lottie Script -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
   <style>
-    .dashboard-container { max-width: 900px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px #b3c6e0; padding: 32px; }
-    h2 { color: #0d47a1; }
-    .section { margin-bottom: 32px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
-    th, td { border: 1px solid #b3c6e0; padding: 8px; text-align: left; }
-    th { background: #e3f2fd; }
-    .perform-btn { background: #43a047; color: #fff; border: none; border-radius: 4px; padding: 6px 16px; cursor: pointer; }
-    .perform-btn:hover { background: #2e7031; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #ffffff);
+      color: #0d47a1;
+    }
+
+    header {
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      padding: 25px 20px;
+      text-align: center;
+      color: white;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .labman-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    header h1 {
+      font-size: 2.4em;
+      margin-bottom: 10px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    nav {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #ffffff;
+      padding: 8px 16px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      transition: all 0.3s ease-in-out;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .dashboard-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px #b3c6e0;
+      padding: 32px;
+    }
+
+    h2 {
+      color: #0d47a1;
+    }
+
+    .section {
+      margin-bottom: 32px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+
+    th, td {
+      border: 1px solid #b3c6e0;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background: #e3f2fd;
+    }
+
+    .perform-btn {
+      background: #43a047;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 16px;
+      cursor: pointer;
+    }
+
+    .perform-btn:hover {
+      background: #2e7031;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Header with Labman and Navigation -->
+  <header>
+    <div class="header-container">
+      <img src="images/labman.png" alt="Labman" class="labman-logo">
+      <h1>Virtual Chemistry Lab</h1>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="register_teacher.html">Register as Teacher</a>
+      <a href="register_student.html">Register as Student</a>
+    </nav>
+  </header>
+
+  <!-- Lottie Animation in Top Right -->
+  <div style="position: absolute; top: 20px; right: 20px; width: 120px; height: 120px; z-index: 10;">
+    <lottie-player
+      src="images/student_dashboard_animation.json"
+      background="transparent"
+      speed="1"
+      loop
+      autoplay>
+    </lottie-player>
+  </div>
+
+  <!-- Student Dashboard -->
   <div class="dashboard-container">
     <h2>🧑‍🎓 Student Dashboard</h2>
     <div style="color:#1976d2;font-weight:bold;margin-bottom:10px;">Logged in as: <span id="student-email-display"></span></div>
     <div class="section">
       <h3>Assigned Experiments</h3>
       <table id="assigned-table">
-        <thead><tr><th>Experiment</th><th>Instructions</th><th>Submit Result</th><th>Teacher Feedback</th></tr></thead>
+        <thead>
+          <tr><th>Experiment</th><th>Instructions</th><th>Submit Result</th><th>Teacher Feedback</th></tr>
+        </thead>
         <tbody></tbody>
       </table>
     </div>
   </div>
+
+  <!-- Backend Logic -->
   <script src="../virtuallabbackend/virtuallab.js"></script>
   <script>
-    // Replace with actual student email (from login/session)
     const studentEmail = localStorage.getItem('student_email') || prompt('Enter your student email:');
     localStorage.setItem('student_email', studentEmail);
-
-    // Display the logged-in student email
     document.getElementById('student-email-display').textContent = studentEmail;
 
-    // --- DEMO MODE: Show assignments from localStorage ---
     function getDemoAssignments() {
       return JSON.parse(localStorage.getItem('demo_assignments') || '[]');
     }
@@ -53,7 +190,7 @@
       } else {
         data.forEach(a => {
           const tr = document.createElement('tr');
-          tr.innerHTML = `<td>${a.experiment.name}</td><td>${a.experiment.instructions}</td><td>${a.result ? 'Submitted' : `<button class='perform-btn' onclick=\"performExperiment('${a.id}', '${encodeURIComponent(JSON.stringify(a.experiment))}')\">Perform & Submit</button>`}</td><td>${a.result || ''}</td>`;
+          tr.innerHTML = `<td>${a.experiment.name}</td><td>${a.experiment.instructions}</td><td>${a.result ? 'Submitted' : `<button class='perform-btn' onclick="performExperiment('${a.id}', '${encodeURIComponent(JSON.stringify(a.experiment))}')">Perform & Submit</button>`}</td><td>${a.result || ''}</td>`;
           tbody.appendChild(tr);
         });
       }
@@ -61,7 +198,6 @@
     loadAssignments();
 
     window.performExperiment = function(id, experimentStr) {
-      // Store assignment id and experiment details in localStorage
       localStorage.setItem('current_assignment_id', id);
       localStorage.setItem('current_experiment', experimentStr);
       window.location.href = 'lab.html';
