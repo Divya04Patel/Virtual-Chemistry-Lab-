@@ -96,26 +96,36 @@
     </div>
 
     <button onclick="login()">Sign in</button>
+<div id="error-msg" style="color:#e53935; margin-top:12px; font-size:15px;"></div>
   </div>
 
   <script>
-    function login() {
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value.trim();
 
-      if (email && password) {
-        // Logic to redirect based on login page
-        if (window.location.href.includes("teacher")) {
-          localStorage.setItem("teacher_email", email);
-          window.location.href =window.location.href = "../teacher_dashboard.html";
-        } else {
-          localStorage.setItem("student_email", email);
-          window.location.href = window.location.href = "../student_dashboard.html";
-        }
-      } else {
-        alert("Please enter both email and password.");
-      }
-    }
-  </script>
+function login() {
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const errorDiv = document.getElementById('error-msg');
+  errorDiv.textContent = ""; // Clear previous errors
+
+  // Get registered students from localStorage
+  const students = JSON.parse(localStorage.getItem('students') || '[]');
+  // Find the student with matching email
+  const student = students.find(s => s.email === email);
+
+  if (!student) {
+    errorDiv.textContent = "No account found with this email. Please register first.";
+    return;
+  }
+  if (student.password !== password) {
+    errorDiv.textContent = "Incorrect password.";
+    return;
+  }
+
+  // Successful login
+  localStorage.setItem("student_email", email);
+  window.location.href = "../student_dashboard.html";
+}
+
+</script>
 </body>
 </html>

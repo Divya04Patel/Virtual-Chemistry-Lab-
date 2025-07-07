@@ -566,7 +566,42 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
   <script>
+
+  <!-- Animation Loader Script -->
+
+    lottie.loadAnimation({
+      container: document.getElementById('lottieChemAnim'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'images/Animation - 1751621659082.json' // Change to your animation file path if different
+    });
+
+    // pH Simulation Logic
+    const phSlider = document.getElementById("phSlider");
+    const phValue = document.getElementById("phValue");
+    const phBox = document.getElementById("phBox");
+
+    phSlider.addEventListener("input", () => {
+      const val = parseInt(phSlider.value);
+      let nature = "", color = "";
+
+      if (val < 7) {
+        nature = "Acidic";
+        color = `rgb(${255 - val * 20}, 100, 100)`;
+      } else if (val === 7) {
+        nature = "Neutral";
+        color = "#00bcd4";
+      } else {
+        nature = "Basic";
+        color = `rgb(100, ${255 - (14 - val) * 20}, 100)`;
+      }
+
+      phValue.textContent = `pH: ${val} (${nature})`;
+      phBox.style.backgroundColor = color;
+    });
     // --- Periodic Table Data (all 118 elements, grouped) ---
+
 const elements = [
   // Period 1
   {num:1, sym:"H", name:"Hydrogen", mass:"1.008", config:"1s1", col:1, row:1, group:"reactive-nonmetals", groupName:"Reactive Nonmetals"},
@@ -850,6 +885,7 @@ window.addEventListener('DOMContentLoaded', function() {
     }, 0);
   }
 });
+
 
   </script>
 </body>
