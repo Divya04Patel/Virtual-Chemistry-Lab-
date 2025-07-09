@@ -77,9 +77,9 @@
 <script>
 document.querySelector('form').addEventListener('submit', function(e) {
   e.preventDefault();
-  const name = document.querySelector('input[name="name"]').value;
-  const email = document.querySelector('input[name="email"]').value;
-  const school = document.querySelector('input[name="school"]').value;
+  const name = document.querySelector('input[name="name"]').value.trim();
+  const email = document.querySelector('input[name="email"]').value.trim();
+  const school = document.querySelector('input[name="school"]').value.trim();
   const grade = document.querySelector('select[name="grade"]').value;
   const pwd = document.querySelector('input[name="password"]').value;
   const cpwd = document.querySelector('input[name="confirm_password"]').value;
@@ -89,9 +89,20 @@ document.querySelector('form').addEventListener('submit', function(e) {
     return;
   }
 
-  // Save student info to localStorage
+  // Check for duplicate email
   const students = JSON.parse(localStorage.getItem('students') || '[]');
-  students.push({ name, email, school, grade });
+  if (students.some(s => s.email === email)) {
+    alert('This email is already registered as a student.');
+    return;
+  }
+
+  students.push({
+    name,
+    email,
+    school,
+    grade,
+    password: pwd
+  });
   localStorage.setItem('students', JSON.stringify(students));
 
   alert('Registration successful! Please login.');
