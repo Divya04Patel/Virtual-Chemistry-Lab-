@@ -141,7 +141,7 @@ def contact():
         return """<script>
                     alert('Thank you for contacting us!');
                     window.location.href = "/contact";
-                  </script>"""
+</script>"""
     # Show contact form
     return render_template('contact.html')
 

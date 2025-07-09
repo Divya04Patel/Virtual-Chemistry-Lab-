@@ -99,7 +99,174 @@
   <main>
     <p style="text-align: center;">Explore and perform safe, interactive simulations of common chemistry experiments.</p>
 
-    <div class="experiment-grid">
+    <div style="text-align:center; margin-bottom: 30px;">
+      <label for="class-select" style="font-weight:bold;">Select Class:</label>
+      <select id="class-select">
+        <option value="9">Class 9</option>
+        <option value="10">Class 10</option>
+        <option value="11">Class 11</option>
+        <option value="12">Class 12</option>
+        <!-- Add more classes if needed -->
+      </select>
+    </div>
+
+    <!-- Class 9 experiments-->
+    <div id="experiments-9" class="9">
+      <div class="experiment-grid">
+      <div class="card">
+        <h3>🌊 True Solution Prep</h3>
+        <p>Make clear, transparent solution by dissolving salt, sugar, or alum in water.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+      <div class="card">
+        <h3>🔍 Salt + Sand Separation</h3>
+        <p>Use filtration and evaporation to separate components.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>      
+
+      <div class="card">
+        <h3>🌫 Sublimation of NH₄Cl</h3>
+        <p>Watch solid turn into gas directly on heating, then re-solidify.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+      <div class="card">
+        <h3>🧪 Paper Chromatography</h3>
+        <p>Separate dyes/pigments based on solubility in solvent.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+        <div class="card">
+        <h3>🧼 Chalk Filtration	</h3>
+        <p>Remove insoluble chalk from water using filter paper.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+        <div class="card">
+        <h3>🔁 Iron + Copper Sulphate	</h3>
+        <p>Iron displaces copper showing color and metal change.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+        <div class="card">
+        <h3>🔥 Burning Magnesium	</h3>
+        <p>Bright white flame forms white powder (MgO).</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+        <div class="card">
+        <h3>🥼 Heating Ferrous Sulphate		</h3>
+        <p>Color changes and gas smell confirm decomposition.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+        <div class="card">
+        <h3>🌀 Heating CuSO₄ Crystals		</h3>
+        <p>Blue hydrated crystals turn white on heating, regain blue on adding water.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+        <div class="card">
+        <h3>🧁 Baking Soda + Vinegar	</h3>
+        <p>Produces CO₂ gas bubbles, inflates balloon.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- Class 10 experiments-->
+    <div id="experiments-10" class="experiment-class-segment" style="display:none;">
+      <div class="experiment-grid">
+      <div class="card">
+        <h3>🧱 Combination Reaction</h3>
+        <p>Any 2 reactants combine to form 1 product.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+      <div class="card">
+        <h3>⚡ Decomposition (KMnO₄)</h3>
+        <p>Heat splits potassium permanganate into simpler products.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+      <div class="card">
+        <h3>🔄 Displacement Reaction</h3>
+        <p>Iron replaces copper from CuSO₄, forming brown layer.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+      <div class="card">
+        <h3>🧂 Double Displacement</h3>
+        <p>Two salt solutions form a white precipitate.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+      <div class="card">
+        <h3>🧪 Acid + Metal (Zn + HCl)</h3>
+        <p>Acid reacts with metal to release hydrogen gas.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+      <div class="card">
+        <h3>🧼 CO₂ Test with Limewater</h3>
+        <p>CO₂ from acid-carbonate mix turns limewater milky.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+      <div class="card">
+        <h3>🔵 pH of Substances</h3>
+        <p>Test lemon, soap, cola with universal indicator strip.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+      <div class="card">
+        <h3>⚖ Neutralization (HCl + NaOH)</h3>
+        <p>Acid + base → salt + water, heat is released.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+            <div class="card">
+        <h3>🌩 Salt Reactions with AgNO₃ / BaCl₂</h3>
+        <p>White/cream precipitate confirms presence of ions.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+      <div class="card">
+        <h3>🔥 Thermal Decomposition</h3>
+        <p>Compounds break into simpler ones using heat.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+      <div class="card">
+        <h3>🌧 Rusting of Iron</h3>
+        <p>Wet air causes iron to form brown flaky coating.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+      <div class="card">
+        <h3>🧱 Heating Copper in Air</h3>
+        <p>Black layer forms due to copper oxide.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+
+      <div class="card">
+        <h3>🧴 Indicator Reaction</h3>
+        <p>Observe color changes with litmus, phenolphthalein.</p>
+        <button onclick="window.location.href='lab.html?experiment=sodium-water'">Perform</button>
+      </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
       <!-- Experiment 1 -->
       <div class="card">
         <h3>🔥 Reaction of Sodium with Water</h3>
@@ -134,6 +301,8 @@
         <p>Simulate the experiment demonstrating Joule’s Law using a coil and current source.</p>
         <button onclick="window.location.href='lab.html?experiment=heating-effect'">Perform</button>
       </div>
+
+
     </div>
   </main>
 
