@@ -1,17 +1,18 @@
+window.addEventListener('DOMContentLoaded', function() {
+  lottie.loadAnimation({
+    container: document.getElementById('lottieChemAnim'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: '../assets/Animation - 1751621659082.json'
+  });
 
-    lottie.loadAnimation({
-      container: document.getElementById('lottieChemAnim'),
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      path: 'assests/Animation - 1751621659082.json' // Change to your animation file path if different
-    });
+  // pH Simulation Logic
+  const phSlider = document.getElementById("phSlider");
+  const phValue = document.getElementById("phValue");
+  const phBox = document.getElementById("phBox");
 
-    // pH Simulation Logic
-    const phSlider = document.getElementById("phSlider");
-    const phValue = document.getElementById("phValue");
-    const phBox = document.getElementById("phBox");
-
+  if (phSlider && phValue && phBox) {
     phSlider.addEventListener("input", () => {
       const val = parseInt(phSlider.value);
       let nature = "", color = "";
@@ -24,19 +25,20 @@
         color = "#00bcd4";
       } else {
         nature = "Basic";
-       color = `rgb(${255 - val * 20}, 100, 100)`;
+        color = `rgb(100, ${255 - (14 - val) * 20}, 100)`;
       }
 
-  phValue.textContent = `pH: ${val} (${nature})`;
+      phValue.textContent = `pH: ${val} (${nature})`;
       phBox.style.backgroundColor = color;
     });
-    // --- Periodic Table Data (all 118 elements, grouped) ---
     lottie.loadAnimation({
-  container: document.getElementById('phFlaskAnim'),
-  renderer: 'svg',
-  loop: true,
-  autoplay: true,
-  path: 'assests/flask animation.json' // <-- Replace with your flask JSON file path
+    container: document.getElementById('phFlaskAnim'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: '../assets/flask animation.json' // <-- Corrected asset path
+  });
+  }
 });
 const elements = [
   // Period 1

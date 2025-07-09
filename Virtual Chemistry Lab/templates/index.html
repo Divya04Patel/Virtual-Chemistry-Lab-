@@ -4,17 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Virtual Chemistry Lab</title>
-  <link rel="stylesheet" href="styles.css" />
+ <link rel="stylesheet" href="../styles.css" />
+
   <!-- Google Fonts & Font Awesome -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   </head>
-<body>
+<body> 
   <header>
     <div class="header-container">
-      <img src="assests/labman.png" alt="Labman" class="labman-logo">
+     <img src="../assets/labman.png" alt="Labman" class="labman-logo">
       <h1>Virtual Chemistry Lab</h1>
     </div>
    <nav>
@@ -55,7 +56,7 @@
   <div class="features-blocks-grid">
 
     <div class="feature-block-modern">
-      <lottie-player src="assests/animation1.json" background="transparent" speed="1" loop autoplay></lottie-player>
+      <lottie-player src="../assets/animation1.json" ...></background="transparent" speed="1" loop autoplay></lottie-player>
       <div>
          <h3>Interactive Simulations</h3>
         <p>Gain practical experience with safe, hands-on virtual experiments.</p>
@@ -63,7 +64,7 @@
     </div>
 
     <div class="feature-block-modern">
-  <img src="assests/periodic table.png" alt="Periodic Table" style="width:140px; height:140px; margin-bottom:18px;">
+  <img src="../assets/periodic table.png" alt="Periodic Table" style="width:140px; height:140px; margin-bottom:18px;">
   <div>
     <h3>Dynamic Periodic Table</h3>
     <p>Explore all 118 elements with interactive details and visualizations.</p>
@@ -71,7 +72,8 @@
 </div>
 
     <div class="feature-block-modern">
-      <lottie-player src="assests/animation3.json" background="transparent" speed="1" loop autoplay></lottie-player>
+     <lottie-player src="../assets/animation3.json" 
+     background="transparent" speed="1" loop autoplay></lottie-player>
       <div>
         <h3>Lab Equipment Gallery</h3>
         <p>Visualize and learn about essential chemistry lab tools and apparatus.</p>
@@ -79,7 +81,7 @@
     </div>
 
     <div class="feature-block-modern">
-      <lottie-player src="assests/animation4.json" background="transparent" speed="1" loop autoplay></lottie-player>
+     <lottie-player src="../assets/animation4.json" ...></background="transparent" speed="1" loop autoplay></lottie-player>
       <div>
         <h3>Student & Teacher Dashboards</h3>
         <p>Personalized dashboards for tracking progress, experiments, and tasks.</p>
@@ -87,7 +89,7 @@
     </div>
 
     <div class="feature-block-modern">
-      <lottie-player src="assests/animation5.json" background="transparent" speed="1" loop autoplay></lottie-player>
+     <lottie-player src="../assets/animation5.json" ...></background="transparent" speed="1" loop autoplay></lottie-player>
       <div>
         <h3>Accessible Anywhere</h3>
         <p>Use the lab from any device, anytime—no software installation needed.</p>
@@ -96,7 +98,7 @@
 
     <!-- 🔥 New Feature: Virtual Assistant -->
     <div class="feature-block-modern">
-      <lottie-player src="assests/animation6.json" background="transparent" speed="1" loop autoplay></lottie-player>
+      <lottie-player src="../assets/animation6.json" ...></background="transparent" speed="1" loop autoplay></lottie-player>
       <div>
         <h3>AI Virtual Chemistry Assistant</h3>
         <p>Chat with an AI assistant to get instant help, experiment guidance, and chemistry answers.</p>
@@ -108,18 +110,17 @@
 
 
     <!-- Equipment Section -->
-    <section class="equipment-section">
-      <h2>🧪 Lab Equipment</h2>
-      <div class="equipment-grid">
-        <div class="item"><img src="assests/beaker.png" alt="Beaker"><p>Beaker</p></div>
-        <div class="item"><img src="assests/flask.png" alt="Flask"><p>Conical Flask</p></div>
-        <div class="item"><img src="assests/testtube.png" alt="Test Tube"><p>Test Tube</p></div>
-        <div class="item"><img src="assests/burette.png" alt="Burette"><p>Burette</p></div>
-        <div class="item"><img src="assests/pipette.png" alt="Pipette"><p>Pipette</p></div>
-        <div class="item"><img src="assests/bunsenburner.png" alt="Bunsen Burner"><p>Bunsen Burner</p></div>
-      </div>
-    </section>
-
+<section class="equipment-section">
+  <h2>🧪 Lab Equipment</h2>
+  <div class="equipment-grid">
+    <div class="item"><img src="../assets/beaker.png" alt="Beaker"><p>Beaker</p></div>
+    <div class="item"><img src="../assets/flask.png" alt="Flask"><p>Conical Flask</p></div>
+    <div class="item"><img src="../assets/testtube.png" alt="Test Tube"><p>Test Tube</p></div>
+    <div class="item"><img src="../assets/burette.png" alt="Burette"><p>Burette</p></div>
+    <div class="item"><img src="../assets/pipette.png" alt="Pipette"><p>Pipette</p></div>
+    <div class="item"><img src="../assets/bunsenburner.png" alt="Bunsen Burner"><p>Bunsen Burner</p></div>
+  </div>
+</section>
     <!-- pH Simulation Section -->
   <section class="ph-simulation-flex">
   <div class="ph-flask-animation" id="phFlaskAnim"></div>
@@ -146,6 +147,8 @@
         <div><b>Atomic Mass:</b> <span id="modalMass"></span></div>
         <div><b>Electronic Configuration:</b> <span id="modalConfig"></span></div>
         <div><b>Group:</b> <span id="modalGroup"></span></div>
+
+
       </div>
     </div>
   </div>
@@ -188,7 +191,7 @@
   <footer>
     &copy; 2025 Virtual Chemistry Lab
   </footer>
-  <script src="main.js"></script>
+ <script src="../main.js"></script>
   </body>
   </html>
 
