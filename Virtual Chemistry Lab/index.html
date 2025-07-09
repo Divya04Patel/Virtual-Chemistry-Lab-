@@ -642,16 +642,6 @@
 .legend-box.lanthanides { background: #f0e68c; border-color: #bdb76b; }
 .legend-box.actinides { background: #bcaaa4; border-color: #4e342e; }
 .legend-box.reactive-nonmetals { background: #ffd6d6; border-color: #e57373; }
-@media (max-width: 900px) {
-  .ptable-legend {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 600px) {
-  .ptable-legend {
-    grid-template-columns: 1fr;
-  }
-}
   </style>
 </head>
 <body>
@@ -830,7 +820,7 @@
       </div>
 
       <!-- Periodic Table Legend -->
-      <div class="ptable-legend">
+      <div class="ptable-legend" style="margin: 40px auto 0; max-width: 900px; display: flex; flex-wrap: wrap; gap: 18px; justify-content: center;">
   <div class="legend-item"><span class="legend-box alkali-metals"></span> Alkali Metals (Group 1): <b>Li–Fr</b></div>
   <div class="legend-item"><span class="legend-box alkaline-earth-metals"></span> Alkaline Earth Metals (Group 2): <b>Be–Ra</b></div>
   <div class="legend-item"><span class="legend-box transition-metals"></span> Transition Metals (Groups 3–12): <b>Sc–Cn</b></div>
