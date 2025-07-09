@@ -388,22 +388,24 @@
     }
 
     .ptable-legend {
-  font-size: 1.05em;
-  margin-top: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px 32px;
+  max-width: 900px;
+  margin: 40px auto 0;
+  justify-items: start;
+  align-items: center;
+  background: none;
 }
 .legend-item {
   display: flex;
   align-items: center;
   gap: 7px;
-  margin-bottom: 8px;
   background: #f5f5f5;
   border-radius: 8px;
   padding: 5px 14px;
   box-shadow: 0 2px 8px rgba(13,71,161,0.04);
+  font-size: 1.08em;
 }
 .legend-box {
   display: inline-block;
@@ -426,6 +428,16 @@
 .legend-box.lanthanides { background: #f0e68c; border-color: #bdb76b; }
 .legend-box.actinides { background: #bcaaa4; border-color: #4e342e; }
 .legend-box.reactive-nonmetals { background: #ffd6d6; border-color: #e57373; }
+@media (max-width: 900px) {
+  .ptable-legend {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .ptable-legend {
+    grid-template-columns: 1fr;
+  }
+}
   </style>
 </head>
 <body>
@@ -505,7 +517,7 @@
       </div>
 
       <!-- Periodic Table Legend -->
-      <div class="ptable-legend" style="margin: 40px auto 0; max-width: 900px; display: flex; flex-wrap: wrap; gap: 18px; justify-content: center;">
+      <div class="ptable-legend">
   <div class="legend-item"><span class="legend-box alkali-metals"></span> Alkali Metals (Group 1): <b>Li–Fr</b></div>
   <div class="legend-item"><span class="legend-box alkaline-earth-metals"></span> Alkaline Earth Metals (Group 2): <b>Be–Ra</b></div>
   <div class="legend-item"><span class="legend-box transition-metals"></span> Transition Metals (Groups 3–12): <b>Sc–Cn</b></div>
