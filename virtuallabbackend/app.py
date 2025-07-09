@@ -12,7 +12,7 @@ FRONTEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../Virtu
 
 @app.route('/')
 def serve_index():
-    return send_from_directory(FRONTEND_DIR, 'index.html')
+    return send_from_directory(FRONTEND_DIR, 'templates/index.html')
 
 @app.route('/<path:filename>')
 def serve_static(filename):
@@ -138,6 +138,8 @@ def contact():
     # You can process/store/send the message here
     flash('Thank you for contacting us, {}!'.format(name))
     return redirect(url_for('index'))
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
