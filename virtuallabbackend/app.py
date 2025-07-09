@@ -12,7 +12,7 @@ FRONTEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../Virtu
 
 @app.route('/')
 def serve_index():
-    return send_from_directory(FRONTEND_DIR, 'index.html')
+    return send_from_directory(FRONTEND_DIR, 'templates/index.html')
 
 @app.route('/<path:filename>')
 def serve_static(filename):

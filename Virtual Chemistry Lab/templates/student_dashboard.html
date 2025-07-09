@@ -146,17 +146,17 @@
       <h1>Virtual Chemistry Lab</h1>
     </div>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="experiments.html">Experiments</a>
-      <a href="safety.html">Lab Safety</a>
-      <a href="theory.html">Theory</a>
+      <a href="templates/index.html">Home</a>
+      <a href="templates/experiments.html">Experiments</a>
+      <a href="templates/safety.html">Lab Safety</a>
+      <a href="templates/theory.html">Theory</a>
     </nav>
   </header>
 
   <!-- Lottie Animation in Top Right -->
   <div style="position: absolute; top: 20px; right: 20px; width: 120px; height: 120px; z-index: 10;">
     <lottie-player
-      src="images/student_dashboard_animation.json"
+      src="assets/student_dashboard_animation.json"
       background="transparent"
       speed="1"
       loop
@@ -211,7 +211,7 @@
     window.performExperiment = function(id, experimentStr) {
       localStorage.setItem('current_assignment_id', id);
       localStorage.setItem('current_experiment', experimentStr);
-      window.location.href = 'lab.html';
+      window.location.href = 'templates/lab.html';
     };
    
 /*window.addEventListener('DOMContentLoaded', function() {
