@@ -128,5 +128,22 @@ def experiments_for_class():
 def lab():
     return render_template('lab.html')
 
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        # Handle form submission
+        name = request.form.get('name')
+        email = request.form.get('email')
+        message = request.form.get('message')
+
+        print(f"Contact form submitted:\nName: {name}\nEmail: {email}\nMessage: {message}")
+
+        return """<script>
+                    alert('Thank you for contacting us!');
+                    window.location.href = "/contact";
+                  </script>"""
+    # Show contact form
+    return render_template('contact.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

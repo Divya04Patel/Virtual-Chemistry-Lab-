@@ -199,17 +199,31 @@
       margin: 0 auto;
     }
 
-    .ph-simulation {
-      margin-top: 50px;
-      padding: 30px;
-      background-color: #f9f9f9;
-      border-radius: 16px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
+    .ph-simulation-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 50px;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ph-flask-animation {
+  width: 180px;
+  min-width: 120px;
+  height: 180px;
+}
+
+.ph-simulation-content {
+  flex: 1;
+  min-width: 220px;
+}
 
     .ph-simulation h2 {
       font-size: 1.8rem;
@@ -303,6 +317,208 @@
   transform: scale(0);
   animation: bubble-pop 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   z-index: 9999;
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+.features-section {
+  background-color: #f5f9ff;
+  padding: 60px 20px;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+.features-section h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #0d47a1;
+  margin-bottom: 40px;
+}
+
+.features-blocks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 26px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.feature-block-modern {
+  background: white;
+  border-radius: 18px;
+  padding: 24px 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feature-block-modern:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+.feature-block-modern lottie-player {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 18px;
+}
+
+.feature-block-modern h3 {
+  font-size: 1.2rem;
+  color: #1a237e;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.feature-block-modern p {
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .features-blocks-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .features-blocks-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+.contact-support-modern {
+  background: linear-gradient(90deg, #183b6b 60%, #22508c 100%);
+  color: #fff;
+  padding: 50px 0 30px 0;
+  margin-top: 60px;
+  font-family: 'Inter', sans-serif;
+}
+.contact-support-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px;
+  justify-content: space-between;
+}
+.contact-support-left {
+  flex: 1 1 320px;
+  min-width: 270px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.lab-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.labman-logo-footer {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(255,255,255,0.18);
+}
+.lab-title-footer {
+  font-size: 1.5em;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.lab-tagline-footer {
+  font-size: 1.08em;
+  margin-bottom: 10px;
+  color: #ffe082;
+}
+.contact-block h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.18em;
+  color: #fff;
+}
+.contact-label {
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 2px;
+  color: #ffe082;
+  font-size: 1em;
+}
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  font-size: 1em;
+}
+.contact-row a {
+  color: #fff;
+  text-decoration: underline;
+}
+.social-row {
+  margin-top: 12px;
+  display: flex;
+  gap: 16px;
+}
+.social-row a {
+  color: #fff;
+  font-size: 1.3em;
+  transition: color 0.2s;
+}
+.social-row a:hover {
+  color: #ffe082;
+}
+.contact-support-right {
+  flex: 2 1 400px;
+  display: flex;
+  gap: 60px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+.contact-links-col {
+  min-width: 160px;
+  margin-bottom: 18px;
+}
+.contact-links-col h4 {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  color: #ffe082;
+  font-weight: 700;
+}
+.contact-links-col a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 7px;
+  font-size: 1em;
+  transition: color 0.2s;
+}
+.contact-links-col a:hover {
+  color: #ffe082;
+}
+@media (max-width: 900px) {
+  .contact-support-container {
+    flex-direction: column;
+    gap: 30px;
+    align-items: flex-start;
+  }
+  .contact-support-right {
+    gap: 30px;
+    justify-content: flex-start;
+  }
 }
 @keyframes bubble-pop {
   to {
@@ -446,14 +662,52 @@
       <img src="images/labman.png" alt="Labman" class="labman-logo">
       <h1>Virtual Chemistry Lab</h1>
     </div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="experiments.html">Experiments</a>
-      <a href="safety.html">Lab Safety</a>
-      <a href="theory.html">Theory</a>
-      <a href="register_teacher.html">Register as Teacher</a>
-      <a href="register_student.html">Register as Student</a>
-    </nav>
+   <nav>
+  <a href="index.html">Home</a>
+  <a href="Login/register_teacher.html">Register as Teacher</a>
+  <a href="Login/register_student.html">Register as Student</a>
+   <div class="dropdown">
+    <a href="#" class="dropbtn">Login ▼</a>
+    <div class="dropdown-content">
+      <a href="Login/login_teacher.html">Login as Teacher</a>
+      <a href="Login/login_student.html">Login as Student</a>
+    </div>
+  </div>
+</nav>
+<style>
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .dropbtn {
+    cursor: pointer;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background: #fff;
+    min-width: 180px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+    z-index: 1;
+    border-radius: 8px;
+    margin-top: 6px;
+  }
+  .dropdown-content a {
+    color: #0d47a1;
+    padding: 10px 18px;
+    text-decoration: none;
+    display: block;
+    background: none;
+    border-radius: 0;
+    font-weight: 500;
+  }
+  .dropdown-content a:hover {
+    background: #e3f2fd;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+</style>
   </header>
 
   <main>
@@ -473,6 +727,64 @@
       </div>
       <div class="about-animation" id="lottieChemAnim"></div>
     </section>
+    <!-- Features Section -->
+
+<section class="features-section">
+  <h2>🔬 Key Features</h2>
+  <div class="features-blocks-grid">
+
+    <div class="feature-block-modern">
+      <lottie-player src="your-animation-1.json" background="transparent" speed="1" loop autoplay></lottie-player>
+      <div>
+        <h3>Interactive Simulations</h3>
+        <p>Gain practical experience with safe, hands-on virtual experiments.</p>
+      </div>
+    </div>
+
+    <div class="feature-block-modern">
+      <lottie-player src="your-animation-2.json" background="transparent" speed="1" loop autoplay></lottie-player>
+      <div>
+        <h3>Dynamic Periodic Table</h3>
+        <p>Explore all 118 elements with interactive details and visualizations.</p>
+      </div>
+    </div>
+
+    <div class="feature-block-modern">
+      <lottie-player src="your-animation-3.json" background="transparent" speed="1" loop autoplay></lottie-player>
+      <div>
+        <h3>Lab Equipment Gallery</h3>
+        <p>Visualize and learn about essential chemistry lab tools and apparatus.</p>
+      </div>
+    </div>
+
+    <div class="feature-block-modern">
+      <lottie-player src="your-animation-4.json" background="transparent" speed="1" loop autoplay></lottie-player>
+      <div>
+        <h3>Student & Teacher Dashboards</h3>
+        <p>Personalized dashboards for tracking progress, experiments, and tasks.</p>
+      </div>
+    </div>
+
+    <div class="feature-block-modern">
+      <lottie-player src="your-animation-5.json" background="transparent" speed="1" loop autoplay></lottie-player>
+      <div>
+        <h3>Accessible Anywhere</h3>
+        <p>Use the lab from any device, anytime—no software installation needed.</p>
+      </div>
+    </div>
+
+    <!-- 🔥 New Feature: Virtual Assistant -->
+    <div class="feature-block-modern">
+      <lottie-player src="your-animation-virtual-assistant.json" background="transparent" speed="1" loop autoplay></lottie-player>
+      <div>
+        <h3>AI Virtual Chemistry Assistant</h3>
+        <p>Chat with an AI assistant to get instant help, experiment guidance, and chemistry answers.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
     <!-- Equipment Section -->
     <section class="equipment-section">
@@ -488,13 +800,16 @@
     </section>
 
     <!-- pH Simulation Section -->
-    <section class="ph-simulation">
-      <h2>🧫 pH Scale Simulation</h2>
-      <p>Adjust the pH level and observe the nature of the solution.</p>
-      <input type="range" id="phSlider" min="0" max="14" value="7" />
-      <div id="phValue">pH: 7 (Neutral)</div>
-      <div id="phBox"></div>
-    </section>
+  <section class="ph-simulation-flex">
+  <div class="ph-flask-animation" id="phFlaskAnim"></div>
+  <div class="ph-simulation-content">
+    <h2>🧫 pH Scale Simulation</h2>
+    <p>Adjust the pH level and observe the nature of the solution.</p>
+    <input type="range" id="phSlider" min="0" max="14" value="7" />
+    <div id="phValue">pH: 7 (Neutral)</div>
+    <div id="phBox"></div>
+  </div>
+</section>
 
     <!-- Periodic Table Section -->
     <section class="periodic-table">
@@ -534,13 +849,117 @@
     </section>
   </main>
 
+<!-- Replace the big contact-support-modern section with this simple Contact Us section -->
+<!-- templates/contact.html -->
+<section class="contact-simple-section">
+  <h2>Contact Us</h2>
+  <form class="contact-form" method="POST" action="/contact">
+    <div class="form-row">
+      <input type="text" name="name" placeholder="Your Name" required>
+    </div>
+    <div class="form-row">
+      <input type="email" name="email" placeholder="Your Email" required>
+    </div>
+    <div class="form-row">
+      <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+    </div>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+
+<style>
+.contact-simple-section {
+  background: #f5faff;
+  padding: 40px 20px 30px 20px;
+  margin: 60px auto 0 auto;
+  border-radius: 16px;
+  max-width: 400px;
+  box-shadow: 0 4px 16px rgba(33,150,243,0.07);
+  text-align: center;
+}
+.contact-simple-section h2 {
+  font-size: 1.5em;
+  margin-bottom: 18px;
+  color: #0d47a1;
+}
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.contact-form .form-row {
+  display: flex;
+  flex-direction: column;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 10px 12px;
+  border: 1px solid #b3c6e0;
+  border-radius: 8px;
+  font-size: 1em;
+  font-family: inherit;
+  resize: none;
+}
+.contact-form button {
+  background: #0d47a1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  font-size: 1em;
+  font-weight: 600;
+}
+</style>
   <footer>
     &copy; 2025 Virtual Chemistry Lab
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
   <script>
+
+  <!-- Animation Loader Script -->
+
+    lottie.loadAnimation({
+      container: document.getElementById('lottieChemAnim'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'images/Animation - 1751621659082.json' // Change to your animation file path if different
+    });
+
+    // pH Simulation Logic
+    const phSlider = document.getElementById("phSlider");
+    const phValue = document.getElementById("phValue");
+    const phBox = document.getElementById("phBox");
+
+    phSlider.addEventListener("input", () => {
+      const val = parseInt(phSlider.value);
+      let nature = "", color = "";
+
+      if (val < 7) {
+        nature = "Acidic";
+        color = `rgb(${255 - val * 20}, 100, 100)`;
+      } else if (val === 7) {
+        nature = "Neutral";
+        color = "#00bcd4";
+      } else {
+        nature = "Basic";
+        color = `rgb(100, ${255 - (14 - val) * 20}, 100)`;
+      }
+
+      phValue.textContent = `pH: ${val} (${nature})`;
+      phBox.style.backgroundColor = color;
+    });
     // --- Periodic Table Data (all 118 elements, grouped) ---
+    lottie.loadAnimation({
+  container: document.getElementById('phFlaskAnim'),
+  renderer: 'svg',
+  loop: true,
+  autoplay: true,
+  path: 'images/flask animation.json' // <-- Replace with your flask JSON file path
+});
+
 const elements = [
   // Period 1
   {num:1, sym:"H", name:"Hydrogen", mass:"1.008", config:"1s1", col:1, row:1, group:"reactive-nonmetals", groupName:"Reactive Nonmetals"},
@@ -757,6 +1176,75 @@ document.querySelectorAll('.element, nav a, .equipment-grid .item').forEach(el =
     document.addEventListener('keydown', function(e) {
       if(e.key === "Escape") closeModal();
     });
+   
+
+window.addEventListener('DOMContentLoaded', function() {
+  const studentEmail = localStorage.getItem('student_email');
+  const teacherEmail = localStorage.getItem('teacher_email');
+  const nav = document.querySelector('nav');
+  const dropdown = nav.querySelector('.dropdown');
+  const oldUserDiv = document.getElementById('user-info');
+  if (oldUserDiv) oldUserDiv.remove();
+
+  // If logged in, replace Login dropdown with user menu
+  if ((studentEmail || teacherEmail) && nav && dropdown) {
+    dropdown.style.display = 'none';
+
+    const userDiv = document.createElement('div');
+    userDiv.id = 'user-info';
+    userDiv.style.display = 'flex';
+    userDiv.style.alignItems = 'center';
+    userDiv.style.gap = '8px';
+    userDiv.style.position = 'absolute';
+    userDiv.style.right = '10px';
+    userDiv.style.top = '-10px';
+    userDiv.style.background = 'rgba(255,255,255,0.15)';
+    userDiv.style.padding = '6px 14px';
+    userDiv.style.borderRadius = '18px';
+    userDiv.style.fontWeight = '500';
+    userDiv.style.zIndex = '1002';
+
+    // User menu dropdown
+    userDiv.innerHTML = `
+      <div class="user-menu" style="position:relative;">
+        <button id="userMenuBtn" style="background:none;border:none;display:flex;align-items:center;gap:8px;cursor:pointer;color:inherit;">
+          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User" style="width:28px;height:28px;border-radius:50%;background:#fff;">
+          <span>${teacherEmail ? teacherEmail : studentEmail}</span>
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div id="userMenuDropdown" style="display:none;position:absolute;right:0;top:38px;background:#fff;min-width:180px;box-shadow:0 8px 16px rgba(0,0,0,0.12);border-radius:8px;z-index:1003;">
+          <a href="${teacherEmail ? 'teacher_dashboard.html' : 'student_dashboard.html'}" style="display:block;padding:10px 18px;color:#0d47a1;text-decoration:none;">Dashboard</a>
+          <div style="padding:10px 18px;color:#0d47a1;border-top:1px solid #eee;">${teacherEmail ? 'Teacher' : 'Student'}<br><small>${teacherEmail ? teacherEmail : studentEmail}</small></div>
+          <button id="logout-btn" style="width:90%;margin:10px 5%;padding:6px 0;border:none;border-radius:8px;background:#e57373;color:#fff;cursor:pointer;">Logout</button>
+        </div>
+      </div>
+    `;
+    nav.style.position = 'relative';
+    nav.appendChild(userDiv);
+
+    // Dropdown logic
+    const userMenuBtn = userDiv.querySelector('#userMenuBtn');
+    const userMenuDropdown = userDiv.querySelector('#userMenuDropdown');
+    userMenuBtn.onclick = function(e) {
+      e.stopPropagation();
+      userMenuDropdown.style.display = userMenuDropdown.style.display === 'block' ? 'none' : 'block';
+    };
+    document.body.addEventListener('click', function() {
+      userMenuDropdown.style.display = 'none';
+    });
+
+    // Logout logic
+    setTimeout(() => {
+      document.getElementById('logout-btn').onclick = function() {
+        localStorage.removeItem('student_email');
+        localStorage.removeItem('teacher_email');
+        location.reload();
+      };
+    }, 0);
+  }
+});
+
+
   </script>
 </body>
 </html>
