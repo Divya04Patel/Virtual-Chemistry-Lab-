@@ -2,197 +2,393 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <!-- Add this after <body> -->
-<header>
-  <div class="header-container">
-    <img src="images/labman.png" alt="Labman" class="labman-logo">
-    <h1>Virtual Chemistry Lab</h1>
-  </div>
-  <nav>
-    <a href="templates/index.html">Home</a>
-    <a href="Login/register_teacher.html">Register as Teacher</a>
-    <a href="Login/register_student.html">Register as Student</a>
-  </nav>
-</header>
-<style>
-  .header-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-  }
-  .labman-logo {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 0 10px rgba(255,255,255,0.3);
-  }
-  header h1 {
-    font-size: 2.4em;
-    font-family: 'Playfair Display', serif;
-    color: #fff;
-    margin: 0;
-  }
-  header {
-    background: linear-gradient(to right, #1e3c72, #2a5298);
-    padding: 25px 20px 10px 20px;
-    text-align: center;
-    color: white;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    margin-bottom: 20px;
-  }
-  nav {
-    margin-top: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-  }
-  nav a {
-    text-decoration: none;
-    color: #ffffff;
-    padding: 8px 16px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-    transition: all 0.3s ease-in-out;
-    font-weight: 500;
-  }
-  nav a:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-  }
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  .dropbtn {
-    cursor: pointer;
-  }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background: #fff;
-    min-width: 180px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
-    z-index: 1;
-    border-radius: 8px;
-    margin-top: 6px;
-  }
-  .dropdown-content a {
-    color: #0d47a1;
-    padding: 10px 18px;
-    text-decoration: none;
-    display: block;
-    background: none;
-    border-radius: 0;
-    font-weight: 500;
-  }
-  .dropdown-content a:hover {
-    background: #e3f2fd;
-  }
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-</style>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Teacher Dashboard - Virtual Chemistry Lab</title>
-  <link rel="stylesheet" href="styles.css" />
   <style>
-    .dashboard-container { max-width: 900px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px #b3c6e0; padding: 32px; }
-    h2 { color: #0d47a1; }
-    .section { margin-bottom: 32px; }
-    label, select, input, button { margin: 8px 0; }
-    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
-    th, td { border: 1px solid #b3c6e0; padding: 8px; text-align: left; }
-    th { background: #e3f2fd; }
-    .assign-btn { background: #1976d2; color: #fff; border: none; border-radius: 4px; padding: 6px 16px; cursor: pointer; }
-    .assign-btn:hover { background: #0d47a1; }
+      * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #ffffff);
+      color: #0d47a1;
+    }
+
+    header {
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      padding: 25px 20px;
+      text-align: center;
+      color: white;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+    .header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.labman-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+    header h1 {
+      font-size: 2.4em;
+      margin-bottom: 10px;
+    }
+
+    
+    nav {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #ffffff;
+      padding: 8px 16px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      transition: all 0.3s ease-in-out;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    main {
+      padding: 50px 20px;
+      text-align: center;
+    }
+    .dashboard-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px #b3c6e0;
+      padding: 32px 28px 24px 28px;
+    }
+    .section {
+      margin-bottom: 32px;
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 22px 18px 18px 18px;
+      box-shadow: 0 2px 10px #e3eaf3;
+    }
+    .section h3 {
+      color: #1976d2;
+      margin-bottom: 16px;
+      font-size: 1.25em;
+      letter-spacing: 0.5px;
+    }
+    label {
+      font-weight: 500;
+      margin-bottom: 6px;
+      display: block;
+    }
+    input[type="text"], input[type="email"], input[type="url"] {
+      width: 60%;
+      padding: 7px 10px;
+      margin: 6px 0 14px 0;
+      border: 1px solid #b3c6e0;
+      border-radius: 4px;
+      font-size: 1em;
+      background: #f7fbff;
+      transition: border 0.2s;
+    }
+    input[type="text"]:focus, input[type="email"]:focus, input[type="url"]:focus {
+      border: 1.5px solid #1976d2;
+      outline: none;
+    }
+    .assign-btn {
+      background: #1976d2;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 7px 18px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s;
+      font-weight: 500;
+    }
+    .assign-btn:hover {
+      background: #0d47a1;
+    }
+    .status-msg {
+      margin-top: 10px;
+      color: #388e3c;
+      font-weight: 600;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      font-size: 1em;
+    }
+    th, td {
+      border: 1px solid #b3c6e0;
+      padding: 10px 8px;
+      text-align: left;
+    }
+    th {
+      background: #e3f2fd;
+      color: #0d47a1;
+      font-weight: 700;
+    }
+    tr:nth-child(even) {
+      background: #f1f8e9;
+    }
+    td button {
+      background: #43a047;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 5px 12px;
+      cursor: pointer;
+      font-size: 0.95em;
+      transition: background 0.2s;
+    }
+    td button:hover {
+      background: #2e7031;
+    }
+    #shared-google-quizzes h4 {
+      margin: 12px 0 6px 0;
+      color: #1976d2;
+      font-size: 1.08em;
+    }
+    #shared-google-quizzes div {
+      margin-bottom: 6px;
+    }
+    @media (max-width: 700px) {
+      .dashboard-container { padding: 10px 2vw; }
+      .section { padding: 12px 4vw; }
+      input[type="text"], input[type="email"], input[type="url"] { width: 98%; }
+      th, td { font-size: 0.98em; }
+      .navbar-inner { flex-direction: column; align-items: flex-start; gap: 12px; padding: 0 8px; }
+      .navbar-title { font-size: 1.3em; }
+      .labman-logo { width: 38px; height: 38px; }
+      .navbar-links { gap: 8px; }
+    }
   </style>
 </head>
 <body>
-  <div class="dashboard-container">
-    <h2>👨‍🏫 Teacher Dashboard</h2>
-    <div class="section">
-      <h3>Assign Experiment to Student</h3>
-      <form id="assign-form">
-        <label>Student Email: <input type="email" id="Class" required /></label><br/>
-        <label>Experiment Name: <input type="text" id="experiment-name" required /></label><br/>
-        <label>Instructions: <input type="text" id="experiment-instructions" required /></label><br/>
-        <button type="submit" class="assign-btn">Assign Experiment</button>
-      </form>
-      <div id="assign-status"></div>
+   <header>
+    <div class="header-container">
+     <img src="../assets/labman.png" alt="Labman" class="labman-logo">
+      <h1>Virtual Chemistry Lab</h1>
     </div>
+   <nav>
+  <a href="index.html">Home</a>
+  <a href="../Login/register_teacher.html">Register as Teacher</a>
+  <a href="../Login/register_student.html">Register as Student</a>
+  </div>
+</nav>
+</header>
+
+  <div class="dashboard-container">
+    <h2 style="color:#0d47a1; margin-bottom:24px; text-align:center;">👨‍🏫 Teacher Dashboard</h2>
+
+    <!-- Section 1: Add Student Info -->
     <div class="section">
-      <h3>Assigned Experiments</h3>
+      <h3>Add Student Information</h3>
+      <form id="student-info-form">
+        <label>Student Email:
+          <input type="email" id="student-info-email" required />
+        </label>
+        <label>Registration Number:
+          <input type="text" id="student-info-regno" required />
+        </label>
+        <button type="submit" class="assign-btn">Add Student</button>
+      </form>
+      <div id="student-info-status" class="status-msg"></div>
+      <div id="student-list"></div>
+    </div>
+
+    <!-- Section 2: Assign Quiz/Experiment -->
+    <div class="section">
+      <h3>Assign Quiz or Experiment</h3>
+      <form id="assign-form">
+        <label>Student Email:
+          <input type="email" id="assign-student-email" required />
+        </label>
+        <label>Assignment Type:
+          <select id="assignment-type" required>
+            <option value="experiment">Experiment</option>
+            <option value="quiz">Quiz (Google Form)</option>
+          </select>
+        </label>
+        <div id="experiment-fields">
+          <label>Experiment Name:
+            <input type="text" id="experiment-name" />
+          </label>
+          <label>Instructions:
+            <input type="text" id="experiment-instructions" />
+          </label>
+        </div>
+        <div id="quiz-fields" style="display:none;">
+          <label>Quiz Title:
+            <input type="text" id="quiz-title" />
+          </label>
+          <label>Google Form Link:
+            <input type="url" id="quiz-link" />
+          </label>
+        </div>
+        <button type="submit" class="assign-btn">Assign</button>
+      </form>
+      <div id="assign-status" class="status-msg"></div>
+    </div>
+
+    <!-- Section 3: Evaluate Assigned Quiz/Experiment -->
+    <div class="section">
+      <h3>Evaluate Assigned Quiz/Experiment</h3>
       <table id="assigned-table">
-        <thead><tr><th>Student</th><th>Experiment</th><th>Instructions</th><th>Result</th><th>Evaluate</th></tr></thead>
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Type</th>
+            <th>Title/Name</th>
+            <th>Instructions/Link</th>
+            <th>Result/Submission</th>
+            <th>Evaluate</th>
+          </tr>
+        </thead>
         <tbody></tbody>
       </table>
     </div>
   </div>
-  <script src="../virtuallabbackend/virtuallab.js"></script>
   <script>
-    // Replace with actual teacher email (from login/session)
-    const teacherEmail = localStorage.getItem('teacher_email') || prompt('Enter your teacher email:');
-    localStorage.setItem('teacher_email', teacherEmail);
-
-    // --- DEMO MODE: Store assignments in localStorage ---
-    function getDemoAssignments() {
-      return JSON.parse(localStorage.getItem('demo_assignments') || '[]');
+    // --- Student Info Section ---
+    function getStudents() {
+      return JSON.parse(localStorage.getItem('students') || '[]');
     }
-    function setDemoAssignments(assignments) {
-      localStorage.setItem('demo_assignments', JSON.stringify(assignments));
+    function setStudents(students) {
+      localStorage.setItem('students', JSON.stringify(students));
     }
-
-    async function loadAssignments() {
-      // DEMO: Use localStorage instead of backend
-      const data = getDemoAssignments().filter(a => a.teacher_email === teacherEmail);
-      const tbody = document.querySelector('#assigned-table tbody');
-      tbody.innerHTML = '';
-      data.forEach(a => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${a.student_email}</td><td>${a.experiment.name}</td><td>${a.experiment.instructions}</td><td>${a.result || ''}</td><td>${a.result ? '' : `<button onclick="evaluate('${a.id}')">Evaluate</button>`}</td>`;
-        tbody.appendChild(tr);
+    function loadStudents() {
+      const students = getStudents();
+      const div = document.getElementById('student-list');
+      if (students.length === 0) {
+        div.innerHTML = "<i>No students added yet.</i>";
+        return;
+      }
+      div.innerHTML = "<b>Students:</b><ul style='margin:8px 0 0 16px;'>";
+      students.forEach(s => {
+        div.innerHTML += `<li>${s.email} (${s.regno})</li>`;
       });
+      div.innerHTML += "</ul>";
     }
-    loadAssignments();
-
-    document.getElementById('assign-form').onsubmit = function(e) {
+    document.getElementById('student-info-form').onsubmit = function(e) {
       e.preventDefault();
-      const student_email = document.getElementById('student-email').value;
-      const experiment = {
-        name: document.getElementById('experiment-name').value,
-        instructions: document.getElementById('experiment-instructions').value
-      };
-      // DEMO: Store assignment in localStorage
-      const assignments = getDemoAssignments();
-      assignments.push({
-        id: Date.now().toString(),
-        teacher_email: teacherEmail,
-        student_email,
-        experiment,
-        result: null
-      });
-      setDemoAssignments(assignments);
-      document.getElementById('assign-status').textContent = 'Assigned!';
-      loadAssignments();
+      const email = document.getElementById('student-info-email').value;
+      const regno = document.getElementById('student-info-regno').value;
+      const students = getStudents();
+      if (students.some(s => s.email === email)) {
+        document.getElementById('student-info-status').textContent = 'Student already exists!';
+        return;
+      }
+      students.push({ email, regno });
+      setStudents(students);
+      document.getElementById('student-info-status').textContent = 'Student added!';
+      loadStudents();
+      this.reset();
     };
+    loadStudents();
 
-    window.evaluate = function(id) {
-      const result = prompt('Enter evaluation/grade/feedback:');
-      if (!result) return;
-      const assignments = getDemoAssignments();
-      const idx = assignments.findIndex(a => a.id === id);
-      if (idx !== -1) {
-        assignments[idx].result = result;
-        setDemoAssignments(assignments);
-        loadAssignments();
+    // --- Assignment Section ---
+    function getAssignments() {
+      return JSON.parse(localStorage.getItem('assignments') || '[]');
+    }
+    function setAssignments(assignments) {
+      localStorage.setItem('assignments', JSON.stringify(assignments));
+    }
+    document.getElementById('assignment-type').onchange = function() {
+      if (this.value === 'experiment') {
+        document.getElementById('experiment-fields').style.display = '';
+        document.getElementById('quiz-fields').style.display = 'none';
+      } else {
+        document.getElementById('experiment-fields').style.display = 'none';
+        document.getElementById('quiz-fields').style.display = '';
       }
     };
+    document.getElementById('assign-form').onsubmit = function(e) {
+      e.preventDefault();
+      const student_email = document.getElementById('assign-student-email').value;
+      const type = document.getElementById('assignment-type').value;
+      let assignment = { id: Date.now().toString(), student_email, type, result: null };
+      if (type === 'experiment') {
+        assignment.name = document.getElementById('experiment-name').value;
+        assignment.instructions = document.getElementById('experiment-instructions').value;
+      } else {
+        assignment.title = document.getElementById('quiz-title').value;
+        assignment.link = document.getElementById('quiz-link').value;
+      }
+      const assignments = getAssignments();
+      assignments.push(assignment);
+      setAssignments(assignments);
+      document.getElementById('assign-status').textContent = 'Assigned!';
+      loadAssignments();
+      this.reset();
+      document.getElementById('experiment-fields').style.display = '';
+      document.getElementById('quiz-fields').style.display = 'none';
+    };
+
+    // --- Evaluation Section ---
+    // --- Evaluation Section ---
+    function loadAssignments() {
+  const assignments = getAssignments();
+  const tbody = document.querySelector('#assigned-table tbody');
+  tbody.innerHTML = '';
+  assignments.forEach(a => {
+    let title = a.type === 'experiment' ? a.name : a.title;
+    let info = a.type === 'experiment' ? a.instructions : `<a href="${a.link}" target="_blank">Quiz Link</a>`;
+    let submission = a.submission || '';
+    let result = a.result || '';
+    let evalBtn = (a.submission && !a.result) ? `<button class="eval-btn" data-id="${a.id}">Evaluate</button>` : '';
+    tbody.innerHTML += `<tr>
+      <td>${a.student_email}</td>
+      <td>${a.type.charAt(0).toUpperCase() + a.type.slice(1)}</td>
+      <td>${title}</td>
+      <td>${info}</td>
+      <td>${submission}</td>
+      <td>${result || evalBtn}</td>
+    </tr>`;
+  });
+}
+loadAssignments();
+
+// Event delegation for Evaluate buttons
+document.querySelector('#assigned-table tbody').addEventListener('click', function(e) {
+  if (e.target.classList.contains('eval-btn')) {
+    const id = e.target.getAttribute('data-id');
+    const result = prompt('Enter evaluation/grade/feedback:');
+    if (!result) return;
+    const assignments = getAssignments();
+    const idx = assignments.findIndex(a => a.id === id);
+    if (idx !== -1) {
+      assignments[idx].result = result;
+      setAssignments(assignments);
+      loadAssignments();
+    }
+  }
+});
   </script>
 </body>
 </html>

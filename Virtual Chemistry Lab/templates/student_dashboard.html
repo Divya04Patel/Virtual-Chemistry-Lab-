@@ -142,14 +142,14 @@
   <!-- Header with Labman and Navigation -->
   <header>
     <div class="header-container">
-      <img src="images/labman.png" alt="Labman" class="labman-logo">
+      <img src="../assets/labman.png" alt="Labman" class="labman-logo">
       <h1>Virtual Chemistry Lab</h1>
     </div>
     <nav>
-      <a href="templates/index.html">Home</a>
-      <a href="templates/experiments.html">Experiments</a>
-      <a href="templates/safety.html">Lab Safety</a>
-      <a href="templates/theory.html">Theory</a>
+      <a href="index.html">Home</a>
+      <a href="experiments.html">Experiments</a>
+      <a href="safety.html">Lab Safety</a>
+      <a href="theory.html">Theory</a>
     </nav>
   </header>
 
@@ -168,86 +168,74 @@
   <div class="dashboard-container">
     <h2>🧑‍🎓 Student Dashboard</h2>
     <div style="color:#1976d2;font-weight:bold;margin-bottom:10px;">Logged in as: <span id="student-email-display"></span></div>
-    <div class="section">
-      <h3>Assigned Experiments</h3>
-      <table id="assigned-table">
-        <thead>
-          <tr><th>Experiment</th><th>Instructions</th><th>Submit Result</th><th>Teacher Feedback</th></tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </div>
+   <!-- Assignment Table -->
+<div class="section">
+  <h3>Your Assigned Experiments/Quizzes</h3>
+  <table id="student-assigned-table">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Title/Name</th>
+        <th>Instructions/Link</th>
+        <th>Your Submission</th>
+        <th>Submit</th>
+        <th>Teacher Feedback</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+<script>
+const studentEmail = localStorage.getItem('student_email');
 
-  <!-- Backend Logic -->
-  <script src="../virtuallabbackend/virtuallab.js"></script>
-  <script>
-    const studentEmail = localStorage.getItem('student_email') || prompt('Enter your student email:');
-    localStorage.setItem('student_email', studentEmail);
-    document.getElementById('student-email-display').textContent = studentEmail;
+function getAssignments() {
+  return JSON.parse(localStorage.getItem('assignments') || '[]');
+}
+function setAssignments(assignments) {
+  localStorage.setItem('assignments', JSON.stringify(assignments));
+}
 
-    function getDemoAssignments() {
-      return JSON.parse(localStorage.getItem('demo_assignments') || '[]');
+function loadStudentAssignments() {
+  const assignments = getAssignments().filter(a => a.student_email === studentEmail);
+  const tbody = document.querySelector('#student-assigned-table tbody');
+  tbody.innerHTML = '';
+  assignments.forEach(a => {
+    let title = a.type === 'experiment' ? a.name : a.title;
+    let info = a.type === 'experiment' ? a.instructions : `<a href="${a.link}" target="_blank">Quiz Link</a>`;
+    let submission = a.submission || '';
+    let feedback = a.result || '';
+    let submitBtn = a.submission ? '' : `<button class="submit-btn" data-id="${a.id}">Submit</button>`;
+    let inputBox = a.submission ? submission : `<input type="text" class="submission-input" data-id="${a.id}" placeholder="Enter result/answer">`;
+    tbody.innerHTML += `<tr>
+      <td>${a.type.charAt(0).toUpperCase() + a.type.slice(1)}</td>
+      <td>${title}</td>
+      <td>${info}</td>
+      <td>${inputBox}</td>
+      <td>${submitBtn}</td>
+      <td>${feedback}</td>
+    </tr>`;
+  });
+}
+loadStudentAssignments();
+
+// Event delegation for submit buttons
+document.querySelector('#student-assigned-table tbody').addEventListener('click', function(e) {
+  if (e.target.classList.contains('submit-btn')) {
+    const id = e.target.getAttribute('data-id');
+    const input = document.querySelector(`.submission-input[data-id="${id}"]`);
+    if (!input.value.trim()) {
+      alert("Please enter your result/answer before submitting.");
+      return;
     }
-
-    async function loadAssignments() {
-      const data = getDemoAssignments().filter(a => a.student_email === studentEmail);
-      const tbody = document.querySelector('#assigned-table tbody');
-      tbody.innerHTML = '';
-      if (data.length === 0) {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td colspan="4" style="text-align:center;color:#888;">No experiments assigned yet. Please wait for your teacher to assign a task.</td>`;
-        tbody.appendChild(tr);
-      } else {
-        data.forEach(a => {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `<td>${a.experiment.name}</td><td>${a.experiment.instructions}</td><td>${a.result ? 'Submitted' : `<button class='perform-btn' onclick="performExperiment('${a.id}', '${encodeURIComponent(JSON.stringify(a.experiment))}')">Perform & Submit</button>`}</td><td>${a.result || ''}</td>`;
-          tbody.appendChild(tr);
-        });
-      }
+    const assignments = getAssignments();
+    const idx = assignments.findIndex(a => a.id === id);
+    if (idx !== -1) {
+      assignments[idx].submission = input.value.trim();
+      setAssignments(assignments);
+      loadStudentAssignments();
     }
-    loadAssignments();
-
-    window.performExperiment = function(id, experimentStr) {
-      localStorage.setItem('current_assignment_id', id);
-      localStorage.setItem('current_experiment', experimentStr);
-      window.location.href = 'experiments.html'; // Redirect to experiments.html in the same folder
-    };
-   
-/*window.addEventListener('DOMContentLoaded', function() {
-  const studentEmail = localStorage.getItem('student_email');
-  const nav = document.querySelector('nav');
-
-  // Remove any previous user info
-  const oldUserDiv = document.getElementById('user-info');
-  if (oldUserDiv) oldUserDiv.remove();
-
-  if (studentEmail && nav) {
-    // Show user info on right
-    const userDiv = document.createElement('div');
-    userDiv.id = 'user-info';
-    userDiv.style.display = 'flex';
-    userDiv.style.alignItems = 'center';
-    userDiv.style.gap = '8px';
-    userDiv.style.position = 'absolute';
-    userDiv.style.right = '20px';
-    userDiv.style.top = '10px'; // Move it below the Lottie animation
-    userDiv.style.background = 'rgba(255,255,255,0.15)';
-    userDiv.style.padding = '6px 14px';
-    userDiv.style.borderRadius = '18px';
-    userDiv.style.fontWeight = '500';
-    userDiv.style.zIndex = '2001'; // Make sure it's above the animation
-
-    userDiv.innerHTML = `
-      <a href="student_dashboard.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:inherit;">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User" style="width:28px;height:28px;border-radius:50%;background:#fff;">
-        <span>${studentEmail}</span>
-      </a>
-    `;
-    nav.style.position = 'relative'; // Ensure nav is positioned for absolute children
-    nav.appendChild(userDiv);
   }
-});*/
+});
 
   </script>
 </body>
