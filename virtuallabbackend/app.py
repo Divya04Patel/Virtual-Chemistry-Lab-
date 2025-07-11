@@ -4,6 +4,8 @@ from simulation import simulate_reaction
 from user_management import add_user, get_user, add_assignment, get_assignments_for_student, get_assignments_for_teacher, update_assignment_result
 import os
 import uuid
+from email.mime.text import MIMEText
+import smtplib
 
 app = Flask(__name__)
 CORS(app)
