@@ -306,7 +306,7 @@ Observation: Pink color disappears at endpoint (neutralization). Used to calcula
     equipment: ["Evaporating dish"],
     chemicals: ["CuSO₄", "Water"],
     logic: "Heat saturated solution; crystals form on cooling.",
-    result: `No chemical reaction.
+    result: `CuSO₄ (aq) + 5H₂O (l) → CuSO₄·5H₂O (s) (on cooling)
 Observation: Blue crystals of CuSO₄·5H₂O form as solution cools and water evaporates.`
   },
   "paper-chromatography-11": {
@@ -423,17 +423,33 @@ Observation: Pink color persists at endpoint; Fe²⁺ is oxidized to Fe³⁺.`
     equipment: ["Flame test", "Test tubes"],
     chemicals: ["Salt sample", "Reagents"],
     logic: "Identify cation and anion stepwise.",
-    result: `Various reactions depending on salt.
+    result: `Examples of reactions:
+Na⁺ (flame test): Yellow flame
+K⁺ (flame test): Lilac flame
+Ca²⁺ + Na₂CO₃ → CaCO₃ (white ppt)
+Cl⁻ + AgNO₃ → AgCl (white ppt, soluble in NH₃)
+SO₄²⁻ + BaCl₂ → BaSO₄ (white ppt, insoluble in HCl)
+CO₃²⁻ + HCl → CO₂ (gas bubbles)
+Fe³⁺ + K₄[Fe(CN)₆] → Prussian blue ppt
+
 Observation: Color changes, precipitate formation, flame color help identify ions.`
   },
   "functional-group-tests": {
     title: "Functional Group Tests",
-    equipment: ["Test tubes"],
-    chemicals: ["Alcohols/aldehydes/phenols", "Reagents"],
-    logic: "Color changes confirm FG presence.",
-    result: `Alcohol + Na → H₂ (g) (effervescence)
-Aldehyde + Tollen's → Silver mirror
-Observation: Color change or precipitate confirms functional group.`
+    equipment: ["Test tubes", "Dropper", "Water bath"],
+    chemicals: [
+      "Alcohol", "Aldehyde", "Ketone", "Phenol", "Glucose"
+    ],
+    logic: "Color changes or precipitate formation confirm the presence of specific functional groups.",
+    result: `Examples of reactions:
+Alcohol + Na → H₂ (g) (effervescence)
+Aldehyde + Tollen's reagent → Silver mirror
+Aldehyde + Fehling's solution → Red ppt (Cu₂O)
+Ketone + 2,4-DNP → Yellow/orange ppt
+Phenol + FeCl₃ → Violet color
+Glucose + Benedict's/Fehling's → Red ppt
+
+Observation: Color change or precipitate confirms the presence of a functional group.`
   },
   "acetanilide-prep": {
     title: "Acetanilide Preparation",
@@ -472,7 +488,7 @@ Observation: Effervescence due to H₂ gas; sodium dissolves.`
     equipment: ["Stop watch"],
     chemicals: ["Na₂S₂O₃", "HCl"],
     logic: "Measure time for turbidity under different conditions.",
-    result: `Na₂S₂O₃ + 2HCl → 2NaCl + SO₂ + S↓ + H₂O
+    result: `Na₂S₂O₃ (aq) + 2HCl → 2NaCl + SO₂ + S (s)↓ + H₂O
 Observation: Time for appearance of turbidity (S precipitate) is measured.`
   },
   "temp-effect": {
@@ -480,15 +496,16 @@ Observation: Time for appearance of turbidity (S precipitate) is measured.`
     equipment: ["Water bath"],
     chemicals: ["Reactants"],
     logic: "Record rate change with temperature variation.",
-    result: `No chemical reaction.
-Observation: Higher temperature increases reaction rate (faster turbidity).`
+    result: `Na₂S₂O₃ (aq) + 2HCl (aq) → 2NaCl (aq) + SO₂ (g) + S (s)↓ + H₂O (l)
+Observation: As temperature increases, the time taken for the solution to turn cloudy (due to S precipitate) decreases, indicating a faster reaction rate.
+Explanation: Higher temperature increases the kinetic energy of molecules, leading to more frequent and energetic collisions (collision theory), thus increasing the rate of reaction.`
   },
   "acetic-adsorption": {
     title: "Acetic Acid Adsorption",
     equipment: ["Beakers"],
     chemicals: ["Acetic acid", "Charcoal"],
     logic: "Charcoal adsorbs acid; test residual.",
-    result: `No chemical reaction.
+    result: `CH₃COOH (aq) + Charcoal (s) → [Charcoal·CH₃COOH] (adsorbed)
 Observation: Acetic acid concentration decreases in solution due to adsorption on charcoal.`
   },
   "colloid-prep-12": {
@@ -496,24 +513,25 @@ Observation: Acetic acid concentration decreases in solution due to adsorption o
     equipment: ["Stirring rod"],
     chemicals: ["Starch/gum"],
     logic: "Form colloid by proper dispersion.",
-    result: `No chemical reaction.
-Observation: Stable colloidal solution forms; shows Tyndall effect.`
+    result: `Starch (s) + H₂O (heating & stirring) → Starch sol (colloid)
+Observation: Stable colloidal solution forms; shows Tyndall effect (scattering of light by colloidal particles). The colloid does not settle on standing and cannot be filtered by ordinary filter paper.`
   },
   "amino-chromatography": {
     title: "Amino Acid Chromatography",
     equipment: ["Filter paper"],
     chemicals: ["Amino acids", "Solvent", "Ninhydrin"],
     logic: "Identify amino acids via spot colors.",
-    result: `No chemical reaction.
+    result:  `Amino acid (on paper) + Ninhydrin → Purple/blue/violet spot (Ruhemann's purple)
 Observation: Colored spots appear after ninhydrin spray, indicating different amino acids.`
   },
-  "essential-oil": {
+  "essential-oil-extraction": {
     title: "Essential Oil Extraction",
     equipment: ["Steam distillation setup"],
     chemicals: ["Clove buds/water"],
     logic: "Extract oil by steam distillation.",
-    result: `No chemical reaction.
-Observation: Oil separates from water after distillation; characteristic aroma.`
+    result: `Clove buds + H₂O (steam distillation) → Clove oil (distillate) + Water
+
+Observation: On heating, steam carries volatile oil vapors from clove buds. The vapors condense in the receiver, forming two layers: oil (upper) and water (lower). The oil is separated and has a characteristic aroma. This method is used for extracting essential oils from plant materials without decomposition.`
   },
   "carbohydrate-test": {
     title: "Carbohydrate Test",
@@ -541,7 +559,9 @@ const ITEM_EMOJIS = {
 // Drag/drop + simulation logic:
 let draggedName = null;
 function addDragHandlers(el) {
-  el.addEventListener('dragstart', e => { draggedName = el.dataset.name; });
+  el.addEventListener('dragstart', e => {
+    draggedName = el.dataset.name;
+  });
 }
 function updateSimBtn() {
   document.getElementById('simulate-btn').disabled =
@@ -569,9 +589,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Show experiment details
   const detailsList = document.getElementById("exp-details-list");
   detailsList.innerHTML = `
-    <li><strong>Chemicals:</strong> ${exp.chemicals.join(", ")}</li>
-    <li><strong>Equipment:</strong> ${exp.equipment.join(", ")}</li>
-    <li><strong>Result:</strong><br><pre style="white-space:pre-wrap;font-family:inherit;">${exp.result}</pre></li>
+    <>
+      <li><strong>Chemicals:</strong> ${exp.chemicals.join(", ")}</li>
+      <li><strong>Equipment:</strong> ${exp.equipment.join(", ")}</li>
+      <li><strong>Result:</strong><br /><pre style="white-space:pre-wrap;font-family:inherit;">${exp.result}</pre></li>
+    </>
   `;
   document.getElementById("exp-details").style.display = "none"; // Hide details initially
 
@@ -598,12 +620,38 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault(); ws.classList.remove('over');
     if (draggedName && ![...itemsDiv.children].some(c=>c.dataset.name===draggedName)) {
       const newEl=document.createElement('div');
-      newEl.className='item'; newEl.dataset.name=draggedName;
+      newEl.className='item'; newEl.draggable=true; newEl.dataset.name=draggedName;
       newEl.innerHTML = `${ITEM_EMOJIS[draggedName] || "🧪"} ${draggedName}`;
+      addDragHandlers(newEl); // <-- ADD THIS LINE
       itemsDiv.appendChild(newEl);
       updateSimBtn();
     }
     draggedName=null;
+  });
+
+  ['chemicals-list', 'equipment-list'].forEach(listId => {
+    const list = document.getElementById(listId);
+    list.addEventListener('dragover', e => e.preventDefault());
+    list.addEventListener('drop', e => {
+      e.preventDefault();
+      if (
+        draggedName &&
+        [...itemsDiv.children].some(c => c.dataset.name === draggedName)
+        && ![...list.children].some(c => c.dataset.name === draggedName)
+      ) {
+        // Remove from workspace
+        const wsItem = [...itemsDiv.children].find(c => c.dataset.name === draggedName);
+        if (wsItem) wsItem.remove();
+        // Add back to source list
+        const newEl = document.createElement('div');
+        newEl.className = 'item'; newEl.draggable = true; newEl.dataset.name = draggedName;
+        newEl.innerHTML = `${ITEM_EMOJIS[draggedName] || (listId === 'chemicals-list' ? "🧪" : "🔧")} ${draggedName}`;
+        list.appendChild(newEl);
+        addDragHandlers(newEl);
+        updateSimBtn();
+      }
+      draggedName = null;
+    });
   });
 
   document.getElementById('simulate-btn').addEventListener('click', async () => {
@@ -612,12 +660,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // Special handling for pH experiment
     if (expId === "ph-substances") {
       let output = "";
-      reactants.forEach(r => {
-        if (exp.results && exp.results[r]) {
-          output += `${r} + Universal indicator strips → ${exp.results[r]}\n`;
-        }
-      });
-      document.getElementById('result').textContent = output.trim() || "No reaction.";
+      const indicatorPresent = reactants.includes("Universal indicator strips");
+      const chemicalsPresent = reactants.filter(r => exp.chemicals.includes(r));
+      if (indicatorPresent && chemicalsPresent.length > 0) {
+        chemicalsPresent.forEach(r => {
+          if (exp.results && exp.results[r]) {
+            output += `${r} + Universal indicator strips → ${exp.results[r]}\n`;
+          }
+        });
+      } else {
+        output = "Please add both a substance and Universal indicator strips to see the pH result.";
+      }
+      document.getElementById('result').textContent = output.trim();
       detailsList.innerHTML = `
         <li><strong>Chemicals:</strong> ${exp.chemicals.join(", ")}</li>
         <li><strong>Equipment:</strong> ${exp.equipment.join(", ")}</li>
