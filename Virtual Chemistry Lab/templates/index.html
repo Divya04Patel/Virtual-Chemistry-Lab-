@@ -204,23 +204,26 @@
 <!-- templates/contact.html -->
 <section class="contact-simple-section">
   <h2>Contact Us</h2>
-  <form class="contact-form" method="POST" action="/contact">
-    <div class="form-row">
-      <input type="text" name="name" placeholder="Your Name" required>
+   <form class="contact-form" id="contactForm" action="https://formspree.io/f/xjkrneno" method="POST">
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Your Name" required>
+        </div>
+        <div class="form-row">
+          <input type="email" name="email" placeholder="Your Email" required>
+        </div>
+        <div class="form-row">
+          <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit">Send Message</button>
+      </form>
+      <div id="contactStatus" class="contact-status-message" style="display: none;"></div>
     </div>
-    <div class="form-row">
-      <input type="email" name="email" placeholder="Your Email" required>
-    </div>
-    <div class="form-row">
-      <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
-    </div>
-    <button type="submit">Send Message</button>
-  </form>
-</section>
+  </section>
   <footer>
     &copy; 2025 Virtual Chemistry Lab
   </footer>
  <script src="../main.js"></script>
   </body>
   </html>
+
 
