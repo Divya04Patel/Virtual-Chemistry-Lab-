@@ -218,6 +218,11 @@ Observation: Limewater turns milky.`
     equipment: ["Universal indicator strips"],
     chemicals: ["Lemon juice", "Soap solution", "Cola"],
     logic: "Measure pH, observe color change per substance.",
+    results: {
+      "Lemon juice": "pH ≈ 2 (Red/Orange) – Acidic",
+      "Soap solution": "pH ≈ 9 (Blue/Green) – Basic",
+      "Cola": "pH ≈ 3 (Orange/Yellow) – Acidic"
+    },
     result: `No chemical reaction.
 Observation: Different substances show different pH colors.`
   },
@@ -521,6 +526,18 @@ Observation: Brick-red precipitate confirms reducing sugar.`
 
 };
 
+// Emoji/sticker mapping for chemicals and equipment
+const ITEM_EMOJIS = {
+  "Sodium": "🧂",
+  "Water": "💧",
+  "Phenolphthalein": "🟣",
+  "Beaker": "⚗️",
+  "Water trough": "🛁",
+  "Forceps": "✂️",
+  "Glass rod": "🔬",
+  // Add more mappings as needed
+};
+
 // Drag/drop + simulation logic:
 let draggedName = null;
 function addDragHandlers(el) {
@@ -556,19 +573,19 @@ document.addEventListener("DOMContentLoaded", () => {
     <li><strong>Equipment:</strong> ${exp.equipment.join(", ")}</li>
     <li><strong>Result:</strong><br><pre style="white-space:pre-wrap;font-family:inherit;">${exp.result}</pre></li>
   `;
-  document.getElementById("exp-details").style.display = "";
+  document.getElementById("exp-details").style.display = "none"; // Hide details initially
 
-  exp.chemicals.forEach(name=>{
-    const el=document.createElement('div');
-    el.className='item'; el.draggable=true; el.dataset.name=name;
-    el.innerHTML=`<img src="${name.toLowerCase().replace(/ /g,'')}.png" alt="${name}"/>${name}`;
+  exp.chemicals.forEach(name => {
+    const el = document.createElement('div');
+    el.className = 'item'; el.draggable = true; el.dataset.name = name;
+    el.innerHTML = `${ITEM_EMOJIS[name] || "🧪"} ${name}`;
     document.getElementById('chemicals-list').appendChild(el);
     addDragHandlers(el);
   });
-  exp.equipment.forEach(name=>{
-    const el=document.createElement('div');
-    el.className='item'; el.draggable=true; el.dataset.name=name;
-    el.innerHTML=`<img src="${name.toLowerCase().replace(/ /g,'')}.png" alt="${name}"/>${name}`;
+  exp.equipment.forEach(name => {
+    const el = document.createElement('div');
+    el.className = 'item'; el.draggable = true; el.dataset.name = name;
+    el.innerHTML = `${ITEM_EMOJIS[name] || "🔧"} ${name}`;
     document.getElementById('equipment-list').appendChild(el);
     addDragHandlers(el);
   });
@@ -582,24 +599,61 @@ document.addEventListener("DOMContentLoaded", () => {
     if (draggedName && ![...itemsDiv.children].some(c=>c.dataset.name===draggedName)) {
       const newEl=document.createElement('div');
       newEl.className='item'; newEl.dataset.name=draggedName;
-      newEl.innerHTML=`<img src="${draggedName.toLowerCase().replace(/ /g,'')}.png" alt="${draggedName}"/>${draggedName}`;
+      newEl.innerHTML = `${ITEM_EMOJIS[draggedName] || "🧪"} ${draggedName}`;
       itemsDiv.appendChild(newEl);
       updateSimBtn();
     }
     draggedName=null;
   });
 
-  document.getElementById('simulate-btn').addEventListener('click',async ()=>{
-    const reactants=[...itemsDiv.children].map(c=>c.dataset.name);
-    document.getElementById('result').textContent='Simulating...';
+  document.getElementById('simulate-btn').addEventListener('click', async () => {
+    const reactants = [...itemsDiv.children].map(c => c.dataset.name);
+
+    // Special handling for pH experiment
+    if (expId === "ph-substances") {
+      let output = "";
+      reactants.forEach(r => {
+        if (exp.results && exp.results[r]) {
+          output += `${r} + Universal indicator strips → ${exp.results[r]}\n`;
+        }
+      });
+      document.getElementById('result').textContent = output.trim() || "No reaction.";
+      detailsList.innerHTML = `
+        <li><strong>Chemicals:</strong> ${exp.chemicals.join(", ")}</li>
+        <li><strong>Equipment:</strong> ${exp.equipment.join(", ")}</li>
+        <li><strong>Result:</strong><br><pre style="white-space:pre-wrap;font-family:inherit;">${output.trim() || exp.result}</pre></li>
+      `;
+      document.getElementById("exp-details").style.display = "";
+      return;
+    }
+
+    document.getElementById('result').textContent = 'Simulating...';
     try {
-      const resp = await fetch(`${API_BASE}/simulate`,{
-        method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reactants})
+      const resp = await fetch(`${API_BASE}/simulate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reactants })
       });
       const data = await resp.json();
-      document.getElementById('result').textContent = data.error || `${reactants.join(' + ')} → ${data.products} (${data.reactionType})`;
+
+      // If backend returns error or no products, show equation from exp.result
+      if (data.error || !data.products) {
+        // Extract the first line (equation) from exp.result
+        const eqLine = exp.result.split('\n')[0];
+        document.getElementById('result').textContent = eqLine || "No equation available.";
+      } else {
+        document.getElementById('result').textContent = `${reactants.join(' + ')} → ${data.products} (${data.reactionType})`;
+      }
+
+      // Show experiment details after simulation
+      detailsList.innerHTML = `
+        <li><strong>Chemicals:</strong> ${exp.chemicals.join(", ")}</li>
+        <li><strong>Equipment:</strong> ${exp.equipment.join(", ")}</li>
+        <li><strong>Result:</strong><br><pre style="white-space:pre-wrap;font-family:inherit;">${exp.result}</pre></li>
+      `;
+      document.getElementById("exp-details").style.display = "";
     } catch {
-      document.getElementById('result').textContent='Error connecting to backend.';
+      document.getElementById('result').textContent = 'Error connecting to backend.';
     }
   });
 
