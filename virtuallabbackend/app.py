@@ -130,22 +130,72 @@ def lab():
 
 
 
+
+
 @app.route('/contact', methods=['POST'])
-def contact():
-    if request.method == 'POST':
-        # Handle form submission
-        name = request.form.get('name')
-        email = request.form.get('email')
-        message = request.form.get('message')
+def contact_form_submit():
+    """
+    Handles POST requests for the contact form.
+    It expects JSON data containing 'name', 'email', and 'message'.
+    It prints the data, saves it to a file, and attempts to send an email.
+    """
+    if request.is_json:
+        data = request.get_json()
+        name = data.get('name')
+        email = data.get('email')
+        message = data.get('message')
 
-        print(f"Contact form submitted:\nName: {name}\nEmail: {email}\nMessage: {message}")
+        # Basic validation
+        if not name or not email or not message:
+            return jsonify({"error": "All fields (name, email, message) are required."}), 400
 
-        return """<script>
-                    alert('Thank you for contacting us!');
-                    window.location.href = "/contact";
-                  </script>"""
-    # Show contact form
-    return render_template('contact.html')
+        # --- Console Output (for debugging/logging) ---
+        print(f"New Contact Form Submission:")
+        print(f"Name: {name}")
+        print(f"Email: {email}")
+        print(f"Message: {message}\n")
+
+        # --- Save to a local file (simple logging, not for production database) ---
+        try:
+            with open("contact_submissions.txt", "a") as f:
+                f.write(f"Name: {name}, Email: {email}, Message: {message}\n---\n")
+            print("Submission saved to contact_submissions.txt")
+        except Exception as e:
+            print(f"Error saving submission to file: {e}")
+            # You might log this error but still proceed with email if it's the primary action
+
+        # --- Email Sending Logic ---
+        # IMPORTANT: Replace these placeholders with your actual email credentials and recipient.
+        # For Gmail, you'll likely need to generate an "App password" for security.
+        SENDER_EMAIL = 'your_sending_email@gmail.com' # Your email address that will send the message
+        SENDER_PASSWORD = 'YOUR_GMAIL_APP_PASSWORD' # Your Gmail App Password
+        RECIPIENT_EMAIL = 'zk23273@gmail.com' # The email address where you want to receive messages
+
+        try:
+            msg = MIMEText(f"From: {name} <{email}>\n\nMessage:\n{message}")
+            msg['Subject'] = 'New Contact Form Submission from Virtual Chemistry Lab'
+            msg['From'] = SENDER_EMAIL
+            msg['To'] = RECIPIENT_EMAIL
+
+            # Use SMTP_SSL for secure connection (Gmail uses 465)
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                smtp.login(SENDER_EMAIL, SENDER_PASSWORD)
+                smtp.send_message(msg)
+            print("Email sent successfully!")
+            return jsonify({"message": "Your message has been sent successfully!"}), 200
+
+        except smtplib.SMTPAuthenticationError:
+            print("SMTP Authentication Error: Check your sender email and app password.")
+            return jsonify({"error": "Failed to send message: Authentication issue."}), 500
+        except smtplib.SMTPConnectError:
+            print("SMTP Connection Error: Could not connect to SMTP server. Check host/port or network.")
+            return jsonify({"error": "Failed to send message: Connection issue."}), 500
+        except Exception as e:
+            print(f"An unexpected error occurred while sending email: {e}")
+            return jsonify({"error": f"Failed to send message: {str(e)}"}), 500
+    else:
+        return jsonify({"error": "Request must be JSON"}), 400
+
 
 
 

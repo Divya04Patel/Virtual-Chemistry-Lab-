@@ -321,5 +321,7 @@ window.addEventListener('DOMContentLoaded', function() {
         location.reload();
       };
     }, 0);
+
+    
   }
 });
