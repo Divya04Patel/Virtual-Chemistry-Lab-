@@ -1,0 +1,72 @@
+[
+    {
+        "reactants": ["HCl", "NaOH"],
+        "products": "NaCl + H₂O",
+        "reactionType": "Neutralization",
+        "energy": "Exothermic",
+        "visual": "color_change"
+    },
+    {
+        "reactants": ["AgNO3", "NaCl"],
+        "products": "AgCl + NaNO3",
+        "reactionType": "Precipitation",
+        "energy": "Neutral",
+        "visual": "white_precipitate"
+    },
+    {
+        "reactants": ["Sodium", "Water"],
+        "products": ["Sodium Hydroxide", "Hydrogen Gas"],
+        "reactionType": "Exothermic Reaction",
+        "energy": "Exothermic",
+        "visual": "bubbles, heat, hydrogen gas released"
+    },
+    {
+        "reactants": ["Litmus Paper", "Hydrochloric Acid"],
+        "products": ["Red Litmus"],
+        "reactionType": "Acid-Base Indicator",
+        "energy": "Neutral",
+        "visual": "litmus turns red"
+    },
+    {
+        "reactants": ["Litmus Paper", "Sodium Hydroxide"],
+        "products": ["Blue Litmus"],
+        "reactionType": "Acid-Base Indicator",
+        "energy": "Neutral",
+        "visual": "litmus turns blue"
+    },
+    {
+        "reactants": ["Zinc", "Hydrochloric Acid"],
+        "products": ["Zinc Chloride", "Hydrogen Gas"],
+        "reactionType": "Single Displacement",
+        "energy": "Exothermic",
+        "visual": "bubbles, hydrogen gas released"
+    },
+    {
+        "reactants": ["Copper Sulphate", "Water"],
+        "products": ["Copper Sulphate Solution"],
+        "reactionType": "Dissolution",
+        "energy": "Endothermic",
+        "visual": "blue solution forms"
+    },
+    {
+        "reactants": ["Phenolphthalein", "Sodium Hydroxide"],
+        "products": ["Pink Solution"],
+        "reactionType": "Indicator",
+        "energy": "Neutral",
+        "visual": "solution turns pink"
+    },
+    {
+        "reactants": ["Phenolphthalein", "Hydrochloric Acid"],
+        "products": ["Colorless Solution"],
+        "reactionType": "Indicator",
+        "energy": "Neutral",
+        "visual": "solution remains colorless"
+    },
+    {
+        "reactants": ["Beaker", "Burner"],
+        "products": ["Heating Occurs"],
+        "reactionType": "Physical Change",
+        "energy": "Endothermic",
+        "visual": "beaker heats up"
+    }
+]
