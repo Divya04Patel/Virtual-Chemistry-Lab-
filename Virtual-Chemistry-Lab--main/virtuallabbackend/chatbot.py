@@ -1,75 +1,51 @@
 from flask import Blueprint, request, jsonify
-import google.generativeai as genai
+from llama_cpp import Llama
 import os
 import uuid
 import time
-from dotenv import load_dotenv
-from pathlib import Path
 
-# Load .env from the project root (same level as app.py)
-root_dir = Path(__file__).resolve().parents[1]
-env_path = root_dir / '.env'
+# ✅ Path to your model file (must match file name exactly)
+MODEL_PATH = os.path.join("models", "mistral-7b-instruct-v0.1.Q4_K_M.gguf")
 
-if not env_path.exists():
-    raise FileNotFoundError(".env file not found at project root.")
+# ✅ Load the model
+llm = Llama(
+    model_path=MODEL_PATH,
+    n_ctx=2048,
+    n_threads=6,     # Adjust based on your CPU
+    n_batch=64,      # Safe value for 8GB RAM
+    verbose=False
+)
 
-load_dotenv(dotenv_path=env_path)
-
-# Load Gemini API key (do NOT print the key!)
-api_key = os.getenv("GOOGLE_API_KEY")
-if not api_key:
-    raise EnvironmentError("GOOGLE_API_KEY not found in .env file.")
-
-# Configure Gemini
-genai.configure(api_key=api_key)
-model = genai.GenerativeModel('models/gemini-1.5-pro-latest')
-
-# Maintain per-session chat history
+chatbot_bp = Blueprint('chatbot', _name_)
 chat_sessions = {}
-
-def cleanup_old_sessions():
-    current_time = time.time()
-    expired = [sid for sid, session in chat_sessions.items()
-               if current_time - session.get('created_at', 0) > 3600]
-    for sid in expired:
-        del chat_sessions[sid]
-
-# Register Flask Blueprint
-chatbot_bp = Blueprint('chatbot', __name__)
 
 @chatbot_bp.route('/api/chat', methods=['POST'])
 def chat():
     try:
         data = request.get_json()
+        session_id = data.get('sessionId')
         message = data.get('message')
+
         if not message:
             return jsonify({'error': 'Message is required'}), 400
 
-        session_id = data.get('sessionId')
-        cleanup_old_sessions()
+        if session_id not in chat_sessions:
+            chat_sessions[session_id] = []
 
-        if session_id and session_id in chat_sessions:
-            chat = chat_sessions[session_id]['chat']
-        else:
-            chat = model.start_chat(history=[])
-            session_id = str(uuid.uuid4())
-            chat_sessions[session_id] = {
-                'chat': chat,
-                'created_at': time.time()
-            }
+        chat_history = chat_sessions[session_id]
+        chat_history.append({"role": "user", "content": message})
 
-        # Rate limiting: 1 request per second
-        time.sleep(1)
+        prompt = "\n".join([f"{m['role'].capitalize()}: {m['content']}" for m in chat_history]) + "\nAssistant:"
 
-        response = chat.send_message(message)
+        response = llm(prompt, max_tokens=512, stop=["User:", "Assistant:"], echo=False)
+        reply = response["choices"][0]["text"].strip()
+
+        chat_history.append({"role": "assistant", "content": reply})
 
         return jsonify({
             'sessionId': session_id,
-            'response': response.text
+            'response': reply
         })
 
     except Exception as e:
-        print(f"❌ Error in /api/chat: {e}")
-        return jsonify({
-            'error': 'Failed to process chat message'
-        }), 500
+        return jsonify({'error': str(e)}), 500
