@@ -5,27 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teacher Dashboard - Virtual Chemistry Lab</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
   <style>
-      /* Base styles */
-      * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Inter', sans-serif;
       background: linear-gradient(to right, #e3f2fd, #ffffff);
       color: #0d47a1;
     }
-
     header {
       background: linear-gradient(to right, #1e3c72, #2a5298);
       padding: 25px 20px;
       text-align: center;
       color: white;
-      top: 0;
-      z-index: 1000;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     }
     .header-container {
@@ -35,7 +28,6 @@
       gap: 15px;
       flex-wrap: wrap;
     }
-
     .labman-logo {
       width: 60px;
       height: 60px;
@@ -43,20 +35,18 @@
       object-fit: cover;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
     }
-
     header h1 {
       font-size: 2.4em;
       margin-bottom: 10px;
     }
-
     nav {
       margin-top: 10px;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
+      text-align: center;
     }
-
     nav a {
       text-decoration: none;
       color: #ffffff;
@@ -65,15 +55,11 @@
       border-radius: 6px;
       transition: all 0.3s ease-in-out;
       font-weight: 500;
+      margin: 0 5px;
     }
-
-    nav a:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-
-    main {
-      padding: 50px 20px;
-      text-align: center;
+    nav a.active, nav a:hover {
+      background: #1976d2;
+      color: #fff;
     }
     .dashboard-container {
       max-width: 900px;
@@ -82,61 +68,69 @@
       border-radius: 14px;
       box-shadow: 0 4px 24px #b3c6e0;
       padding: 32px 28px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
-    .section {
-      margin-bottom: 32px;
-      background: #f8fafc;
-      border-radius: 10px;
-      padding: 22px 18px 18px 18px;
-      box-shadow: 0 2px 10px #e3eaf3;
-    }
-    .section h3 {
-      color: #1976d2;
-      margin-bottom: 16px;
-      font-size: 1.25em;
-      letter-spacing: 0.5px;
-    }
+   .section {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.section-content {
+  max-width: 720px;
+  width: 100%;
+  padding: 30px;
+  background: #f8fafc;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+
+    .section.active { display: block; }
     label {
       font-weight: 500;
       margin-bottom: 6px;
       display: block;
-      text-align: left; /* Align labels to left */
+      text-align: left;
     }
     input[type="text"], input[type="email"], input[type="url"], select {
-      width: 100%; /* Make inputs full width */
+      width: 100%;
       padding: 10px 12px;
       margin: 6px 0 14px 0;
       border: 1px solid #b3c6e0;
-      border-radius: 8px; /* Slightly more rounded */
+      border-radius: 8px;
       font-size: 1em;
       background: #f7fbff;
       transition: border 0.2s, box-shadow 0.2s;
     }
     input[type="text"]:focus, input[type="email"]:focus, input[type="url"]:focus, select:focus {
       border: 1.5px solid #1976d2;
-      box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2); /* Focus ring */
+      box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2);
       outline: none;
     }
     .assign-btn {
       background: #1976d2;
       color: #fff;
       border: none;
-      border-radius: 8px; /* Slightly more rounded */
+      border-radius: 8px;
       padding: 10px 22px;
-      font-size: 1.05em; /* Slightly larger text */
+      font-size: 1.05em;
       cursor: pointer;
-      margin-top: 12px; /* More margin */
+      margin-top: 12px;
       transition: background 0.3s ease, transform 0.2s ease;
-      font-weight: 600; /* Bolder text */
+      font-weight: 600;
       box-shadow: 0 4px 12px rgba(25, 118, 210, 0.2);
     }
     .assign-btn:hover {
       background: #0d47a1;
-      transform: translateY(-2px); /* Slight lift effect */
+      transform: translateY(-2px);
       box-shadow: 0 6px 16px rgba(25, 118, 210, 0.3);
     }
     .status-msg {
-      margin-top: 15px; /* More margin */
+      margin-top: 15px;
       color: #388e3c;
       font-weight: 600;
       text-align: center;
@@ -144,33 +138,33 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px; /* More margin */
+      margin-top: 20px;
       background: #fff;
-      border-radius: 10px; /* More rounded corners */
+      border-radius: 10px;
       overflow: hidden;
       font-size: 0.95em;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     }
     th, td {
-      border: 1px solid #e0e0e0; /* Lighter border */
-      padding: 12px 10px; /* More padding */
+      border: 1px solid #e0e0e0;
+      padding: 12px 10px;
       text-align: left;
     }
     th {
-      background: #bbdefb; /* Lighter blue */
+      background: #bbdefb;
       color: #0d47a1;
       font-weight: 700;
-      text-transform: uppercase; /* Uppercase headers */
+      text-transform: uppercase;
       letter-spacing: 0.5px;
     }
     tr:nth-child(even) {
-      background: #f5f5f5; /* Light grey for even rows */
+      background: #f5f5f5;
     }
     tr:hover {
-        background-color: #e0f2f7; /* Highlight row on hover */
+      background-color: #e0f2f7;
     }
     td button {
-      background: #43a047; /* Green */
+      background: #43a047;
       color: #fff;
       border: none;
       border-radius: 6px;
@@ -181,60 +175,134 @@
       font-weight: 500;
     }
     td button:hover {
-      background: #2e7031; /* Darker green */
+      background: #2e7031;
       transform: translateY(-1px);
     }
     td a {
-        color: #1976d2;
-        text-decoration: none;
-        font-weight: 500;
+      color: #1976d2;
+      text-decoration: none;
+      font-weight: 500;
     }
     td a:hover {
-        text-decoration: underline;
+      text-decoration: underline;
     }
-    #shared-google-quizzes h4 {
-      margin: 12px 0 6px 0;
-      color: #1976d2;
-      font-size: 1.08em;
+    #pdf-modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0; top: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
     }
-    #shared-google-quizzes div {
-      margin-bottom: 6px;
+    #pdf-modal-content {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 90vw;
+      max-height: 90vh;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
     }
-    @media (max-width: 700px) {
-      .dashboard-container { padding: 20px; margin: 20px auto; }
-      .section { padding: 18px; }
-      input[type="text"], input[type="email"], input[type="url"], select { width: 100%; }
-      th, td { font-size: 0.85em; padding: 8px 6px; }
-      .navbar-inner { flex-direction: column; align-items: flex-start; gap: 12px; padding: 0 8px; }
-      .navbar-title { font-size: 1.3em; }
-      .labman-logo { width: 38px; height: 38px; }
-      .navbar-links { gap: 8px; }
-      .header-container h1 { font-size: 1.8em; }
+    #pdf-modal iframe {
+      width: 70vw;
+      height: 80vh;
+      border: none;
+      margin-top: 10px;
+      background: #f5f5f5;
     }
+    #pdf-modal .close-btn {
+      background: #d32f2f;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 16px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+    #pdf-modal .close-btn:hover {
+      background: #b71c1c;
+    }
+    .dashboard-container {
+  max-width: 100%;
+  margin: 40px auto;
+  background: transparent; /* remove white */
+  box-shadow: none;        /* remove glow */
+  padding: 0;
+}
+
   </style>
 </head>
 <body>
-   <header>
+  <header>
     <div class="header-container">
-     <img src="../assets/labman.png" alt="Labman" class="labman-logo"> <!-- Placeholder image for labman.png -->
+      <img src="../assets/labman.png" alt="Labman" class="labman-logo">
       <h1>Virtual Chemistry Lab</h1>
     </div>
-   <nav>
-  <a href="index.html">Home</a>
-  <a href="../Login/register_teacher.html">Register as Teacher</a>
-  <a href="../Login/register_student.html">Register as Student</a>
-</nav>
-</header>
+    <nav>
+      <a href="index.html" id="nav-home">Dashboard</a>
+      <a href="index.html" id="nav-index">Home</a>
+      <a href="#" id="nav-students">Manage Students</a>
+      <a href="#" id="nav-assign">Assign Tasks</a>
+      <a href="#" id="nav-evaluate">Evaluate Submissions</a>
+    </nav>
+  </header>
 
-  <div class="dashboard-container">
-    <h2 style="color:#0d47a1; margin-bottom:24px; text-align:center;">👨‍🏫 Teacher Dashboard</h2>
-
-    <!-- Section 1: Manage Students -->
-    <div class="section">
+<div class="dashboard-container">
+  <div class="section active" id="section-home" style="background: #f8fafc; box-shadow: 0 8px 32px rgba(25,118,210,0.08); border-radius: 18px; padding: 40px 32px;">
+    <h2 style="font-size:2.2em; color:#1565c0; margin-bottom:10px; font-weight:700; letter-spacing:1px;">
+      👋 Welcome, Teacher!
+    </h2>
+    <p style="font-size:1.1em; color:#1976d2; margin-bottom:18px;">
+    
+      <span style="color:#388e3c;">Empowering you to manage, assign, and evaluate with ease.</span>
+    </p>
+    <ul style="list-style:none; padding:0; margin:0 0 32px 0; max-width:600px; margin-left:auto; margin-right:auto;">
+      <li style="background:#fff; margin:12px 0; padding:18px 22px; border-radius:12px; box-shadow:0 2px 8px #e3eaf3; font-size:1.08em; color:#1976d2; display:flex; align-items:center; gap:14px;">
+        <span style="font-size:1.3em;">📋</span>
+        <span>
+          <b>Recent Activities:</b> Track assignments and student submissions in real time.
+        </span>
+      </li>
+      <li style="background:#fff; margin:12px 0; padding:18px 22px; border-radius:12px; box-shadow:0 2px 8px #e3eaf3; font-size:1.08em; color:#1976d2; display:flex; align-items:center; gap:14px;">
+        <span style="font-size:1.3em;">⏳</span>
+        <span>
+          <b>Pending Evaluations:</b> Quickly access and review assignments needing feedback.
+        </span>
+      </li>
+      <li style="background:#fff; margin:12px 0; padding:18px 22px; border-radius:12px; box-shadow:0 2px 8px #e3eaf3; font-size:1.08em; color:#1976d2; display:flex; align-items:center; gap:14px;">
+        <span style="font-size:1.3em;">📊</span>
+        <span>
+          <b>Quick Stats:</b> Instantly see the number of students, assignments, and submissions.
+        </span>
+      </li>
+      <li style="background:#fff; margin:12px 0; padding:18px 22px; border-radius:12px; box-shadow:0 2px 8px #e3eaf3; font-size:1.08em; color:#1976d2; display:flex; align-items:center; gap:14px;">
+        <span style="font-size:1.3em;">🔒</span>
+        <span>
+          <b>Secure & Organized:</b> All your teaching tools in one place, safely managed.
+        </span>
+      </li>
+      <li style="background:#fff; margin:12px 0; padding:18px 22px; border-radius:12px; box-shadow:0 2px 8px #e3eaf3; font-size:1.08em; color:#1976d2; display:flex; align-items:center; gap:14px;">
+        <span style="font-size:1.3em;">💡</span>
+        <span>
+          <b>Easy Navigation:</b> Switch between tasks, students, and evaluations with one click.
+        </span>
+      </li>
+    </ul>
+    <div style="margin-top:32px; text-align:center;">
+    <div id="lottie-mascot" style="width:500px; height:300px; margin:auto; background:#f8fafc; border-radius:12px;"></div>
+      </p>
+    </div>
+  </div>
+</div>
+    <div class="section" id="section-students">
       <h3>Manage Students</h3>
       <form id="student-info-form">
-        <label>Student Email:
-          <input type="email" id="student-info-email" placeholder="e.g. student@example.com" required />
+        <label>Student Name:
+          <input type="text" id="student-info-name" placeholder="e.g. John Doe" required />
         </label>
         <label>Student Reg. No:
           <input type="text" id="student-info-regno" placeholder="e.g. 2023001" required />
@@ -246,9 +314,7 @@
         <!-- Student list will be loaded here -->
       </div>
     </div>
-
-    <!-- Section 2: Assign Quiz/Experiment -->
-    <div class="section">
+    <div class="section" id="section-assign">
       <h3>Assign Quiz or Experiment</h3>
       <form id="assign-form">
         <label>Student Emails (comma separated):
@@ -280,9 +346,7 @@
       </form>
       <div id="assign-status" class="status-msg"></div>
     </div>
-
-    <!-- Section 3: Evaluate Assigned Quiz/Experiment -->
-    <div class="section">
+    <div class="section" id="section-evaluate">
       <h3>Evaluate Assigned Quiz/Experiment</h3>
       <table id="assigned-table">
         <thead>
@@ -299,8 +363,35 @@
       </table>
     </div>
   </div>
+  <!-- PDF Modal -->
+  <div id="pdf-modal">
+    <div id="pdf-modal-content">
+      <button class="close-btn" onclick="closePdfModal()">Close</button>
+      <iframe id="pdf-viewer" src="" title="PDF Viewer"></iframe>
+    </div>
+  </div>
 
   <script>
+    // Navbar navigation logic
+     const navLinks = [
+    { id: 'nav-home', section: 'section-home' },
+    { id: 'nav-students', section: 'section-students' },
+    { id: 'nav-assign', section: 'section-assign' },
+    { id: 'nav-evaluate', section: 'section-evaluate' }
+  ];
+  navLinks.forEach(link => {
+    document.getElementById(link.id).addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      this.classList.add('active');
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+      const activeSection = document.getElementById(link.section);
+      activeSection.classList.add('active');
+      activeSection.style.display = 'block';
+    });
+  });
+
     // --- Student Info Section ---
     function getStudents() {
       return JSON.parse(localStorage.getItem('students') || '[]');
@@ -317,24 +408,24 @@
       }
       div.innerHTML = "<b>Registered Students:</b><ul style='margin:8px 0 0 16px;'>";
       students.forEach(s => {
-        div.innerHTML += `<li>${s.email} (Reg No: ${s.regno})</li>`;
+        div.innerHTML += `<li>${s.name} (Reg No: ${s.regno})</li>`;
       });
       div.innerHTML += "</ul>";
     }
     document.getElementById('student-info-form').onsubmit = function(e) {
       e.preventDefault();
-      const email = document.getElementById('student-info-email').value.trim().toLowerCase();
+      const name = document.getElementById('student-info-name').value.trim();
       const regno = document.getElementById('student-info-regno').value.trim();
       const students = getStudents();
-      if (students.some(s => s.email === email)) {
-        document.getElementById('student-info-status').textContent = 'Error: Student with this email already exists!';
-        document.getElementById('student-info-status').style.color = '#d32f2f'; // Red color for error
+      if (students.some(s => s.regno === regno)) {
+        document.getElementById('student-info-status').textContent = 'Error: Student with this Registration Number already exists!';
+        document.getElementById('student-info-status').style.color = '#d32f2f';
         return;
       }
-      students.push({ email, regno });
+      students.push({ name, regno });
       setStudents(students);
       document.getElementById('student-info-status').textContent = 'Student added successfully!';
-      document.getElementById('student-info-status').style.color = '#388e3c'; // Green color for success
+      document.getElementById('student-info-status').style.color = '#388e3c';
       loadStudents();
       this.reset();
     };
@@ -373,39 +464,44 @@
       let newAssignments = [];
       const currentAssignments = getAssignments();
 
+      let hasError = false;
       studentEmails.forEach(email => {
-          let assignment = {
-              id: Date.now().toString() + '-' + email.replace(/[^a-zA-Z0-9]/g, ''), // Unique ID per assignment per student
-              student_email: email,
-              type: type,
-              submission: null, // Student's submission
-              result: null,    // Teacher's evaluation result
-              submitted_at: null // Timestamp of student submission
-          };
+        let assignment = {
+          id: Date.now().toString() + '-' + email.replace(/[^a-zA-Z0-9]/g, ''),
+          student_email: email,
+          type: type,
+          submission: null,
+          result: null,
+          submitted_at: null
+        };
 
-          if (type === 'experiment') {
-              assignment.name = document.getElementById('experiment-name').value.trim();
-              assignment.instructions = document.getElementById('experiment-instructions').value.trim();
-              if (!assignment.name || !assignment.instructions) {
-                  document.getElementById('assign-status').textContent = 'Please fill all experiment fields.';
-                  document.getElementById('assign-status').style.color = '#d32f2f';
-                  return; // Skip this assignment if fields are empty
-              }
-          } else { // type === 'quiz'
-              assignment.title = document.getElementById('quiz-title').value.trim();
-              assignment.link = document.getElementById('quiz-link').value.trim();
-              if (!assignment.title || !assignment.link) {
-                  document.getElementById('assign-status').textContent = 'Please fill all quiz fields.';
-                  document.getElementById('assign-status').style.color = '#d32f2f';
-                  return; // Skip this assignment if fields are empty
-              }
+        if (type === 'experiment') {
+          assignment.name = document.getElementById('experiment-name').value.trim();
+          assignment.instructions = document.getElementById('experiment-instructions').value.trim();
+          if (!assignment.name || !assignment.instructions) {
+            document.getElementById('assign-status').textContent = 'Please fill all experiment fields.';
+            document.getElementById('assign-status').style.color = '#d32f2f';
+            hasError = true;
+            return;
           }
-          newAssignments.push(assignment);
+        } else {
+          assignment.title = document.getElementById('quiz-title').value.trim();
+          assignment.link = document.getElementById('quiz-link').value.trim();
+          if (!assignment.title || !assignment.link) {
+            document.getElementById('assign-status').textContent = 'Please fill all quiz fields.';
+            document.getElementById('assign-status').style.color = '#d32f2f';
+            hasError = true;
+            return;
+          }
+        }
+        newAssignments.push(assignment);
       });
 
+      if (hasError) return;
       if (newAssignments.length === 0) {
-          // All assignments might have been skipped due to empty fields
-          return;
+        document.getElementById('assign-status').textContent = 'No valid assignments to create.';
+        document.getElementById('assign-status').style.color = '#d32f2f';
+        return;
       }
 
       setAssignments([...currentAssignments, ...newAssignments]);
@@ -413,7 +509,7 @@
       document.getElementById('assign-status').style.color = '#388e3c';
       loadAssignments();
       this.reset();
-      // Reset display to experiment fields after submission
+      document.getElementById('assignment-type').value = 'experiment';
       document.getElementById('experiment-fields').style.display = 'block';
       document.getElementById('quiz-fields').style.display = 'none';
     };
@@ -422,7 +518,7 @@
     function loadAssignments() {
       const assignments = getAssignments();
       const tbody = document.querySelector('#assigned-table tbody');
-      tbody.innerHTML = ''; // Clear existing rows
+      tbody.innerHTML = '';
 
       if (assignments.length === 0) {
         tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #616161;">No assignments created yet.</td></tr>';
@@ -431,27 +527,51 @@
 
       assignments.forEach(a => {
         let title = a.type === 'experiment' ? a.name : a.title;
-        let info = a.type === 'experiment' ? a.instructions : `<a href="${a.link}" target="_blank">Quiz Link</a>`;
+        let info;
+        if (a.type === 'experiment') {
+          info = a.instructions;
+        } else if (a.type === 'quiz') {
+          info = `<a href="${a.link}" target="_blank" class="quiz-link-btn" style="display:inline-block;padding:8px 16px;background:#1976d2;color:#fff;border-radius:6px;text-decoration:none;font-weight:600;">Quiz Link</a>`;
+        }
         let submissionDisplay;
 
         if (a.submission) {
-            submissionDisplay = `Submitted: ${a.submission}`;
-            if (a.submitted_at) {
-                const date = new Date(a.submitted_at);
-                submissionDisplay += `<br><small style="color: #616161;">(${date.toLocaleString()})</small>`;
+          let isPDF = false;
+          let pdfUrl = '';
+          if (a.type === 'experiment') {
+            if (a.submission.startsWith('data:application/pdf')) {
+              isPDF = true;
+              pdfUrl = a.submission;
             }
+            if ((a.submission.startsWith('http://') || a.submission.startsWith('https://')) && a.submission.toLowerCase().endsWith('.pdf')) {
+              isPDF = true;
+              pdfUrl = a.submission;
+            }
+            if (isPDF) {
+              submissionDisplay = `<span style="color: #388e3c; font-weight: 500;">Submitted</span>:
+                <button class="view-pdf-btn" data-pdf="${encodeURIComponent(pdfUrl)}" style="color:#1976d2;font-weight:600;cursor:pointer;background:none;border:none;text-decoration:underline;">View PDF</button>`;
+            } else {
+              submissionDisplay = `<span style="color: #388e3c; font-weight: 500;">Submitted</span>: ${a.submission}`;
+            }
+          } else {
+            submissionDisplay = `<span style="color: #388e3c; font-weight: 500;">Submitted</span>: ${a.submission}`;
+          }
+          if (a.submitted_at) {
+            const date = new Date(a.submitted_at);
+            submissionDisplay += `<br><small style="color: #616161;">(${date.toLocaleString()})</small>`;
+          }
         } else {
-            submissionDisplay = '<span style="color: #ff9800; font-weight: 500;">Pending Submission</span>';
+          submissionDisplay = '<span style="color: #ff9800; font-weight: 500;">Pending Submission</span>';
         }
 
         let resultDisplay = '';
         let evalBtn = '';
         if (a.result) {
-            resultDisplay = `<span style="color: #1976d2; font-weight: 600;">${a.result}</span>`;
-        } else if (a.submission) { // If submitted but not yet evaluated
-            evalBtn = `<button class="eval-btn" data-id="${a.id}">Evaluate</button>`;
-        } else { // Not submitted, not evaluated
-            resultDisplay = '<span style="color: #9e9e9e;">N/A</span>';
+          resultDisplay = `<span style="color: #1976d2; font-weight: 600;">${a.result}</span>`;
+        } else if (a.submission) {
+          evalBtn = `<button class="eval-btn" data-id="${a.id}">Evaluate</button>`;
+        } else {
+          resultDisplay = '<span style="color: #9e9e9e;">N/A</span>';
         }
 
         tbody.innerHTML += `<tr>
@@ -466,23 +586,49 @@
     }
     loadAssignments();
 
-    // Event delegation for Evaluate buttons
-    document.querySelector('#assigned-table tbody').addEventListener('click', function(e) {
+    // PDF Modal functions
+    function openPdfModal(pdfUrl) {
+      document.getElementById('pdf-viewer').src = pdfUrl;
+      document.getElementById('pdf-modal').style.display = 'flex';
+    }
+    function closePdfModal() {
+      document.getElementById('pdf-viewer').src = '';
+      document.getElementById('pdf-modal').style.display = 'none';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === "Escape") closePdfModal();
+    });
+
+    // Event delegation for Evaluate and View PDF buttons
+    document.querySelector('#assigned-table tbody').addEventListener('click', async function(e) {
       if (e.target.classList.contains('eval-btn')) {
         const id = e.target.getAttribute('data-id');
         const result = prompt('Enter evaluation/grade/feedback:');
-        if (result === null || result.trim() === '') { // Handle cancel or empty input
-            return;
-        }
+        if (result === null || result.trim() === '') return;
         const assignments = getAssignments();
         const idx = assignments.findIndex(a => a.id === id);
         if (idx !== -1) {
           assignments[idx].result = result.trim();
           setAssignments(assignments);
-          loadAssignments(); // Reload table to reflect change
+          loadAssignments();
         }
       }
+      if (e.target.classList.contains('view-pdf-btn')) {
+        const pdfUrl = decodeURIComponent(e.target.getAttribute('data-pdf'));
+        openPdfModal(pdfUrl);
+      }
     });
+
+  lottie.loadAnimation({
+    container: document.getElementById('lottie-mascot'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: '../assets/Online Learning.json' // Use your actual Lottie file path
+  });
+
+    // Lottie mascot
+   
   </script>
 </body>
 </html>
