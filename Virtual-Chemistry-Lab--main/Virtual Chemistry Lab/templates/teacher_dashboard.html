@@ -233,6 +233,10 @@
   box-shadow: none;        /* remove glow */
   padding: 0;
 }
+/* Add this to your existing <style> block */
+.section:not(.active) {
+  display: none;
+}
 
   </style>
 </head>
@@ -370,7 +374,7 @@
       <iframe id="pdf-viewer" src="" title="PDF Viewer"></iframe>
     </div>
   </div>
-
+</div>
   <script>
     // Navbar navigation logic
      const navLinks = [
