@@ -636,15 +636,17 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       if (
         draggedName &&
-        [...itemsDiv.children].some(c => c.dataset.name === draggedName)
-        && ![...list.children].some(c => c.dataset.name === draggedName)
+        [...itemsDiv.children].some(c => c.dataset.name === draggedName) &&
+        ![...list.children].some(c => c.dataset.name === draggedName)
       ) {
         // Remove from workspace
         const wsItem = [...itemsDiv.children].find(c => c.dataset.name === draggedName);
         if (wsItem) wsItem.remove();
         // Add back to source list
         const newEl = document.createElement('div');
-        newEl.className = 'item'; newEl.draggable = true; newEl.dataset.name = draggedName;
+        newEl.className = 'item';
+        newEl.draggable = true;
+        newEl.dataset.name = draggedName;
         newEl.innerHTML = `${ITEM_EMOJIS[draggedName] || (listId === 'chemicals-list' ? "🧪" : "🔧")} ${draggedName}`;
         list.appendChild(newEl);
         addDragHandlers(newEl);
@@ -657,6 +659,18 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById('simulate-btn').addEventListener('click', async () => {
     const reactants = [...itemsDiv.children].map(c => c.dataset.name);
 
+    // --- Check for missing chemicals/equipment ---
+    const missingChemicals = exp.chemicals.filter(c => !reactants.includes(c));
+    const missingEquipment = exp.equipment.filter(e => !reactants.includes(e));
+    if (missingChemicals.length > 0 || missingEquipment.length > 0) {
+      let msg = "Please add all required items to the workspace before simulating.\n";
+      if (missingChemicals.length > 0) msg += "Missing chemicals: " + missingChemicals.join(", ") + ".\n";
+      if (missingEquipment.length > 0) msg += "Missing equipment: " + missingEquipment.join(", ") + ".";
+      alert(msg);
+      return;
+    }
+
+    // --- (rest of your simulation code follows) ---
     // Special handling for pH experiment
     if (expId === "ph-substances") {
       let output = "";
