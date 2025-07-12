@@ -25,7 +25,7 @@ if not api_key:
 
 # ✅ Configure Gemini
 genai.configure(api_key=api_key)
-model = genai.GenerativeModel('gemini-pro')
+model = genai.GenerativeModel('models/gemini-1.5-pro-latest')
 
 # 🧠 Maintain per-session chat history
 chat_sessions = {}
