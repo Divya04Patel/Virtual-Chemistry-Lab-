@@ -6,28 +6,25 @@ import time
 from dotenv import load_dotenv
 from pathlib import Path
 
-# ✅ Load .env from the project root (same level as app.py)
-root_dir = Path(__file__).resolve().parents[1]  # chatbot → virtuallabbackend → project root
+# Load .env from the project root (same level as app.py)
+root_dir = Path(__file__).resolve().parents[1]
 env_path = root_dir / '.env'
 
-print(f"🔍 Loading .env from: {env_path}")
 if not env_path.exists():
-    raise FileNotFoundError(f".env file not found at {env_path} ❌")
+    raise FileNotFoundError(".env file not found at project root.")
 
 load_dotenv(dotenv_path=env_path)
 
-# 🔐 Load Gemini API key
+# Load Gemini API key (do NOT print the key!)
 api_key = os.getenv("GOOGLE_API_KEY")
-print(f"🔑 Loaded API key: {api_key}")
-
 if not api_key:
-    raise EnvironmentError("GOOGLE_API_KEY not found in .env file ❌")
+    raise EnvironmentError("GOOGLE_API_KEY not found in .env file.")
 
-# ✅ Configure Gemini
+# Configure Gemini
 genai.configure(api_key=api_key)
 model = genai.GenerativeModel('models/gemini-1.5-pro-latest')
 
-# 🧠 Maintain per-session chat history
+# Maintain per-session chat history
 chat_sessions = {}
 
 def cleanup_old_sessions():
@@ -37,14 +34,13 @@ def cleanup_old_sessions():
     for sid in expired:
         del chat_sessions[sid]
 
-# ✅ Register Flask Blueprint
+# Register Flask Blueprint
 chatbot_bp = Blueprint('chatbot', __name__)
 
 @chatbot_bp.route('/api/chat', methods=['POST'])
 def chat():
     try:
         data = request.get_json()
-
         message = data.get('message')
         if not message:
             return jsonify({'error': 'Message is required'}), 400
@@ -62,6 +58,9 @@ def chat():
                 'created_at': time.time()
             }
 
+        # Rate limiting: 1 request per second
+        time.sleep(1)
+
         response = chat.send_message(message)
 
         return jsonify({
@@ -72,9 +71,5 @@ def chat():
     except Exception as e:
         print(f"❌ Error in /api/chat: {e}")
         return jsonify({
-            'error': 'Failed to process chat message',
-            'details': str(e)
+            'error': 'Failed to process chat message'
         }), 500
-
-# ✅ Print files in the folder for debug
-print(f"📂 Files in folder: {list(root_dir.glob('*'))}")
