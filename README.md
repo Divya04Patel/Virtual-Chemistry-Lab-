@@ -27,7 +27,8 @@ Explore chemical reactions, molecular structures, and fundamental principles in 
 
 4. **Interactive Simulations**
    - Conduct various chemical reactions and observe real-time changes.
-     <img width="1893" height="824" alt="image" src="https://github.com/user-attachments/assets/6f21e89d-9e5f-403f-bc51-6b558f217f9d" />
+   
+<img width="1893" height="824" alt="image" src="https://github.com/user-attachments/assets/6f21e89d-9e5f-403f-bc51-6b558f217f9d" />
 
 
 5. **Virtual Apparatus**
