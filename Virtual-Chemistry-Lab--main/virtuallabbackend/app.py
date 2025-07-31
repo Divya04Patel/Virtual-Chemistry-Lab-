@@ -2,15 +2,17 @@ from flask import Flask, request, jsonify, send_from_directory, render_template
 from flask_cors import CORS
 from simulation import simulate_reaction
 from user_management import add_user, get_user, add_assignment, get_assignments_for_student, get_assignments_for_teacher, update_assignment_result
-from chatbot import chatbot_bp  # ✅ Add this import
 import os
 import uuid
 from email.mime.text import MIMEText
 import smtplib
 
+
+
+
 app = Flask(__name__)
 CORS(app)
-app.register_blueprint(chatbot_bp)  # ✅ Add this line
+
 
 FRONTEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../Virtual Chemistry Lab'))
 
@@ -22,7 +24,6 @@ def serve_index():
 def serve_static(filename):
     return send_from_directory(FRONTEND_DIR, filename)
 
-# ✅ Add this route for the chatbot page
 @app.route('/chatbot')
 def chatbot():
     return send_from_directory(FRONTEND_DIR, 'templates/chatbot.html')
@@ -30,7 +31,6 @@ def chatbot():
 @app.route('/reactions', methods=['GET'])
 def get_reactions():
     from simulation import reactions_data
-    # Only return reactants and products for listing
     reactions_list = [
         {
             "reactants": r["reactants"],
@@ -64,7 +64,6 @@ def register():
 @app.route('/assign_experiment', methods=['POST'])
 def assign_experiment():
     data = request.get_json()
-    # teacher_email, student_email, experiment (dict)
     if not all(k in data for k in ('teacher_email', 'student_email', 'experiment')):
         return jsonify({'error': 'Missing fields'}), 400
     assignment = {
@@ -101,11 +100,9 @@ def evaluate_assignment():
 
 @app.route('/experiments', methods=['GET'])
 def get_experiments():
-    # This should return the list of experiments
     return jsonify([
         {"id": 1, "name": "Experiment 1", "description": "Description of Experiment 1"},
         {"id": 2, "name": "Experiment 2", "description": "Description of Experiment 2"},
-        # Add more experiments as needed
     ])
 
 experiments_by_class = {
@@ -139,42 +136,27 @@ def lab():
 
 @app.route('/contact', methods=['POST'])
 def contact_form_submit():
-    """
-    Handles POST requests for the contact form.
-    It expects JSON data containing 'name', 'email', and 'message'.
-    It prints the data, saves it to a file, and attempts to send an email.
-    """
     if request.is_json:
         data = request.get_json()
         name = data.get('name')
         email = data.get('email')
         message = data.get('message')
 
-        # Basic validation
         if not name or not email or not message:
             return jsonify({"error": "All fields (name, email, message) are required."}), 400
 
-        # --- Console Output (for debugging/logging) ---
-        print(f"New Contact Form Submission:")
-        print(f"Name: {name}")
-        print(f"Email: {email}")
-        print(f"Message: {message}\n")
+        print(f"New Contact Form Submission:\nName: {name}\nEmail: {email}\nMessage: {message}\n")
 
-        # --- Save to a local file (simple logging, not for production database) ---
         try:
             with open("contact_submissions.txt", "a") as f:
                 f.write(f"Name: {name}, Email: {email}, Message: {message}\n---\n")
             print("Submission saved to contact_submissions.txt")
         except Exception as e:
             print(f"Error saving submission to file: {e}")
-            # You might log this error but still proceed with email if it's the primary action
 
-        # --- Email Sending Logic ---
-        # IMPORTANT: Replace these placeholders with your actual email credentials and recipient.
-        # For Gmail, you'll likely need to generate an "App password" for security.
-        SENDER_EMAIL = 'your_sending_email@gmail.com' # Your email address that will send the message
-        SENDER_PASSWORD = 'YOUR_GMAIL_APP_PASSWORD' # Your Gmail App Password
-        RECIPIENT_EMAIL = 'zk23273@gmail.com' # The email address where you want to receive messages
+        SENDER_EMAIL = 'your_sending_email@gmail.com'
+        SENDER_PASSWORD = 'YOUR_GMAIL_APP_PASSWORD'
+        RECIPIENT_EMAIL = 'zk23273@gmail.com'
 
         try:
             msg = MIMEText(f"From: {name} <{email}>\n\nMessage:\n{message}")
@@ -182,7 +164,6 @@ def contact_form_submit():
             msg['From'] = SENDER_EMAIL
             msg['To'] = RECIPIENT_EMAIL
 
-            # Use SMTP_SSL for secure connection (Gmail uses 465)
             with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
                 smtp.login(SENDER_EMAIL, SENDER_PASSWORD)
                 smtp.send_message(msg)
@@ -193,13 +174,16 @@ def contact_form_submit():
             print("SMTP Authentication Error: Check your sender email and app password.")
             return jsonify({"error": "Failed to send message: Authentication issue."}), 500
         except smtplib.SMTPConnectError:
-            print("SMTP Connection Error: Could not connect to SMTP server. Check host/port or network.")
+            print("SMTP Connection Error: Could not connect to SMTP server.")
             return jsonify({"error": "Failed to send message: Connection issue."}), 500
         except Exception as e:
-            print(f"An unexpected error occurred while sending email: {e}")
+            print(f"Unexpected error while sending email: {e}")
             return jsonify({"error": f"Failed to send message: {str(e)}"}), 500
     else:
         return jsonify({"error": "Request must be JSON"}), 400
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
