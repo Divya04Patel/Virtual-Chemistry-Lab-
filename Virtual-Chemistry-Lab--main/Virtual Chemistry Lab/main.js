@@ -72,6 +72,7 @@ const elements = [
   {num:25, sym:"Mn", name:"Manganese", mass:"54.938", config:"[Ar] 3d5 4s2", col:7, row:4, group:"transition-metals", groupName:"Transition Metals"},
   {num:26, sym:"Fe", name:"Iron", mass:"55.845", config:"[Ar] 3d6 4s2", col:8, row:4, group:"transition-metals", groupName:"Transition Metals"},
   {num:27, sym:"Co", name:"Cobalt", mass:"58.933", config:"[Ar] 3d7 4s2", col:9, row:4, group:"transition-metals", groupName:"Transition Metals"},
+  {num:28, sym:"Ni", name:"Nickel", mass:"58.693", config:"[Ar] 3d8 4s2", col:10, row:4, group:"transition-metals", groupName:"Transition Metals"},
   {num:29, sym:"Cu", name:"Copper", mass:"63.546", config:"[Ar] 3d10 4s1", col:11, row:4, group:"transition-metals", groupName:"Transition Metals"},
   {num:30, sym:"Zn", name:"Zinc", mass:"65.38", config:"[Ar] 3d10 4s2", col:12, row:4, group:"transition-metals", groupName:"Transition Metals"},
   {num:31, sym:"Ga", name:"Gallium", mass:"69.723", config:"[Ar] 3d10 4s2 4p1", col:13, row:4, group:"boron-group", groupName:"Boron Group"},
