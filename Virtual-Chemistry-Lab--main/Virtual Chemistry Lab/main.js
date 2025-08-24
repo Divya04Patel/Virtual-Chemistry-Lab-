@@ -94,6 +94,7 @@ const elements = [
   {num:46, sym:"Pd", name:"Palladium", mass:"106.42", config:"[Kr] 4d10", col:10, row:5, group:"transition-metals", groupName:"Transition Metals"},
   {num:47, sym:"Ag", name:"Silver", mass:"107.87", config:"[Kr] 4d10 5s1", col:11, row:5, group:"transition-metals", groupName:"Transition Metals"},
   {num:48, sym:"Cd", name:"Cadmium", mass:"112.41", config:"[Kr] 4d10 5s2", col:12, row:5, group:"transition-metals", groupName:"Transition Metals"},
+  {num:49, sym:"In", name:"Indium", mass:"114.82", config:"[Kr] 4d10 5s2 5p1", col:13, row:5, group:"boron-group", groupName:"Boron Group"},
   {num:50, sym:"Sn", name:"Tin", mass:"118.71", config:"[Kr] 4d10 5s2 5p2", col:14, row:5, group:"carbon-group", groupName:"Carbon Group"},
   {num:51, sym:"Sb", name:"Antimony", mass:"121.76", config:"[Kr] 4d10 5s2 5p3", col:15, row:5, group:"nitrogen-group", groupName:"Nitrogen Group"},
   {num:52, sym:"Te", name:"Tellurium", mass:"127.60", config:"[Kr] 4d10 5s2 5p4", col:16, row:5, group:"chalcogens", groupName:"Chalcogens"},
