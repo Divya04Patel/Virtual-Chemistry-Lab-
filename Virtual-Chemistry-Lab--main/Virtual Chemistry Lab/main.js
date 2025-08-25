@@ -256,6 +256,7 @@ document.querySelectorAll('.element, nav a, .equipment-grid .item').forEach(el =
     document.addEventListener('keydown', function(e) {
       if(e.key === "Escape") closeModal();
     });
+  
 
 window.addEventListener('DOMContentLoaded', function() {
   const studentEmail = localStorage.getItem('student_email');
