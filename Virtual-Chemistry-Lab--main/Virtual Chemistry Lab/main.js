@@ -285,6 +285,7 @@ window.addEventListener('DOMContentLoaded', function() {
     userDiv.style.zIndex = '1002';
 
     // User menu dropdown
+  userDiv.innerHTML = `
   <div class="user-menu" style="position:relative;">
     <button id="userMenuBtn" style="background:none;border:none;display:flex;align-items:center;gap:8px;cursor:pointer;color:inherit;">
       <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User" style="width:28px;height:28px;border-radius:50%;background:#fff;">

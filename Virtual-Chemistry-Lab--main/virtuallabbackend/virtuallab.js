@@ -223,15 +223,15 @@ window.addEventListener('DOMContentLoaded', loadReactions);
 
 // Fetch all reactions from backend
 fetch('http://127.0.0.1:5000/reactions')
-  .then(response => response.json())
-  .then(data => {
+.then(response => response.json())
+.then(data => {
     console.log('All reactions:', data);
     // You can display these reactions in your UI
-  });
+});
 
 // Example function to simulate a reaction
 function simulateReaction(reactants) {
-  fetch('http://127.0.0.1:5000/simulate', {
+fetch('http://127.0.0.1:5000/simulate', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ reactants: reactants })
