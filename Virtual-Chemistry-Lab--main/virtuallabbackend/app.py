@@ -13,7 +13,6 @@ import smtplib
 app = Flask(__name__)
 CORS(app)
 
-
 FRONTEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../Virtual Chemistry Lab'))
 
 @app.route('/')
