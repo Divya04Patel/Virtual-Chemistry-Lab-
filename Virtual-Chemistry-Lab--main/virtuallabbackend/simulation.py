@@ -9,7 +9,6 @@ def load_reactions():
     
 reactions_data = load_reactions()
 
-
 def simulate_reaction(user_reactants):
     user_set = set(user_reactants)
     for reaction in reactions_data:
