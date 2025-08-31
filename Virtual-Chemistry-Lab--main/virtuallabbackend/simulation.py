@@ -6,7 +6,6 @@ def load_reactions():
     with open(os.path.join(base_dir, 'reactions.json')) as f:
         return json.load(f)
 
-
 reactions_data = load_reactions()
 
 def simulate_reaction(user_reactants):
