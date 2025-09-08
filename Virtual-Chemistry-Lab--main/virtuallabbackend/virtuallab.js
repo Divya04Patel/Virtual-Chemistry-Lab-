@@ -108,6 +108,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
 
+
 // About modal
 window.addEventListener('DOMContentLoaded', function() {
     document.getElementById('about-link').addEventListener('click', function(e) {
