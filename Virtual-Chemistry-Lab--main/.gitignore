@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+contact_submissions.txt
+.env
+.DS_Store
