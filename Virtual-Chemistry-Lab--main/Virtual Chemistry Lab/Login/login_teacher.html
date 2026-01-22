@@ -107,24 +107,24 @@
   const errorDiv = document.getElementById('error-msg');
   errorDiv.textContent = ""; // Clear previous errors
 
-  // Get registered teachers from localStorage
-  const teachers = JSON.parse(localStorage.getItem('teachers') || '[]');
-  // Find the teacher with matching email
-  const teacher = teachers.find(t => t.email === email);
-
-  if (!teacher) {
-    errorDiv.textContent = "No account found with this email. Please register first.";
-    return;
-  }
-  if (teacher.password !== password) {
-    errorDiv.textContent = "Incorrect password.";
-    return;
-  }
-
-
-  // Successful login
-  localStorage.setItem("teacher_email", email);
-  window.location.href = "/templates/teacher_dashboard.html";
+  fetch('/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email, password: password })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      localStorage.setItem("teacher_email", email);
+      window.location.href = "/templates/teacher_dashboard.html";
+    } else {
+      errorDiv.textContent = data.error;
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    errorDiv.textContent = "Login failed. Please try again.";
+  });
 }
 </script>
 </body>

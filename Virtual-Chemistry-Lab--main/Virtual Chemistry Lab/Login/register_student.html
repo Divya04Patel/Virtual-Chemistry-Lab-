@@ -73,7 +73,6 @@
       <button type="submit">Register</button>
     </form>
   </div>
-  <!-- ...existing code... -->
 <script>
 document.querySelector('form').addEventListener('submit', function(e) {
   e.preventDefault();
@@ -89,24 +88,21 @@ document.querySelector('form').addEventListener('submit', function(e) {
     return;
   }
 
-  // Check for duplicate email
-  const students = JSON.parse(localStorage.getItem('students') || '[]');
-  if (students.some(s => s.email === email)) {
-    alert('This email is already registered as a student.');
-    return;
-  }
-
-  students.push({
-    name,
-    email,
-    school,
-    grade,
-    password: pwd
+  // Instead of localStorage, send to backend
+  fetch('/register', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({name, email, school, grade, password: pwd, role: 'student'})
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert('Registration successful!');
+      window.location.href = 'login_student.html';
+    } else {
+      alert(data.error);
+    }
   });
-  localStorage.setItem('students', JSON.stringify(students));
-
-  alert('Registration successful! Please login.');
-  window.location.href = 'login_student.html';
 });
 </script>
 <!-- ...existing code... -->

@@ -308,36 +308,41 @@
             return;
         }
 
-        const assignments = getAssignments().filter(a => a.student_email === studentEmail);
-        const tbody = document.querySelector('#student-assigned-table tbody');
-        tbody.innerHTML = ''; // Clear existing rows
+        fetch('/student_assignments', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ student_email: studentEmail })
+        })
+        .then(response => response.json())
+        .then(assignments => {
+            const tbody = document.querySelector('#student-assigned-table tbody');
+            tbody.innerHTML = ''; // Clear existing rows
 
-        if (assignments.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #616161;">No assignments assigned to you yet.</td></tr>';
-            return;
-        }
+            if (assignments.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #616161;">No assignments assigned to you yet.</td></tr>';
+                return;
+            }
 
-        assignments.forEach(a => {
-            let title = a.type === 'experiment' ? a.name : a.title;
-            let info = a.type === 'experiment' ? a.instructions : `<a href="${a.link}" target="_blank">Quiz Link</a>`;
-            let submissionCellContent;
-            let actionButtonHtml;
+            assignments.forEach(a => {
+                let title = a.experiment; // Assuming experiment is the title
+                let submissionCellContent = a.result ? `<span class="status-submitted">Completed</span>` : `<span class="status-pending">Pending</span>`;
+                let actionButtonHtml = a.result ? '' : `<button onclick="submitAssignment('${a.id}')">Submit</button>`;
 
-            if (a.submission) {
-                // Already submitted
-                const submittedTime = a.submitted_at ? `<br><small style="color: #616161;">(${new Date(a.submitted_at).toLocaleString()})</small>` : '';
-
-                if (a.type === 'quiz' && (a.submission.startsWith('http://') || a.submission.startsWith('https://'))) {
-                    // If it's a quiz and the submission is a URL
-                    submissionCellContent = `<span class="status-submitted">Submitted</span>: <a href="${a.submission}" target="_blank">View Responses</a>${submittedTime}`;
-                } else if (a.type === 'experiment' && a.submission.startsWith('data:application/pdf;base64,')) {
-                    // If it's an experiment and the submission is a Base64 PDF
-                    submissionCellContent = `<span class="status-submitted">Submitted</span>: PDF Attached${submittedTime}`;
-                } else if (a.type === 'experiment' && (a.submission.startsWith('http://') || a.submission.startsWith('https://')) && a.submission.toLowerCase().endsWith('.pdf')) {
-                    // If it's an experiment and the submission is a PDF URL
-                    submissionCellContent = `<span class="status-submitted">Submitted</span>: <a href="${a.submission}" target="_blank">View PDF</a>${submittedTime}`;
-                }
-                else {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${title}</td>
+                    <td>${a.teacher_email}</td>
+                    <td>${submissionCellContent}</td>
+                    <td>${actionButtonHtml}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error loading assignments:', error);
+            document.querySelector('#student-assigned-table tbody').innerHTML = '<tr><td colspan="6" style="text-align: center; color: #d32f2f;">Error loading assignments.</td></tr>';
+        });
+    }
                     // Fallback for any other type of submission content (e.g., plain text or non-PDF files)
                     submissionCellContent = `<span class="status-submitted">Submitted</span>: ${a.submission}${submittedTime}`;
                 }

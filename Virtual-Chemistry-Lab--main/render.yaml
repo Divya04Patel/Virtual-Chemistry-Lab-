@@ -7,3 +7,5 @@ services:
     envVars:
       - key: FLASK_ENV
         value: production
+      - key: SECRET_KEY
+        generateValue: true

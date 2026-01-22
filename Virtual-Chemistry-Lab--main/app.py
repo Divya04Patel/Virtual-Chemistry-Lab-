@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_from_directory, render_template
+from flask import Flask, request, jsonify, send_from_directory, render_template, session
 from flask_cors import CORS
 from simulation import simulate_reaction
 from user_management import add_user, get_user, add_assignment, get_assignments_for_student, get_assignments_for_teacher, update_assignment_result
@@ -12,6 +12,7 @@ import smtplib
 
 app = Flask(__name__)
 CORS(app)
+app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key')
 
 FRONTEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), 'Virtual Chemistry Lab'))
 
@@ -59,6 +60,17 @@ def register():
         return jsonify({'error': 'User already exists'}), 400
     add_user(data)
     return jsonify({'success': True})
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    if not data or 'email' not in data or 'password' not in data:
+        return jsonify({'error': 'Missing email or password'}), 400
+    user = get_user(data['email'])
+    if not user or user.get('password') != data['password']:
+        return jsonify({'error': 'Invalid credentials'}), 401
+    session['user'] = user
+    return jsonify({'success': True, 'role': user['role']})
 
 @app.route('/assign_experiment', methods=['POST'])
 def assign_experiment():

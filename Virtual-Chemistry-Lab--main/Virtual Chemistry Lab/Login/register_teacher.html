@@ -70,10 +70,10 @@
 <script>
 document.querySelector('form').addEventListener('submit', function(e) {
   e.preventDefault();
-  const name = document.querySelector('input[name="name"]').value;
-  const email = document.querySelector('input[name="email"]').value;
-  const institution = document.querySelector('input[name="institution"]').value;
-  const subject = document.querySelector('input[name="subject"]').value;
+  const name = document.querySelector('input[name="name"]').value.trim();
+  const email = document.querySelector('input[name="email"]').value.trim();
+  const institution = document.querySelector('input[name="institution"]').value.trim();
+  const subject = document.querySelector('input[name="subject"]').value.trim();
   const pwd = document.querySelector('input[name="password"]').value;
   const cpwd = document.querySelector('input[name="confirm_password"]').value;
 
@@ -82,17 +82,31 @@ document.querySelector('form').addEventListener('submit', function(e) {
     return;
   }
 
-  const teachers = JSON.parse(localStorage.getItem('teachers') || '[]');
-  teachers.push({
-    name,
-    email,
-    institution,
-    subject,
-    password: pwd
+  fetch('/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: name,
+      email: email,
+      institution: institution,
+      subject: subject,
+      password: pwd,
+      role: 'teacher'
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert('Registration successful! Please login.');
+      window.location.href = 'login_teacher.html';
+    } else {
+      alert(data.error);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Registration failed. Please try again.');
   });
-  localStorage.setItem('teachers', JSON.stringify(teachers));
-  alert('Registration successful! Please login.');
-  window.location.href = 'login_teacher.html';
 });
 </script>
 
